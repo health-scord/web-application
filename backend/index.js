@@ -20,6 +20,7 @@ fitbitAuthServer.get("/authorize", async (req, res) => {
     try{
         let url = await client.getAuthorizeUrl('activity heartrate location nutrition profile settings sleep social weight', fitbitAuthCallbackUrl)
         console.log(url)
+        console.log('about to redirect...')
         return res.redirect(url);
 
     } catch(error){
@@ -33,6 +34,7 @@ fitbitAuthServer.get("/callback", async (req, res) => {
     // exchange the authorization code we just received for an access token
 
     console.log('in callback route')
+    console.log(req.query)
     
     // let accessTokenResult = await client.getAccessToken(req.query.code, fitbitAuthCallbackUrl)
     // let profileDetails = await client.get("/profile.json", accessTokenResult.access_token)
