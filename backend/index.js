@@ -12,7 +12,7 @@ const client = new FitbitApiClient({
     apiVersion: '1.2' // 1.2 is the default
 });
 
-const fitbitAuthCallbackUrl = `http://157.230.2.203/callback`
+const fitbitAuthCallbackUrl = `https://157.230.2.203/callback`
 
 // redirect the user to the Fitbit authorization page
 fitbitAuthServer.get("/authorize", async (req, res) => {
@@ -76,4 +76,4 @@ fitbitAuthServer.get("/callback", async (req, res) => {
 //     cert: fs.readFileSync(__dirname + '/certs/server.cert', 'utf8')
 // }, fitbitAuthServer).listen(443);
 
-fitbitAuthServer.listen(80)
+fitbitAuthServer.listen(443)
