@@ -53,6 +53,10 @@ fitbitAuthServer.get("/callback", async (req, res) => {
 
 });
 
+console.log('RIGHT HERE>>>')
+
+console.log(__dirname)
+
 // launch the server
 https.createServer({
     key: fs.readFileSync('./certs/selfsigned.key'),
