@@ -55,6 +55,6 @@ fitbitAuthServer.get("/callback", async (req, res) => {
 
 // launch the server
 https.createServer({
-    key: fs.readFileSync('key.pem'),
-    cert: fs.readFileSync('cert.pem')
+    key: fs.readFileSync('./certs/selfsigned.key'),
+    cert: fs.readFileSync('./certs/selfsigned.crt')
 }, fitbitAuthServer).listen(443);
