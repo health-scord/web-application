@@ -43,7 +43,7 @@ fitbitAuthServer.get("/callback", async (req, res) => {
     // let id = profileDetails[0].encodedId
     // let accessToken = accessTokenResult.access_token
 
-    console.log(`saving access token for id ${id} to dataservice /accounts route`)
+    //console.log(`saving access token for id ${id} to dataservice /accounts route`)
 
     // //post this to dataService
     //  let options = {
