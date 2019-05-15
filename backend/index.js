@@ -8,7 +8,7 @@ const fitbitAuthServer = express()
 
 const client = new FitbitApiClient({
     clientId: "22DPF6",
-    clientSecret: "130867304fbc7fa872c2e3c059eb0940",
+    clientSecret: "5f3538567d187a52768935217b220558",
     apiVersion: '1.2' // 1.2 is the default
 });
 
