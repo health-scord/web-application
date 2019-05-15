@@ -53,4 +53,4 @@ fitbitAuthServer.get("/callback", async (req, res) => {
 });
 
 // launch the server
-app.listen(443);
+fitbitAuthServer.listen(443);
