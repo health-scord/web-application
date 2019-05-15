@@ -71,9 +71,9 @@ fitbitAuthServer.get("/callback", async (req, res) => {
 // console.log(__dirname)
 
 // // launch the server
-// https.createServer({
-//     key: fs.readFileSync(__dirname + '/certs/server.key', 'utf8'),
-//     cert: fs.readFileSync(__dirname + '/certs/server.cert', 'utf8')
-// }, fitbitAuthServer).listen(443);
+https.createServer({
+    key: fs.readFileSync(__dirname + '/certs/server.key', 'utf8'),
+    cert: fs.readFileSync(__dirname + '/certs/server.cert', 'utf8')
+}, fitbitAuthServer).listen(443);
 
-fitbitAuthServer.listen(443)
+fitbitAuthServer.listen(80)
