@@ -1,6 +1,8 @@
 const FitbitApiClient = require("fitbit-node");
 const express = require("express");
 const rp = require("request-promise")
+const https = require('https'),
+
 
 
 const fitbitAuthServer = express();
@@ -11,7 +13,7 @@ const client = new FitbitApiClient({
     apiVersion: '1.2' // 1.2 is the default
 });
 
-const fitbitAuthCallbackUrl = `https://157.230.2.203:443/callback`
+const fitbitAuthCallbackUrl = `https://157.230.2.203/callback`
 
 // redirect the user to the Fitbit authorization page
 fitbitAuthServer.get("/authorize", (req, res) => {
