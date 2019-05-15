@@ -1,11 +1,9 @@
 const FitbitApiClient = require("fitbit-node");
 const express = require("express");
 const rp = require("request-promise")
-const https = require('https'),
+const https = require('https')
 
-const fitbitAuthServer = express();
-
-
+const fitbitAuthServer = express()
 
 const client = new FitbitApiClient({
     clientId: "22DPF6",
