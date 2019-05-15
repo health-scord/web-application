@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/healthkarma/web-application/issues"
   },
-  "homepage": "https://github.com/healthkarma/web-application#readme"
+  "homepage": "https://github.com/healthkarma/web-application#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "fitbit-node": "^2.2.0"
+  }
 }
