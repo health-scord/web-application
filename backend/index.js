@@ -22,7 +22,7 @@ fitbitAuthServer.get("/authorize", async (req, res) => {
         let url = await client.getAuthorizeUrl('activity heartrate location nutrition profile settings sleep social weight', fitbitAuthCallbackUrl)
         console.log(url)
         console.log('about to redirect...')
-       // return res.redirect(url);
+        return res.redirect(url);
 
     } catch(error){
         console.log(error)
