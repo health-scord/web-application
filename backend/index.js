@@ -31,31 +31,33 @@ fitbitAuthServer.get("/authorize", async (req, res) => {
 // handle the callback from the Fitbit authorization flow
 fitbitAuthServer.get("/callback", async (req, res) => {
     // exchange the authorization code we just received for an access token
+
+    console.log('in callback route')
     
-    let accessTokenResult = await client.getAccessToken(req.query.code, fitbitAuthCallbackUrl)
-    let profileDetails = await client.get("/profile.json", accessTokenResult.access_token)
+    // let accessTokenResult = await client.getAccessToken(req.query.code, fitbitAuthCallbackUrl)
+    // let profileDetails = await client.get("/profile.json", accessTokenResult.access_token)
 
-    let id = profileDetails[0].encodedId
-    let accessToken = accessTokenResult.access_token
+    // let id = profileDetails[0].encodedId
+    // let accessToken = accessTokenResult.access_token
 
-    console.log(`saving access token for id ${id} to dataservice /accounts route`)
+    // console.log(`saving access token for id ${id} to dataservice /accounts route`)
 
-    //post this to dataService
-     let options = {
-        uri: 'http://localhost:5000/accounts',
-        method: 'POST',
-        body: {
-            id,
-            accessToken
-        },
-        json: true
-    }
+    // //post this to dataService
+    //  let options = {
+    //     uri: 'http://localhost:5000/accounts',
+    //     method: 'POST',
+    //     body: {
+    //         id,
+    //         accessToken
+    //     },
+    //     json: true
+    // }
              
-    try{            
-        accounts = await rp(options)
-    } catch(error){
-        console.log(error)
-    }
+    // try{            
+    //     accounts = await rp(options)
+    // } catch(error){
+    //     console.log(error)
+    // }
 
 
 
