@@ -18,10 +18,10 @@ const fitbitAuthCallbackUrl = `https://157.230.2.203/callback`
 fitbitAuthServer.get("/authorize", async (req, res) => {
     // request access to the user's activity, heartrate, location, nutrion, profile, settings, sleep, social, and weight scopes
     try{
-        // let url = await 
-        // console.log(url)
-        // console.log('about to redirect...')
-        res.redirect(client.getAuthorizeUrl('activity heartrate location nutrition profile settings sleep social weight', fitbitAuthCallbackUrl));
+        let url = await client.getAuthorizeUrl('activity heartrate location nutrition profile settings sleep social weight', fitbitAuthCallbackUrl)
+        console.log(url)
+        console.log('about to redirect...')
+        return res.redirect(url);
 
     } catch(error){
         console.log(error)
