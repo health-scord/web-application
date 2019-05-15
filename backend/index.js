@@ -3,9 +3,9 @@ const express = require("express");
 const rp = require("request-promise")
 const https = require('https'),
 
-
-
 const fitbitAuthServer = express();
+
+
 
 const client = new FitbitApiClient({
     clientId: "22DPF6",
@@ -55,4 +55,7 @@ fitbitAuthServer.get("/callback", async (req, res) => {
 });
 
 // launch the server
-fitbitAuthServer.listen(443);
+https.createServer({
+    key: fs.readFileSync('key.pem'),
+    cert: fs.readFileSync('cert.pem')
+}, fitbitAuthServer).listen(443);
