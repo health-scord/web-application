@@ -24,7 +24,7 @@ fitbitAuthServer.get("/callback", async (req, res) => {
     // exchange the authorization code we just received for an access token
     
     let accessTokenResult = await client.getAccessToken(req.query.code, fitbitAuthCallbackUrl)
-    let profileDetails = await client.get("/profile.json", result.access_token)
+    let profileDetails = await client.get("/profile.json", accessTokenResult.access_token)
 
     let id = profileDetails[0].encodedId
     let accessToken = accessTokenResult.access_token
