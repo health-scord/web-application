@@ -12,18 +12,26 @@ const client = new FitbitApiClient({
     apiVersion: '1.2' // 1.2 is the default
 });
 
-const fitbitAuthCallbackUrl = `https://157.230.2.203/callback`
+const fitbitAuthCallbackUrl = `https://157.230.2.203/authorizeCallback`
 
 // redirect the user to the Fitbit authorization page
-fitbitAuthServer.get("/authorize", async (req, res) => {
+fitbitAuthServer.get(":id/authorize", async (req, res) => {
     // request access to the user's activity, heartrate, location, nutrion, profile, settings, sleep, social, and weight scopes
     try{
-        
-        let url = await client.getAuthorizeUrl('activity heartrate location nutrition profile settings sleep social weight', fitbitAuthCallbackUrl)
-        console.log(url)
-        console.log('about to redirect...')
-        return res.redirect(url);
+        let isAccountAuthorized = false
+        //get account details from dataService using id
+        //if access token and refresh token are available for account then send user to "this device is already authorized" page or modal.
 
+        if(isAccountAuthorized){
+            return
+        } else {
+
+            let callbackUrl = `https://157.230.2.203/${id}/authorizeCallback`
+            let url = await client.getAuthorizeUrl('activity heartrate location nutrition profile settings sleep social weight', callbackUrl)
+            console.log(url)
+            console.log('about to redirect...')
+            return res.redirect(url);
+        }
     } catch(error){
         console.log(error)
     }
@@ -31,7 +39,7 @@ fitbitAuthServer.get("/authorize", async (req, res) => {
 });
 
 // handle the callback from the Fitbit authorization flow
-fitbitAuthServer.get("/callback", async (req, res) => {
+fitbitAuthServer.get(":id/authorizeCallback", async (req, res) => {
     // exchange the authorization code we just received for an access token
 
     console.log('in callback route')
@@ -43,27 +51,32 @@ fitbitAuthServer.get("/callback", async (req, res) => {
     console.log(accessTokenResult)
     console.log(profileDetails)
 
-    // let id = profileDetails[0].encodedId
-    // let accessToken = accessTokenResult.access_token
+    let fitbitId = profileDetails[0].encodedId
+    let accessToken = accessTokenResult.access_token
+    let refreshToken = ''
 
-    //console.log(`saving access token for id ${id} to dataservice /accounts route`)
+    console.log(`saving access token for id ${id} to dataservice /accounts route`)
 
-    // //post this to dataService
-    //  let options = {
-    //     uri: 'http://localhost:5000/accounts',
-    //     method: 'POST',
-    //     body: {
-    //         id,
-    //         accessToken
-    //     },
-    //     json: true
-    // }
+    //post this to dataService
+     let options = {
+        uri: `http://localhost:5000/${id}/account/deviceCredentials`,
+        method: 'POST',
+        body: {
+            id,
+            deviceCredentials:{
+                fitbitId,
+                accessToken,
+                refreshToken
+            }
+        },
+        json: true
+    }
              
-    // try{            
-    //     accounts = await rp(options)
-    // } catch(error){
-    //     console.log(error)
-    // }
+    try{            
+        await rp(options)
+    } catch(error){
+        console.log(error)
+    }
 
 
 
