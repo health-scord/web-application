@@ -31,7 +31,7 @@ fitbitAuthServer.get("/accounts/:id/authorize", async (req, res) => {
         if(isAccountAuthorized){
             return
         } else {
-            let idCallbackUrl = `${callbackUrl}?${req.params.id}`
+            let idCallbackUrl = `${callbackUrl}?id=${req.params.id}`
             console.log(`callbackUrl:`)
             console.log(callbackUrl)
             console.log(`idCallbackUrl:`)
@@ -53,29 +53,26 @@ fitbitAuthServer.get("/authorizeCallback", async (req, res) => {
     // exchange the authorization code we just received for an access token
 
     console.log('in callback route')
-    console.log('req.params')
-    console.log(req.params)
+    console.log('req.query')
+    console.log(req.query)
     
     let accessTokenResult = await client.getAccessToken(req.query.code, callbackUrl)
     let profileDetails = await client.get("/profile.json", accessTokenResult.access_token)
 
-    console.log(accessTokenResult)
-    console.log(profileDetails)
 
     let accessToken = accessTokenResult.access_token
-    let refreshToken = ''
+    let refreshToken = accessTokenResult.refresh_token
+    let deviceUserId = accessTokenResult.user_id
 
-    console.log(fitbitId)
+    console.log(deviceUserId)
     console.log(accessToken)
     console.log(refreshToken)
 
     console.log(`saving access token for id to dataservice /accounts route`)
 
-    return res.redirect(`http://157.230.2.203:5000/accounts`);
-
     //post this to dataService
      let options = {
-        uri: `http://${apiUrl}/accounts/${id}`,
+        uri: `http://${apiUrl}/accounts/${req.query.id}`,
         method: 'PATCH',
         body: {
             id: req.params.id,
@@ -83,9 +80,9 @@ fitbitAuthServer.get("/authorizeCallback", async (req, res) => {
                 {
                     make: 'fitbit',
                     model: 'charge3',
-                    deviceUserId: '26FFKE',
-                    accessToken: '23423424234',
-                    refreshToken: '45645645645645'
+                    deviceUserId,
+                    accessToken,
+                    refreshToken
                 }
             ],
         },
@@ -94,8 +91,10 @@ fitbitAuthServer.get("/authorizeCallback", async (req, res) => {
              
     try{            
         await rp(options)
+        return res.redirect(`http://157.230.2.203:5000/accounts`);
     } catch(error){
         console.log(error)
+        return res.redirect(`http://157.230.2.203:5000/accounts`);
     }
 
 
