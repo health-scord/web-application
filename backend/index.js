@@ -29,7 +29,7 @@ fitbitAuthServer.get("/accounts/:id/authorize", async (req, res) => {
         if(isAccountAuthorized){
             return
         } else {
-            let callbackUrl = `https://157.230.2.203/accounts/${req.params.id}/authorizeCallback`
+            let callbackUrl = `https://157.230.2.203/authorizeCallback`
             console.log(`callbackUrl:`)
             console.log(callbackUrl)
             let url = await client.getAuthorizeUrl('activity heartrate location nutrition profile settings sleep social weight', callbackUrl)
@@ -44,7 +44,7 @@ fitbitAuthServer.get("/accounts/:id/authorize", async (req, res) => {
 });
 
 // handle the callback from the Fitbit authorization flow
-fitbitAuthServer.get("/account/:id/authorizeCallback", async (req, res) => {
+fitbitAuthServer.get("authorizeCallback", async (req, res) => {
     // exchange the authorization code we just received for an access token
 
     console.log('in callback route')
