@@ -66,7 +66,9 @@ fitbitAuthServer.get("/authorizeCallback", async (req, res) => {
     console.log(accessToken)
     console.log(refreshToken)
 
-    console.log(`saving access token for id ${req.params.id} to dataservice /accounts route`)
+    console.log(`saving access token for id to dataservice /accounts route`)
+
+    return res.redirect(`http://157.230.2.203:5000/accounts`);
 
     //post this to dataService
      let options = {
