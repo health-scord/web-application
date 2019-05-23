@@ -61,6 +61,10 @@ fitbitAuthServer.get("/account/:id/authorizeCallback", async (req, res) => {
     let accessToken = accessTokenResult.access_token
     let refreshToken = ''
 
+    console.log(fitbitId)
+    console.log(accessToken)
+    console.log(refreshToken)
+
     console.log(`saving access token for id ${req.params.id} to dataservice /accounts route`)
 
     //post this to dataService
@@ -68,9 +72,7 @@ fitbitAuthServer.get("/account/:id/authorizeCallback", async (req, res) => {
         uri: `http://${apiUrl}/accounts/${id}`,
         method: 'PATCH',
         body: {
-            id: 'r43e4564r',
-            firstName: 'Jared',
-            lastName: 'Starin',
+            id: req.params.id,
             devices:[
                 {
                     make: 'fitbit',
@@ -80,23 +82,7 @@ fitbitAuthServer.get("/account/:id/authorizeCallback", async (req, res) => {
                     refreshToken: '45645645645645'
                 }
             ],
-            healthScore:{
-                calculated:'780',
-                components: {
-                    sleep:{
-                        averageDailySleepHours: '5.5',
-                    },
-                    fitness:{
-                        averageDailyRigorousActivityMinutes: '35',
-                        averageRigorousActivityTimesPerWeek: '3'
-                    },
-                    heartRate:{
-                        averageRestingHeartRate: '73'
-                    }
-                }
-            }
-
-        },,
+        },
         json: true
     }
              
