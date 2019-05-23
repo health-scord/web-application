@@ -21,7 +21,7 @@ let globalScope
 // redirect the user to the Fitbit authorization page
 fitbitAuthServer.get("/accounts/:id/authorize", async (req, res) => {
     try{
-        globalScope.id = req.params.id
+        globalScope['id'] = req.params.id
         console.log('in authorize route')
         console.log('req.params')
         console.log(req.params)
