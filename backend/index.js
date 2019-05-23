@@ -31,9 +31,13 @@ fitbitAuthServer.get("/accounts/:id/authorize", async (req, res) => {
         if(isAccountAuthorized){
             return
         } else {
+            let idCallbackUrl = `${callbackUrl}?${req.params.id}`
             console.log(`callbackUrl:`)
             console.log(callbackUrl)
-            let url = await client.getAuthorizeUrl('activity heartrate location nutrition profile settings sleep social weight', callbackUrl)
+            console.log(`idCallbackUrl:`)
+            console.log(idCallbackUrl)
+
+            let url = await client.getAuthorizeUrl('activity heartrate location nutrition profile settings sleep social weight', idCallbackUrl)
             console.log(url)
             console.log('about to redirect...')
             return res.redirect(url);
@@ -58,7 +62,6 @@ fitbitAuthServer.get("/authorizeCallback", async (req, res) => {
     console.log(accessTokenResult)
     console.log(profileDetails)
 
-    let fitbitId = profileDetails[0].encodedId
     let accessToken = accessTokenResult.access_token
     let refreshToken = ''
 
