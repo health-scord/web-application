@@ -12,7 +12,8 @@ const client = new FitbitApiClient({
     apiVersion: '1.2' // 1.2 is the default
 });
 
-const apiUrl = `157.230.2.203:5000`
+
+let callbackUrl = `https://157.230.2.203/authorizeCallback`
 
 // redirect the user to the Fitbit authorization page
 fitbitAuthServer.get("/accounts/:id/authorize", async (req, res) => {
@@ -29,7 +30,6 @@ fitbitAuthServer.get("/accounts/:id/authorize", async (req, res) => {
         if(isAccountAuthorized){
             return
         } else {
-            let callbackUrl = `https://157.230.2.203/authorizeCallback`
             console.log(`callbackUrl:`)
             console.log(callbackUrl)
             let url = await client.getAuthorizeUrl('activity heartrate location nutrition profile settings sleep social weight', callbackUrl)
@@ -51,7 +51,7 @@ fitbitAuthServer.get("/authorizeCallback", async (req, res) => {
     console.log('req.params')
     console.log(req.params)
     
-    let accessTokenResult = await client.getAccessToken(req.query.code, fitbitAuthCallbackUrl)
+    let accessTokenResult = await client.getAccessToken(req.query.code, callbackUrl)
     let profileDetails = await client.get("/profile.json", accessTokenResult.access_token)
 
     console.log(accessTokenResult)
