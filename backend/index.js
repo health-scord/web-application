@@ -44,7 +44,7 @@ fitbitAuthServer.get("/accounts/:id/authorize", async (req, res) => {
 });
 
 // handle the callback from the Fitbit authorization flow
-fitbitAuthServer.post("authorizeCallback", async (req, res) => {
+fitbitAuthServer.get("authorizeCallback", async (req, res) => {
     // exchange the authorization code we just received for an access token
 
     console.log('in callback route')
