@@ -66,9 +66,12 @@ fitbitAuthServer.get("/authorizeCallback", async (req, res) => {
 
     console.log(`saving access token for id to dataservice /accounts route`)
 
+    console.log(globalScopeId)
+
+
     //post this to dataService
      let options = {
-        uri: `http://${apiUrl}/accounts/${req.query.id}`,
+        uri: `http://${apiUrl}/accounts/${globalScopeId}`,
         method: 'PATCH',
         body: {
             id: globalScopeId ,
