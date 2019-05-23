@@ -16,9 +16,12 @@ const client = new FitbitApiClient({
 let callbackUrl = `https://157.230.2.203/authorizeCallback`
 const apiUrl = `157.230.2.203:5000`
 
+let globalScope
+
 // redirect the user to the Fitbit authorization page
 fitbitAuthServer.get("/accounts/:id/authorize", async (req, res) => {
     try{
+        globalScope.id = req.params.id
         console.log('in authorize route')
         console.log('req.params')
         console.log(req.params)
@@ -31,13 +34,9 @@ fitbitAuthServer.get("/accounts/:id/authorize", async (req, res) => {
         if(isAccountAuthorized){
             return
         } else {
-            let idCallbackUrl = `${callbackUrl}?id=${req.params.id}`
             console.log(`callbackUrl:`)
             console.log(callbackUrl)
-            console.log(`idCallbackUrl:`)
-            console.log(idCallbackUrl)
-
-            let url = await client.getAuthorizeUrl('activity heartrate location nutrition profile settings sleep social weight', idCallbackUrl)
+            let url = await client.getAuthorizeUrl('activity heartrate location nutrition profile settings sleep social weight', callbackUrl)
             console.log(url)
             console.log('about to redirect...')
             return res.redirect(url);
@@ -51,11 +50,8 @@ fitbitAuthServer.get("/accounts/:id/authorize", async (req, res) => {
 // handle the callback from the Fitbit authorization flow
 fitbitAuthServer.get("/authorizeCallback", async (req, res) => {
     // exchange the authorization code we just received for an access token
-
     console.log('in callback route')
-    console.log('req.query')
-    console.log(req.query)
-    
+ 
     let accessTokenResult = await client.getAccessToken(req.query.code, callbackUrl)
     let profileDetails = await client.get("/profile.json", accessTokenResult.access_token)
 
@@ -75,7 +71,7 @@ fitbitAuthServer.get("/authorizeCallback", async (req, res) => {
         uri: `http://${apiUrl}/accounts/${req.query.id}`,
         method: 'PATCH',
         body: {
-            id: req.params.id,
+            id: globalScope.id ,
             devices:[
                 {
                     make: 'fitbit',
