@@ -16,12 +16,12 @@ const client = new FitbitApiClient({
 let callbackUrl = `https://157.230.2.203/authorizeCallback`
 const apiUrl = `157.230.2.203:5000`
 
-let globalScope
+let globalScopeId
 
 // redirect the user to the Fitbit authorization page
 fitbitAuthServer.get("/accounts/:id/authorize", async (req, res) => {
     try{
-        globalScope['id'] = req.params.id
+        globalScopeId = req.params.id
         console.log('in authorize route')
         console.log('req.params')
         console.log(req.params)
@@ -71,7 +71,7 @@ fitbitAuthServer.get("/authorizeCallback", async (req, res) => {
         uri: `http://${apiUrl}/accounts/${req.query.id}`,
         method: 'PATCH',
         body: {
-            id: globalScope.id ,
+            id: globalScopeId ,
             devices:[
                 {
                     make: 'fitbit',
