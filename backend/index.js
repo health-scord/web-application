@@ -12,12 +12,16 @@ const client = new FitbitApiClient({
     apiVersion: '1.2' // 1.2 is the default
 });
 
-const fitbitAuthCallbackUrl = `https://157.230.2.203/authorizeCallback`
+const apiUrl = `157.230.2.203:5000`
 
 // redirect the user to the Fitbit authorization page
-fitbitAuthServer.get(":id/authorize", async (req, res) => {
-    // request access to the user's activity, heartrate, location, nutrion, profile, settings, sleep, social, and weight scopes
+fitbitAuthServer.get("/accounts/:id/authorize", async (req, res) => {
     try{
+        console.log('in authorize route')
+        console.log('req.params')
+        console.log(req.params)
+
+
         let isAccountAuthorized = false
         //get account details from dataService using id
         //if access token and refresh token are available for account then send user to "this device is already authorized" page or modal.
@@ -25,8 +29,9 @@ fitbitAuthServer.get(":id/authorize", async (req, res) => {
         if(isAccountAuthorized){
             return
         } else {
-
-            let callbackUrl = `https://157.230.2.203/${id}/authorizeCallback`
+            let callbackUrl = `https://157.230.2.203/accounts/${req.params.id}/authorizeCallback`
+            console.log(`callbackUrl:`)
+            console.log(callbackUrl)
             let url = await client.getAuthorizeUrl('activity heartrate location nutrition profile settings sleep social weight', callbackUrl)
             console.log(url)
             console.log('about to redirect...')
@@ -39,11 +44,12 @@ fitbitAuthServer.get(":id/authorize", async (req, res) => {
 });
 
 // handle the callback from the Fitbit authorization flow
-fitbitAuthServer.get(":id/authorizeCallback", async (req, res) => {
+fitbitAuthServer.get("/account/:id/authorizeCallback", async (req, res) => {
     // exchange the authorization code we just received for an access token
 
     console.log('in callback route')
-    console.log(req.query)
+    console.log('req.params')
+    console.log(req.params)
     
     let accessTokenResult = await client.getAccessToken(req.query.code, fitbitAuthCallbackUrl)
     let profileDetails = await client.get("/profile.json", accessTokenResult.access_token)
@@ -55,20 +61,42 @@ fitbitAuthServer.get(":id/authorizeCallback", async (req, res) => {
     let accessToken = accessTokenResult.access_token
     let refreshToken = ''
 
-    console.log(`saving access token for id ${id} to dataservice /accounts route`)
+    console.log(`saving access token for id ${req.params.id} to dataservice /accounts route`)
 
     //post this to dataService
      let options = {
-        uri: `http://localhost:5000/${id}/account/deviceCredentials`,
-        method: 'POST',
+        uri: `http://${apiUrl}/accounts/${id}`,
+        method: 'PATCH',
         body: {
-            id,
-            deviceCredentials:{
-                fitbitId,
-                accessToken,
-                refreshToken
+            id: 'r43e4564r',
+            firstName: 'Jared',
+            lastName: 'Starin',
+            devices:[
+                {
+                    make: 'fitbit',
+                    model: 'charge3',
+                    deviceUserId: '26FFKE',
+                    accessToken: '23423424234',
+                    refreshToken: '45645645645645'
+                }
+            ],
+            healthScore:{
+                calculated:'780',
+                components: {
+                    sleep:{
+                        averageDailySleepHours: '5.5',
+                    },
+                    fitness:{
+                        averageDailyRigorousActivityMinutes: '35',
+                        averageRigorousActivityTimesPerWeek: '3'
+                    },
+                    heartRate:{
+                        averageRestingHeartRate: '73'
+                    }
+                }
             }
-        },
+
+        },,
         json: true
     }
              
