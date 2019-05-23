@@ -14,6 +14,7 @@ const client = new FitbitApiClient({
 
 
 let callbackUrl = `https://157.230.2.203/authorizeCallback`
+const apiUrl = `157.230.2.203:5000`
 
 // redirect the user to the Fitbit authorization page
 fitbitAuthServer.get("/accounts/:id/authorize", async (req, res) => {
