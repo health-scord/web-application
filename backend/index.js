@@ -12,6 +12,8 @@ const client = new FitbitApiClient({
     apiVersion: '1.2' // 1.2 is the default
 });
 
+// lfwerkwehgrkwjhergwkerg
+
 
 let callbackUrl = `https://157.230.2.203/authorizeCallback`
 const apiUrl = `157.230.2.203:5000`
