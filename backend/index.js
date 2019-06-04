@@ -14,9 +14,11 @@ const client = new FitbitApiClient({
 
 // lfwerkwehgrkwjhergwkerg
 
+const serverIP
 
-let callbackUrl = `https://157.230.2.203/authorizeCallback`
-const apiUrl = `157.230.2.203:5000`
+
+let callbackUrl = `https://${serverIP}/authorizeCallback`
+const apiUrl = `${serverIP}:5000`
 
 let globalScopeId
 
@@ -92,10 +94,10 @@ fitbitAuthServer.get("/authorizeCallback", async (req, res) => {
              
     try{            
         await rp(options)
-        return res.redirect(`http://157.230.2.203:5000/accounts`);
+        return res.redirect(`http://${serverIP}:5000/accounts`);
     } catch(error){
         console.log(error)
-        return res.redirect(`http://157.230.2.203:5000/accounts`);
+        return res.redirect(`http://${serverIP}:5000/accounts`);
     }
 
 
