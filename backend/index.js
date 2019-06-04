@@ -17,6 +17,8 @@ const client = new FitbitApiClient({
 const serverIP = '68.183.100.145'
 
 
+
+
 let callbackUrl = `https://${serverIP}/authorizeCallback`
 const apiUrl = `${serverIP}:5000`
 
