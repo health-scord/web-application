@@ -26,7 +26,7 @@ let globalScopeId
 
 app.get('/', function(req, res) {
     res.sendFile(path.join(path.normalize(__dirname +'..') + '/client/public/index.html'));
-    //res.sendFile(path.resolve('../client/public/index.html');
+    //res.sendFile(path.resolve('../client/public/index.html'));
 
 });
 
