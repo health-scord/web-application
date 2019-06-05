@@ -25,7 +25,9 @@ const apiUrl = `${serverIP}:5000`
 let globalScopeId
 
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '../client/public/index.html'));
+    //res.sendFile(path.join(__dirname + '../client/public/index.html'));
+    res.sendFile('../client/public/index.html');
+
 });
 
 // redirect the user to the Fitbit authorization page
