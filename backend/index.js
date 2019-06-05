@@ -4,7 +4,7 @@ const rp = require("request-promise")
 const https = require('https')
 const fs = require('fs')
 
-const fitbitAuthServer = express()
+const app = express()
 
 const client = new FitbitApiClient({
     clientId: "22DPF6",
@@ -17,15 +17,17 @@ const client = new FitbitApiClient({
 const serverIP = '68.183.100.145'
 
 
-
-
 let callbackUrl = `https://${serverIP}/authorizeCallback`
 const apiUrl = `${serverIP}:5000`
 
 let globalScopeId
 
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname + '../client/public/index.html'));
+});
+
 // redirect the user to the Fitbit authorization page
-fitbitAuthServer.get("/accounts/:id/authorize", async (req, res) => {
+app.get("/accounts/:id/authorize", async (req, res) => {
     try{
         globalScopeId = req.params.id
         console.log('in authorize route')
@@ -54,7 +56,7 @@ fitbitAuthServer.get("/accounts/:id/authorize", async (req, res) => {
 });
 
 // handle the callback from the Fitbit authorization flow
-fitbitAuthServer.get("/authorizeCallback", async (req, res) => {
+app.get("/authorizeCallback", async (req, res) => {
     // exchange the authorization code we just received for an access token
     console.log('in callback route')
  
@@ -114,6 +116,6 @@ fitbitAuthServer.get("/authorizeCallback", async (req, res) => {
 https.createServer({
     key: fs.readFileSync(__dirname + '/certs/server.key', 'utf8'),
     cert: fs.readFileSync(__dirname + '/certs/server.cert', 'utf8')
-}, fitbitAuthServer).listen(443);
+}, app).listen(443);
 
-fitbitAuthServer.listen(80)
+app.listen(80)
