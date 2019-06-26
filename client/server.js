@@ -20,7 +20,7 @@ app.get("/auth_config.json", (req, res) => {
 // fitbit auth stuff
 let globalScopeId;
 let callbackUrl = `https://${config.serverUri}/authorizeCallback`;
-const dataServiceEndpoint = `https://${config.dataServiceUri}:${
+const dataServiceEndpoint = `http://${config.dataServiceUri}:${
   config.dataServicePort
 }`;
 
