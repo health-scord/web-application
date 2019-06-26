@@ -47,11 +47,11 @@ const updateUI = async () => {
 
   // NEW - add logic to show/hide gated content after authentication
   if (isAuthenticated) {
-    document.getElementById("gated-content").classList.remove("hidden");
-
     let token = await auth0.getTokenSilently();
-    document.getElementById("ipt-access-token").innerText = token;
     let userProfile = JSON.stringify(await auth0.getUser());
+
+    document.getElementById("gated-content").classList.remove("hidden");
+    document.getElementById("ipt-access-token").innerText = token;
     document.getElementById("ipt-user-profile").innerText = userProfile;
 
     let currentUser = await auth0.getUser();
@@ -62,6 +62,7 @@ const updateUI = async () => {
       }
     });
 
+    console.log("RIGHT HERE>>>>>>");
     console.log(response);
 
     if (response.length == 0) {
@@ -76,6 +77,13 @@ const updateUI = async () => {
           Authorization: `Bearer ${token}`
         }
       });
+    } else {
+      const responseData = await response.json();
+
+      // Display the result in the output element
+      const responseElement = document.getElementById("api-call-result");
+
+      responseElement.innerText = JSON.stringify(responseData, {}, 2);
     }
   } else {
     document.getElementById("gated-content").classList.add("hidden");
@@ -93,33 +101,6 @@ const logout = () => {
   auth0.logout({
     returnTo: window.location.origin
   });
-};
-
-const callApi = async () => {
-  try {
-    // Get the access token from the Auth0 client
-    const token = await auth0.getTokenSilently();
-    let currentUser = await auth0.getUser();
-
-    // Make the call to the API, setting the token
-    // in the Authorization header
-    const response = await fetch(`/accounts/${currentUser.sub}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-
-    // Fetch the JSON result
-    const responseData = await response.json();
-
-    // Display the result in the output element
-    const responseElement = document.getElementById("api-call-result");
-
-    responseElement.innerText = JSON.stringify(responseData, {}, 2);
-  } catch (e) {
-    // Display errors in the console
-    console.error(e);
-  }
 };
 
 const syncFitbit = async () => {
