@@ -58,6 +58,27 @@ app.get("/accounts/", checkJwt, async (req, res) => {
   }
 });
 
+app.post("/accounts/", checkJwt, async (req, res) => {
+    try {
+
+        console.log('got an account create event: ')
+        console.log(req.body)
+        res.send('success')
+
+    //   let options = {
+    //     uri: `${dataServiceEndpoint}/accounts/`,
+    //     method: "GET",
+    //     json: true
+    //   };
+  
+    //   let results = await rp(options);
+    //   console.log(results);
+    //   return res.send(results);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  });
+
 // fitbit auth stuff
 let globalScopeId;
 let callbackUrl = `https://${config.serverUri}/authorizeCallback`;
