@@ -2,6 +2,7 @@ const FitbitApiClient = require("fitbit-node");
 const express = require("express");
 const rp = require("request-promise");
 const https = require("https");
+const bodyParser = require("body-parser");
 const fs = require("fs");
 const path = require("path");
 const config = require("../config.js");
@@ -24,6 +25,12 @@ const checkJwt = jwt({
   issuer: `https://${authConfig.domain}/`,
   algorithm: ["RS256"]
 });
+
+const dataServiceEndpoint = `http://${config.dataServiceUri}:${
+  config.dataServicePort
+}`;
+
+app.use(bodyParser.json());
 
 // Serve static assets from the /public folder
 app.use(express.static(join(__dirname, "public")));
@@ -62,20 +69,19 @@ app.post("/accounts/", checkJwt, async (req, res) => {
   try {
     console.log("got an account create event: ");
     console.log(req.body);
-    res.send("success");
 
-    //   let options = {
-    //     uri: `${dataServiceEndpoint}/accounts/`,
-    //     method: "GET",
-    //     json: true
-    //   };
+    let options = {
+      uri: `${dataServiceEndpoint}/accounts/`,
+      method: "POST",
+      body: {
+        id: req.body.userId
+      },
+      json: true
+    };
 
-    //   let results = await rp(options);
-    //   console.log(results);
-    //   return res.send(results);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    let results = await rp(options);
+    console.log(results);
+    return res.send(results);
   } catch (error) {
     console.log(error);
   }
@@ -84,9 +90,6 @@ app.post("/accounts/", checkJwt, async (req, res) => {
 // fitbit auth stuff
 let globalScopeId;
 let callbackUrl = `https://${config.serverUri}/authorizeCallback`;
-const dataServiceEndpoint = `http://${config.dataServiceUri}:${
-  config.dataServicePort
-}`;
 
 const fitbitClient = new FitbitApiClient({
   clientId: "22DPF6",
