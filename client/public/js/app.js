@@ -50,14 +50,28 @@ const updateUI = async () => {
     document.getElementById("gated-content").classList.remove("hidden");
 
     let accessToken = await auth0.getTokenSilently();
-    console.log(accessToken);
-
     document.getElementById("ipt-access-token").innerText = accessToken;
-
     let userProfile = JSON.stringify(await auth0.getUser());
-    console.log(userProfile);
-
     document.getElementById("ipt-user-profile").innerText = userProfile;
+
+    let currentUser = await auth0.getUser();
+
+    console.log(`current user is ${currentUser}`);
+    let userId = currentUser.sub;
+
+    const response = await fetch("/accounts", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        userId: userId
+      })
+    });
+
+    // Fetch the JSON result
+    const responseData = await response.json();
+    console.log(responseData);
   } else {
     document.getElementById("gated-content").classList.add("hidden");
   }
@@ -68,25 +82,6 @@ const login = async () => {
   await auth0.loginWithRedirect({
     redirect_uri: window.location.origin
   });
-
-  let currentUser = await auth0.getUser();
-
-  console.log(`current user is ${currentUser}`);
-  let userId = currentUser.sub;
-
-  const response = await fetch("/accounts", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify({
-      userId: userId
-    })
-  });
-
-  // Fetch the JSON result
-  const responseData = await response.json();
-  console.log(responseData);
 };
 
 const logout = () => {
@@ -125,24 +120,23 @@ const syncFitbit = async () => {
   try {
     // Get the access token from the Auth0 client
     const token = await auth0.getTokenSilently();
-
     let currentUser = await auth0.getUser();
 
     // Make the call to the API, setting the token
     // in the Authorization header
-    const response = await fetch("/accounts", {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+    // const response = await fetch("/accounts", {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`
+    //   }
+    // });
 
-    // Fetch the JSON result
-    const responseData = await response.json();
+    // // Fetch the JSON result
+    // const responseData = await response.json();
 
-    // Display the result in the output element
-    const responseElement = document.getElementById("api-call-result");
+    // // Display the result in the output element
+    // const responseElement = document.getElementById("api-call-result");
 
-    responseElement.innerText = JSON.stringify(responseData, {}, 2);
+    // responseElement.innerText = JSON.stringify(responseData, {}, 2);
   } catch (e) {
     // Display errors in the console
     console.error(e);
