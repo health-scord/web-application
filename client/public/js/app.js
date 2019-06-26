@@ -67,11 +67,12 @@ const updateUI = async () => {
 
     const response = await fetch("/accounts", {
       method: "post",
-      headers: {
-        Authorization: `Bearer ${token}`
-      },
+      headers: {},
       body: JSON.stringify(data),
-      headers: { "Content-type": "application/json" }
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`
+      }
     });
 
     // Fetch the JSON result
