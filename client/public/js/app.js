@@ -122,7 +122,7 @@ const syncFitbit = async () => {
     // Make the call to the API, setting the token
     // in the Authorization header
     const response = await fetch(
-      `/account/${currentUser.sub}/authorizeDevice/fitbit`,
+      `/accounts/${currentUser.sub}/authorizeDevice/fitbit`,
       {
         method: "post",
         headers: {
