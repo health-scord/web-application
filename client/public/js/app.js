@@ -55,8 +55,9 @@ const updateUI = async () => {
     document.getElementById("ipt-user-profile").innerText = userProfile;
 
     let currentUser = await auth0.getUser();
+    const token = await auth0.getTokenSilently();
 
-    console.log(`current user is ${currentUser}`);
+    console.log(`current user is ${currentUser.sub}`);
     let userId = currentUser.sub;
 
     const response = await fetch("/accounts", {
