@@ -49,13 +49,15 @@ const updateUI = async () => {
   if (isAuthenticated) {
     document.getElementById("gated-content").classList.remove("hidden");
 
-    document.getElementById(
-      "ipt-access-token"
-    ).value = await auth0.getTokenSilently();
+    let accessToken = await auth0.getTokenSilently();
+    console.log(accessToken);
 
-    document.getElementById("ipt-user-profile").value = JSON.stringify(
-      await auth0.getUser()
-    );
+    document.getElementById("ipt-access-token").value = accessToken;
+
+    let userProfile = JSON.stringify(await auth0.getUser());
+    console.log(userProfile);
+
+    document.getElementById("ipt-user-profile").value = userProfile;
   } else {
     document.getElementById("gated-content").classList.add("hidden");
   }
