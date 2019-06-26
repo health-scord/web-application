@@ -102,11 +102,12 @@ app.get("/authorizeCallback", async (req, res) => {
   };
 
   try {
-    await rp(options);
-    return res.redirect(`http://${serverIP}:5000/accounts`);
+    let results = await rp(options);
+    console.log(results);
+    return res.redirect(`https://${config.serverUri}`);
   } catch (error) {
     console.log(error);
-    return res.redirect(`http://${serverIP}:5000/accounts`);
+    return res.redirect(`https://${config.serverUri}`);
   }
 });
 
