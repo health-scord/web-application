@@ -65,8 +65,10 @@ const updateUI = async () => {
       }
     });
 
+    let results = await response.json();
+
     console.log("AND HERE>>>>>>");
-    console.log(await response.json());
+    console.log(results);
 
     //   if (response.length == 0) {
     //     console.log("user doesnt exist, creating in data-service");
