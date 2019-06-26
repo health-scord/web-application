@@ -61,7 +61,7 @@ app.get("/accounts/:id", checkJwt, async (req, res) => {
     let results = await rp(options);
     return res.send(results);
   } catch (error) {
-    console.log(error);
+    res.send(error);
   }
 });
 
