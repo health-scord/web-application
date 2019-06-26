@@ -68,7 +68,8 @@ app.get("/accounts/", checkJwt, async (req, res) => {
 app.post("/accounts/", checkJwt, async (req, res) => {
   try {
     console.log("got an account create event: ");
-    console.log(req.body);
+    console.log(req);
+    console.log(JSON.parse(req));
 
     let options = {
       uri: `${dataServiceEndpoint}/accounts/`,
