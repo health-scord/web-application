@@ -43,7 +43,7 @@ const updateUI = async () => {
   document.getElementById("btn-logout").disabled = !isAuthenticated;
   document.getElementById("btn-login").disabled = isAuthenticated;
 
-  document.getElementById("btn-call-api").disabled = !isAuthenticated;
+  document.getElementById("btn-sync-fitbit").disabled = !isAuthenticated;
 
   // NEW - add logic to show/hide gated content after authentication
   if (isAuthenticated) {
