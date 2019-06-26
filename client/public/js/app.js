@@ -49,26 +49,34 @@ const updateUI = async () => {
   if (isAuthenticated) {
     document.getElementById("gated-content").classList.remove("hidden");
 
-    let accessToken = await auth0.getTokenSilently();
-    document.getElementById("ipt-access-token").innerText = accessToken;
+    let token = await auth0.getTokenSilently();
+    document.getElementById("ipt-access-token").innerText = token;
     let userProfile = JSON.stringify(await auth0.getUser());
     document.getElementById("ipt-user-profile").innerText = userProfile;
 
     let currentUser = await auth0.getUser();
-    const token = await auth0.getTokenSilently();
 
-    const response = await fetch("/accounts", {
-      method: "post",
-      body: JSON.stringify({
-        userId: currentUser.sub
-      }),
+    const response = await fetch(`/accounts/${currentUser.sub}`, {
       headers: {
-        "Content-type": "application/json",
         Authorization: `Bearer ${token}`
       }
     });
 
-    await response.json();
+    console.log(response);
+
+    if (response.length == 0) {
+      console.log("user doesnt exist, creating in data-service");
+      await fetch("/accounts", {
+        method: "post",
+        body: JSON.stringify({
+          userId: currentUser.sub
+        }),
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`
+        }
+      });
+    }
   } else {
     document.getElementById("gated-content").classList.add("hidden");
   }
