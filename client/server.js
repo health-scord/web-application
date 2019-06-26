@@ -61,7 +61,7 @@ app.get("/accounts/:id", checkJwt, async (req, res) => {
     let results = await rp(options);
     return res.send(results);
   } catch (error) {
-    console.log(error.toJSON());
+    console.log(error);
   }
 });
 
@@ -79,7 +79,7 @@ app.post("/accounts/", checkJwt, async (req, res) => {
     let results = await rp(options);
     return res.send(results);
   } catch (error) {
-    console.log(error.toJSON());
+    console.log(error);
   }
 });
 
