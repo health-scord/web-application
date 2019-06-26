@@ -91,10 +91,11 @@ const callApi = async () => {
   try {
     // Get the access token from the Auth0 client
     const token = await auth0.getTokenSilently();
+    let currentUser = await auth0.getUser();
 
     // Make the call to the API, setting the token
     // in the Authorization header
-    const response = await fetch("/accounts", {
+    const response = await fetch(`/accounts/${currentUser.sub}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
