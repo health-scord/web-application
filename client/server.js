@@ -31,6 +31,21 @@ const fitbitClient = new FitbitApiClient({
 });
 
 // redirect the user to the Fitbit authorization page
+app.get("/accounts/", async (req, res) => {
+  try {
+    let options = {
+      uri: `${dataServiceEndpoint}/accounts/`,
+      method: "GET",
+      json: true
+    };
+
+    let results = await rp(options);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// redirect the user to the Fitbit authorization page
 app.get("/accounts/:id/authorizeDevice/fitbit", async (req, res) => {
   try {
     globalScopeId = req.params.id;
