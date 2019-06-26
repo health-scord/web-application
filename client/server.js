@@ -5,33 +5,44 @@ const https = require("https");
 const fs = require("fs");
 const path = require("path");
 const config = require("../config.js");
+const jwt = require("express-jwt");
+const jwksRsa = require("jwks-rsa");
+const authConfig = require("./auth_config.json");
 
 const { join } = require("path");
 const app = express();
 
+const checkJwt = jwt({
+  secret: jwksRsa.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: `https://${authConfig.domain}/.well-known/jwks.json`
+  }),
+
+  audience: authConfig.audience,
+  issuer: `https://${authConfig.domain}/`,
+  algorithm: ["RS256"]
+});
+
 // Serve static assets from the /public folder
 app.use(express.static(join(__dirname, "public")));
+
+app.use(function(err, req, res, next) {
+  if (err.name === "UnauthorizedError") {
+    return res.status(401).send({ msg: "Invalid token" });
+  }
+
+  next(err, req, res);
+});
 
 // Endpoint to serve the configuration file
 app.get("/auth_config.json", (req, res) => {
   res.sendFile(join(__dirname, "auth_config.json"));
 });
 
-// fitbit auth stuff
-let globalScopeId;
-let callbackUrl = `https://${config.serverUri}/authorizeCallback`;
-const dataServiceEndpoint = `http://${config.dataServiceUri}:${
-  config.dataServicePort
-}`;
-
-const fitbitClient = new FitbitApiClient({
-  clientId: "22DPF6",
-  clientSecret: "5f3538567d187a52768935217b220558",
-  apiVersion: "1.2" // 1.2 is the default
-});
-
-// redirect the user to the Fitbit authorization page
-app.get("/accounts/", async (req, res) => {
+// fetches accounts from data-service api
+app.get("/accounts/", checkJwt, async (req, res) => {
   try {
     let options = {
       uri: `${dataServiceEndpoint}/accounts/`,
@@ -45,6 +56,19 @@ app.get("/accounts/", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+});
+
+// fitbit auth stuff
+let globalScopeId;
+let callbackUrl = `https://${config.serverUri}/authorizeCallback`;
+const dataServiceEndpoint = `http://${config.dataServiceUri}:${
+  config.dataServicePort
+}`;
+
+const fitbitClient = new FitbitApiClient({
+  clientId: "22DPF6",
+  clientSecret: "5f3538567d187a52768935217b220558",
+  apiVersion: "1.2" // 1.2 is the default
 });
 
 // redirect the user to the Fitbit authorization page

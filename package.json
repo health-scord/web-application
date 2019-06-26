@@ -19,9 +19,11 @@
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.0.1",
     "express": "^4.16.4",
+    "express-jwt": "^5.3.1",
     "fitbit-node": "^2.2.0",
     "fs": "0.0.1-security",
     "https": "^1.0.0",
+    "jwks-rsa": "^1.5.1",
     "path": "^0.12.7",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
