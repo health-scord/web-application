@@ -58,16 +58,20 @@ const updateUI = async () => {
     const token = await auth0.getTokenSilently();
 
     console.log(`current user is ${currentUser.sub}`);
-    let userId = currentUser.sub;
+
+    let data = {
+      userId: currentUser.sub
+    };
+
+    console.log(data);
 
     const response = await fetch("/accounts", {
-      method: "POST",
+      method: "post",
       headers: {
         Authorization: `Bearer ${token}`
       },
-      body: JSON.stringify({
-        userId: userId
-      })
+      body: JSON.stringify(data),
+      headers: { "Content-type": "application/json" }
     });
 
     // Fetch the JSON result
