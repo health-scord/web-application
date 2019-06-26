@@ -57,7 +57,7 @@ const updateUI = async () => {
     let currentUser = await auth0.getUser();
 
     console.log("RIGHT HERE>>>>>>");
-    console.log(currentUser)
+    console.log(currentUser);
 
     const response = await fetch(`/accounts/${currentUser.sub}`, {
       headers: {
@@ -68,29 +68,29 @@ const updateUI = async () => {
     console.log("AND HERE>>>>>>");
     console.log(response);
 
-  //   if (response.length == 0) {
-  //     console.log("user doesnt exist, creating in data-service");
-  //     await fetch("/accounts", {
-  //       method: "post",
-  //       body: JSON.stringify({
-  //         userId: currentUser.sub
-  //       }),
-  //       headers: {
-  //         "Content-type": "application/json",
-  //         Authorization: `Bearer ${token}`
-  //       }
-  //     });
-  //   } else {
-  //     const responseData = await response.json();
+    //   if (response.length == 0) {
+    //     console.log("user doesnt exist, creating in data-service");
+    //     await fetch("/accounts", {
+    //       method: "post",
+    //       body: JSON.stringify({
+    //         userId: currentUser.sub
+    //       }),
+    //       headers: {
+    //         "Content-type": "application/json",
+    //         Authorization: `Bearer ${token}`
+    //       }
+    //     });
+    //   } else {
+    //     const responseData = await response.json();
 
-  //     // Display the result in the output element
-  //     const responseElement = document.getElementById("api-call-result");
+    //     // Display the result in the output element
+    //     const responseElement = document.getElementById("api-call-result");
 
-  //     responseElement.innerText = JSON.stringify(responseData, {}, 2);
-  //   }
-  // } else {
-  //   document.getElementById("gated-content").classList.add("hidden");
-  // }
+    //     responseElement.innerText = JSON.stringify(responseData, {}, 2);
+    //   }
+  } else {
+    document.getElementById("gated-content").classList.add("hidden");
+  }
 };
 
 const login = async () => {
