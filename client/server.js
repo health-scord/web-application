@@ -40,6 +40,8 @@ app.get("/accounts/", async (req, res) => {
     };
 
     let results = await rp(options);
+    console.log(results);
+    return res.send(results);
   } catch (error) {
     console.log(error);
   }
