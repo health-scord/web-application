@@ -50,27 +50,23 @@ app.get("/auth_config.json", (req, res) => {
 });
 
 // fetches accounts from data-service api
-app.get("/accounts/", checkJwt, async (req, res) => {
+app.get("/accounts/:id", checkJwt, async (req, res) => {
   try {
     let options = {
-      uri: `${dataServiceEndpoint}/accounts/`,
+      uri: `${dataServiceEndpoint}/accounts/${req.params.id}`,
       method: "GET",
       json: true
     };
 
     let results = await rp(options);
-    console.log(results);
     return res.send(results);
   } catch (error) {
-    console.log(error);
+    console.log(error.toJSON());
   }
 });
 
 app.post("/accounts/", checkJwt, async (req, res) => {
   try {
-    console.log("got an account create event: ");
-    console.log(req.body);
-
     let options = {
       uri: `${dataServiceEndpoint}/accounts/`,
       method: "POST",
@@ -81,10 +77,9 @@ app.post("/accounts/", checkJwt, async (req, res) => {
     };
 
     let results = await rp(options);
-    console.log(results);
     return res.send(results);
   } catch (error) {
-    console.log(error);
+    console.log(error.toJSON());
   }
 });
 
@@ -99,7 +94,7 @@ const fitbitClient = new FitbitApiClient({
 });
 
 // redirect the user to the Fitbit authorization page
-app.get("/accounts/:id/authorizeDevice/fitbit", async (req, res) => {
+app.post("/accounts/:id/authorizeDevice/fitbit", async (req, res) => {
   try {
     globalScopeId = req.params.id;
     console.log("in authorize route");

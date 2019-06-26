@@ -57,27 +57,18 @@ const updateUI = async () => {
     let currentUser = await auth0.getUser();
     const token = await auth0.getTokenSilently();
 
-    console.log(`current user is ${currentUser.sub}`);
-
-    let data = {
-      userId: currentUser.sub
-    };
-
-    console.log(data);
-
     const response = await fetch("/accounts", {
       method: "post",
-      headers: {},
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        userId: currentUser.sub
+      }),
       headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${token}`
       }
     });
 
-    // Fetch the JSON result
-    const responseData = await response.json();
-    console.log(responseData);
+    await response.json();
   } else {
     document.getElementById("gated-content").classList.add("hidden");
   }
@@ -130,19 +121,15 @@ const syncFitbit = async () => {
 
     // Make the call to the API, setting the token
     // in the Authorization header
-    // const response = await fetch("/accounts", {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`
-    //   }
-    // });
-
-    // // Fetch the JSON result
-    // const responseData = await response.json();
-
-    // // Display the result in the output element
-    // const responseElement = document.getElementById("api-call-result");
-
-    // responseElement.innerText = JSON.stringify(responseData, {}, 2);
+    const response = await fetch(
+      `/account/${currentUser.sub}/authorizeDevice/fitbit`,
+      {
+        method: "post",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
   } catch (e) {
     // Display errors in the console
     console.error(e);
