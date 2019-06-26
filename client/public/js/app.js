@@ -65,9 +65,9 @@ const updateUI = async () => {
       headers: {
         Authorization: `Bearer ${token}`
       },
-      body: {
-        userId
-      }
+      body: JSON.stringify({
+        userId: userId
+      })
     });
 
     // Fetch the JSON result

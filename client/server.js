@@ -30,6 +30,7 @@ const dataServiceEndpoint = `http://${config.dataServiceUri}:${
   config.dataServicePort
 }`;
 
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Serve static assets from the /public folder
@@ -68,8 +69,7 @@ app.get("/accounts/", checkJwt, async (req, res) => {
 app.post("/accounts/", checkJwt, async (req, res) => {
   try {
     console.log("got an account create event: ");
-    console.log(req);
-    console.log(JSON.parse(req));
+    console.log(req.body);
 
     let options = {
       uri: `${dataServiceEndpoint}/accounts/`,
