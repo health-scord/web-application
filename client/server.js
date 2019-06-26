@@ -94,7 +94,7 @@ const fitbitClient = new FitbitApiClient({
 });
 
 // redirect the user to the Fitbit authorization page
-app.post("/accounts/:id/authorizeDevice/fitbit", async (req, res) => {
+app.get("/accounts/:id/authorizeDevice/fitbit", async (req, res) => {
   try {
     globalScopeId = req.params.id;
     console.log("in authorize route");

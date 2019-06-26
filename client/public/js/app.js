@@ -114,7 +114,7 @@ const syncFitbit = async () => {
     const response = await fetch(
       `/accounts/${currentUser.sub}/authorizeDevice/fitbit`,
       {
-        method: "post",
+        method: "get",
         headers: {
           Authorization: `Bearer ${token}`
         }
