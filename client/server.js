@@ -126,7 +126,7 @@ app.get("/accounts/:id/authorizeDevice/fitbit", async (req, res) => {
         callbackUrl
       );
       console.log(url);
-      console.log("about to redirect...");
+      console.log("about to redirect..");
       return res.redirect(url);
     }
   } catch (error) {
