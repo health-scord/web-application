@@ -74,16 +74,16 @@ const updateUI = async () => {
 
     if (results.statusCode == 404) {
       console.log("user doesnt exist, need to create using data-service");
-      // await fetch("/accounts", {
-      //   method: "post",
-      //   body: JSON.stringify({
-      //     userId: currentUser.sub
-      //   }),
-      //   headers: {
-      //     "Content-type": "application/json",
-      //     Authorization: `Bearer ${token}`
-      //   }
-      // });
+      await fetch("/accounts", {
+        method: "post",
+        body: JSON.stringify({
+          userId: currentUser.sub
+        }),
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`
+        }
+      });
     } else {
       const responseElement = document.getElementById("api-call-result");
       responseElement.innerText = JSON.stringify(results, {}, 2);
