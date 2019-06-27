@@ -108,7 +108,7 @@ const syncFitbit = async () => {
 
     console.log(window.location.origin);
 
-    window.location.href = `https://${window.location.origin}/accounts/${
+    window.location.href = `${window.location.origin}/accounts/${
       currentUser.sub
     }/authorizeDevice/fitbit`;
 
