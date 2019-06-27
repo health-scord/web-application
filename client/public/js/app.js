@@ -51,8 +51,8 @@ const updateUI = async () => {
     let userProfile = JSON.stringify(await auth0.getUser());
 
     document.getElementById("gated-content").classList.remove("hidden");
-    document.getElementById("ipt-access-token").innerText = token;
-    document.getElementById("ipt-user-profile").innerText = userProfile;
+    // document.getElementById("ipt-access-token").innerText = token;
+    // document.getElementById("ipt-user-profile").innerText = userProfile;
 
     let currentUser = await auth0.getUser();
 
@@ -67,13 +67,7 @@ const updateUI = async () => {
 
     let results = await response.json();
 
-    console.log("AND HERE>>>>>>");
-    console.log(results);
-    console.log();
-    //check here for "account not found error"
-
     if (results.statusCode == 404) {
-      console.log("user doesnt exist, need to create using data-service");
       await fetch("/accounts", {
         method: "post",
         body: JSON.stringify({
