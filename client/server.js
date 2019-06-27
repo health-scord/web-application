@@ -9,6 +9,7 @@ const config = require("../config.js");
 const jwt = require("express-jwt");
 const jwksRsa = require("jwks-rsa");
 const authConfig = require("./auth_config.json");
+const cors = require("cors");
 
 const { join } = require("path");
 const app = express();
@@ -29,6 +30,16 @@ const checkJwt = jwt({
 const dataServiceEndpoint = `http://${config.dataServiceUri}:${
   config.dataServicePort
 }`;
+
+app.use(
+  cors({
+    allowedHeaders: ["Content-Type"],
+    exposedHeaders: ["Content-Type"],
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false
+  })
+);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
