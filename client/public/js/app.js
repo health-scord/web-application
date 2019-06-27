@@ -106,17 +106,23 @@ const syncFitbit = async () => {
     const token = await auth0.getTokenSilently();
     let currentUser = await auth0.getUser();
 
+    console.log(window.location.origin);
+
+    window.location.href = `https://${window.location.origin}/accounts/${
+      currentUser.sub
+    }/authorizeDevice/fitbit`;
+
     // Make the call to the API, setting the token
     // in the Authorization header
-    const response = await fetch(
-      `/accounts/${currentUser.sub}/authorizeDevice/fitbit`,
-      {
-        method: "get",
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
-    );
+    // const response = await fetch(
+    //   `/accounts/${currentUser.sub}/authorizeDevice/fitbit`,
+    //   {
+    //     method: "get",
+    //     headers: {
+    //       Authorization: `Bearer ${token}`
+    //     }
+    //   }
+    // );
   } catch (e) {
     // Display errors in the console
     console.error(e);
