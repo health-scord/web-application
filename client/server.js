@@ -52,6 +52,9 @@ app.get("/auth_config.json", (req, res) => {
 // fetches accounts from data-service api
 app.get("/accounts/:id", checkJwt, async (req, res) => {
   try {
+    console.log("inside get /account/:id of web-app");
+    console.log(req.params.id);
+
     let options = {
       uri: `${dataServiceEndpoint}/accounts/${req.params.id}`,
       method: "GET",
@@ -59,8 +62,10 @@ app.get("/accounts/:id", checkJwt, async (req, res) => {
     };
 
     let results = await rp(options);
+    console.log(results);
     return res.send(results);
   } catch (error) {
+    console.log(error);
     res.send(error);
   }
 });
