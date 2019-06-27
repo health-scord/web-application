@@ -135,7 +135,7 @@ app.get("/accounts/:id/authorizeDevice/fitbit", async (req, res) => {
 });
 
 // handle the callback from the Fitbit authorization flow
-app.get("/authorizeCallback", async (req, res) => {
+app.get("/authorizeCallback", cors(), async (req, res) => {
   // exchange the authorization code we just received for an access token
   console.log("in callback route");
 
