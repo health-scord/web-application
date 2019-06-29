@@ -13,30 +13,6 @@ const configureClient = async () => {
   });
 };
 
-window.onload = async () => {
-  await configureClient();
-  updateUI();
-
-  const isAuthenticated = await auth0.isAuthenticated();
-
-  if (isAuthenticated) {
-    // show the gated content
-    return;
-  }
-
-  // NEW - check for the code and state parameters
-  const query = window.location.search;
-  if (query.includes("code=") && query.includes("state=")) {
-    // Process the login state
-    await auth0.handleRedirectCallback();
-
-    updateUI();
-
-    // Use replaceState to redirect the user away and remove the querystring parameters
-    window.history.replaceState({}, document.title, "/");
-  }
-};
-
 const updateUI = async () => {
   const isAuthenticated = await auth0.isAuthenticated();
 
@@ -66,6 +42,8 @@ const updateUI = async () => {
     });
 
     let results = await response.json();
+
+    console.log(currentUser);
 
     if (results.statusCode == 404) {
       await fetch("/accounts", {
@@ -111,20 +89,31 @@ const syncFitbit = async () => {
     window.location.href = `${window.location.origin}/accounts/${
       currentUser.sub
     }/authorizeDevice/fitbit`;
-
-    // Make the call to the API, setting the token
-    // in the Authorization header
-    // const response = await fetch(
-    //   `/accounts/${currentUser.sub}/authorizeDevice/fitbit`,
-    //   {
-    //     method: "get",
-    //     headers: {
-    //       Authorization: `Bearer ${token}`
-    //     }
-    //   }
-    // );
   } catch (e) {
-    // Display errors in the console
     console.error(e);
+  }
+};
+
+window.onload = async () => {
+  await configureClient();
+  updateUI();
+
+  const isAuthenticated = await auth0.isAuthenticated();
+
+  if (isAuthenticated) {
+    // show the gated content
+    return;
+  }
+
+  // NEW - check for the code and state parameters
+  const query = window.location.search;
+  if (query.includes("code=") && query.includes("state=")) {
+    // Process the login state
+    await auth0.handleRedirectCallback();
+
+    updateUI();
+
+    // Use replaceState to redirect the user away and remove the querystring parameters
+    window.history.replaceState({}, document.title, "/");
   }
 };

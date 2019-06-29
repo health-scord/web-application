@@ -31,18 +31,6 @@ const dataServiceEndpoint = `http://${config.dataServiceUri}:${
   config.dataServicePort
 }`;
 
-app.use(
-  cors({
-    allowedHeaders: ["Content-Type"],
-    exposedHeaders: ["Content-Type"],
-    origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false
-  })
-);
-
-app.options("*", cors());
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -137,7 +125,7 @@ app.get("/accounts/:id/authorizeDevice/fitbit", async (req, res) => {
 });
 
 // handle the callback from the Fitbit authorization flow
-app.get("/authorizeCallback", cors(), async (req, res) => {
+app.get("/authorizeCallback", async (req, res) => {
   // exchange the authorization code we just received for an access token
   console.log("in callback route");
 
