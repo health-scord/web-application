@@ -43,6 +43,7 @@ const updateUI = async () => {
 
     let results = await response.json();
 
+    console.log();
     console.log(currentUser);
 
     if (results.statusCode == 404) {
