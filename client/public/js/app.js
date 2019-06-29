@@ -50,7 +50,9 @@ const updateUI = async () => {
       await fetch("/accounts", {
         method: "post",
         body: JSON.stringify({
-          userId: currentUser.sub
+          firstName: currentUser.given_name,
+          lastName: currentUser.family_name,
+          id: currentUser.sub
         }),
         headers: {
           "Content-type": "application/json",

@@ -72,7 +72,9 @@ app.post("/accounts/", checkJwt, async (req, res) => {
       uri: `${dataServiceEndpoint}/accounts/`,
       method: "POST",
       body: {
-        id: req.body.userId
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        id: req.body.id
       },
       json: true
     };
