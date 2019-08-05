@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./client/server.js",
-    "build": "webpack --config ./webpack/client.config.js"
+    "build": "webpack --config ./webpack/client.config.js",
+    "gen:ui": "bash/gen_ui_component.sh",
+    "gen:page": "bash/gen_page_component.sh",
+    "gen:data": "bash/gen_data_component.sh",
+    "gen:layout": "bash/gen_layout_component.sh"
   },
   "repository": {
     "type": "git",

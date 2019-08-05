@@ -13,6 +13,7 @@ import * as Yup from "yup";
 import { LoginFormValues, LoginProps } from "./Login.d";
 
 import LogInForm from "../../data/LogInForm/LogInForm";
+import LoginHero from "../../ui/LoginHero/LoginHero";
 
 const Login: React.FC<LoginProps> = () => {
   return (
@@ -20,6 +21,8 @@ const Login: React.FC<LoginProps> = () => {
       <Text tagName="h1" className="headline">
         Login
       </Text>
+
+      <LoginHero />
 
       <LogInForm />
     </Card>

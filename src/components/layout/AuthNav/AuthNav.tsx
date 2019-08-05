@@ -16,39 +16,15 @@ const AuthNav: React.FC<AuthNavProps> = ({ children }) => {
 
   return (
     <App>
-      <Header
-        leftElements={
-          <>
-            <Button
-              className="textButton headerItem"
-              minimal={true}
-              onClick={() => navigation.navigate("/")}
-            >
-              Back to Browse
-            </Button>
-            <Button
-              className="textButton headerItem"
-              minimal={true}
-              onClick={() => navigation.navigate("/login")}
-            >
-              Login
-            </Button>
-            <Button
-              className="textButton headerItem"
-              minimal={true}
-              onClick={() => navigation.navigate("/sign-up")}
-            >
-              Sign Up
-            </Button>
-          </>
-        }
+      {/* <Header
+        leftElements={<></>}
         rightElements={<></>}
-      />
+      /> */}
       <section
         style={{
           paddingLeft: 25,
           paddingRight: 25,
-          paddingTop: 85,
+          paddingTop: 25,
           background: "#3E4B58",
           height: "100vh",
           overflowY: "scroll",
