@@ -3,7 +3,6 @@ import { hot } from "react-hot-loader";
 
 import { useCookies } from "react-cookie";
 import { useCurrentRoute, useNavigation } from "react-navi";
-import Utility from "../../../../services/Utility";
 import { useAppContext } from "../../../context";
 import AuthClient from "../../../services/AuthClient";
 import LoadingIndicator from "../../ui/LoadingIndicator/LoadingIndicator";
@@ -11,7 +10,6 @@ import { AppProps } from "./App.d";
 
 const App: React.FC<AppProps> = ({ children }) => {
   const authClient = new AuthClient();
-  const utility = new Utility();
 
   const [{ userData }, dispatch] = useAppContext();
   const route = useCurrentRoute();
@@ -25,8 +23,7 @@ const App: React.FC<AppProps> = ({ children }) => {
   // Global Loading
   // Will users who are logged in be shown a loading symbol on SSR (with JS disabled)?
   if (
-    userData === null &&
-    utility.isDefinedWithContent(cookies["reeviewrPrivateHash"])
+    false
   ) {
     authClient.getUserData(dispatch);
 
@@ -39,14 +36,22 @@ const App: React.FC<AppProps> = ({ children }) => {
 
   // Global Redirects
   if (
-    utility.isDefinedWithContent(userData) &&
-    utility.isDefinedWithContent(userData.user)
+    false
   ) {
     if (
-      userData.user.userType === 1 &&
-      route.url.pathname !== "/complete-profile"
+      route.url.pathname === "/"
     ) {
-      navigation.navigate("/complete-profile");
+      setTimeout(() => {
+        navigation.navigate("/list");
+      }, 500)
+    }
+  } else {
+    if (
+      route.url.pathname === "/"
+    ) {
+      setTimeout(() => {
+        navigation.navigate("/login");
+      }, 500)
     }
   }
 

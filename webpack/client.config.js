@@ -37,7 +37,7 @@ module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
     app: [
-      "./src/client.tsx",
+      "./index.tsx",
     ],
   },
 
@@ -74,10 +74,10 @@ module.exports = {
     }),
 
     // Process index.html and insert script and stylesheet tags for us.
-    new HtmlWebpackPlugin({
-      template: "./entry/index.html",
-      inject: "body",
-    }),
+    // new HtmlWebpackPlugin({
+    //   template: "./entry/index.html",
+    //   inject: "body",
+    // }),
 
     // Don't proceed in generating code if there are errors
     new webpack.NoEmitOnErrorsPlugin(),
@@ -150,7 +150,7 @@ module.exports = {
   // },
 
   output: {
-    path: path.resolve(__dirname, "../dist"),
+    path: path.resolve(__dirname, "../client/public/"),
     publicPath: "/",
     filename:
       process.env.NODE_ENV === "development"

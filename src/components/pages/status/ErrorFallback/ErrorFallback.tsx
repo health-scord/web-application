@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ErrorFallbackProps } from "./ErrorFallback.d";
-import * as Sentry from "@sentry/browser";
+// import * as Sentry from "@sentry/browser";
 
 // const ErrorFallback: React.FC<ErrorFallbackProps> = ({
 //   error,
@@ -33,11 +33,11 @@ class ErrorFallback extends React.Component<any, any, any> {
   componentDidMount() {
     const { error } = this.props;
     this.setState({ error });
-    Sentry.withScope(scope => {
-      // scope.setExtras(errorInfo);
-      const eventId = Sentry.captureException(error);
-      this.setState({ eventId });
-    });
+    // Sentry.withScope(scope => {
+    //   // scope.setExtras(errorInfo);
+    //   const eventId = Sentry.captureException(error);
+    //   this.setState({ eventId });
+    // });
   }
 
   render() {
@@ -48,11 +48,12 @@ class ErrorFallback extends React.Component<any, any, any> {
         <strong>Error:</strong>
         {typeof error !== "undefined" ? error.toString() : "undefined"}
         <a
-          onClick={() =>
-            Sentry.showReportDialog({ eventId: this.state.eventId })
-          }
+        href="#!"
+          // onClick={() =>
+          //   Sentry.showReportDialog({ eventId: this.state.eventId })
+          // }
         >
-          Report feedback
+          Report Feedback
         </a>
       </>
     );

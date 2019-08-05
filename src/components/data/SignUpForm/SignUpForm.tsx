@@ -16,9 +16,6 @@ import {
 import { Form, Formik, FormikActions, FormikProps } from "formik";
 import { Link } from "react-navi";
 import * as Yup from "yup";
-import { GenreList, Genres } from "../../../../defs/genres";
-import { ERROR_CODE } from "../../../../services/ERROR_CODE";
-import Utility from "../../../../services/Utility";
 import { useAppContext } from "../../../context";
 import AuthClient from "../../../services/AuthClient";
 import CheckboxField from "../../ui/CheckboxField/CheckboxField";
@@ -33,7 +30,6 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
   onClick = e => console.info("Click"),
 }) => {
   const authClient = new AuthClient();
-  const utility = new Utility();
 
   const [{ mixpanel }, dispatch] = useAppContext();
   const [userExists, setUserExists] = React.useState(false);
@@ -115,11 +111,11 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
 
               if (err) {
                 console.error(err);
-                if (res.body.errorMessage === ERROR_CODE.C008) {
-                  setUserExists(true);
-                } else {
-                  setUserExists(false);
-                }
+                // if (res.body.errorMessage === ERROR_CODE.C008) {
+                //   setUserExists(true);
+                // } else {
+                //   setUserExists(false);
+                // }
               }
               if (res.body.success) {
                 // redirect to Home

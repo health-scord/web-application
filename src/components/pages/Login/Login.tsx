@@ -13,7 +13,6 @@ import * as Yup from "yup";
 import { LoginFormValues, LoginProps } from "./Login.d";
 
 import { Link } from "react-navi";
-import { ERROR_CODE } from "../../../../services/ERROR_CODE";
 import { useAppContext } from "../../../context";
 import AuthClient from "../../../services/AuthClient";
 import TextField from "../../ui/TextField/TextField";
@@ -87,24 +86,10 @@ const Login: React.FC<LoginProps> = () => {
 
           authClient.login(values, (err, res) => {
             if (err) {
-              if (res.body.errorMessage === ERROR_CODE.C003) {
-                setUserDoesNotExist(true);
-              } else {
-                setUserDoesNotExist(false);
-              }
-              if (res.body.errorMessage === ERROR_CODE.C006) {
-                setNotValidType(true);
-              } else {
-                setNotValidType(false);
-              }
-              if (res.body.errorMessage === ERROR_CODE.C007) {
-                setEmailNotConfirmed(true);
-              } else {
-                setEmailNotConfirmed(false);
-              }
+              
             }
             if (res.body.success) {
-              window.location.replace("/");
+              // window.location.replace("/");
             }
             actions.resetForm();
           });

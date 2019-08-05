@@ -15,7 +15,6 @@ import * as Yup from "yup";
 
 import TextField from "../../ui/TextField/TextField";
 import AuthClient from "../../../services/AuthClient";
-import { ERROR_CODE } from "../../../../services/ERROR_CODE";
 
 const ForgotPassword: React.FC<ForgotPasswordProps> = () => {
   const authClient = new AuthClient();
@@ -68,12 +67,12 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = () => {
           authClient.forgotPassword(values, (err, res) => {
             if (err) {
               // console.info("here 1");
-              if (res.body.errorMessage === ERROR_CODE.C001) {
-                // console.info("hero");
-                setCannotFindEmail(true);
-              } else {
-                setCannotFindEmail(false);
-              }
+              // if (res.body.errorMessage === ERROR_CODE.C001) {
+              //   // console.info("hero");
+              //   setCannotFindEmail(true);
+              // } else {
+              //   setCannotFindEmail(false);
+              // }
               // if (res.body.errorMessage === ERROR_CODE.C002) {
               // }
             }

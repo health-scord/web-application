@@ -3,13 +3,9 @@ import * as React from "react";
 import { ConfirmEmailProps } from "./ConfirmEmail.d";
 import { Card, Text, Callout } from "@blueprintjs/core";
 import { useCurrentRoute, useLoadingRoute, useNavigation } from "react-navi";
-import Legacy from "../../../../services/Legacy";
-import Utility from "../../../../services/Utility";
 import AuthClient from "../../../services/AuthClient";
 
 const ConfirmEmail: React.FC<ConfirmEmailProps> = () => {
-  const legacy = new Legacy();
-  const utility = new Utility();
   const authClient = new AuthClient();
 
   let route = useCurrentRoute();
@@ -21,22 +17,7 @@ const ConfirmEmail: React.FC<ConfirmEmailProps> = () => {
 
   const { confirmHash } = route.lastChunk.request.params;
 
-  if (utility.isDefinedWithContent(confirmHash)) {
-    if (!calledApi) {
-      setCalledApi(true);
-      authClient.confirmEmail({ confirmHash }, (err, res) => {
-        if (err) {
-          setError("Failed to confirm");
-        }
-        if (utility.isDefinedWithContent(res)) {
-          if (res.body.success) {
-            window.location.href = window.location.origin + "/login";
-          }
-        } else {
-          setError("Failed to confirm");
-        }
-      });
-    }
+  if (true) {
     return (
       <Card className="floatingForm">
         {error ? (
