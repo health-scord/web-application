@@ -2,55 +2,13 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>SPA SDK Sample</title>
-    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <title>Scord</title>
+    <!-- <link rel="stylesheet" type="text/css" href="/css/main.css" /> -->
   </head>
 
   <body>
-    <h2>Health Score</h2>
-    <p>Put your lifestyle decisions to work for you!</p>
-    <button id="btn-login" disabled="true" onclick="login()">Log in</button>
-    <button id="btn-logout" disabled="true" onclick="logout()">Log out</button>
-    <div class="hidden" id="gated-content">
-      <p>
-        You're seeing this content because you're currently
-        <strong>logged in</strong>.
-      </p>
-      <!-- <label>
-        Access token:
-        <pre id="ipt-access-token"></pre>
-      </label>
-      <label>
-        User profile:
-        <pre id="ipt-user-profile"></pre>
-      </label> -->
-<style>
-body {
-  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#e570e7+0,c85ec7+47,a849a3+100;Pink+3D+%233 */
-background: #e570e7; /* Old browsers */
-background: -moz-linear-gradient(top,  #e570e7 0%, #c85ec7 47%, #a849a3 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top,  #e570e7 0%,#c85ec7 47%,#a849a3 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom,  #e570e7 0%,#c85ec7 47%,#a849a3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e570e7', endColorstr='#a849a3',GradientType=0 ); /* IE6-9 */
-}
-p {
-  color: White;
-  margin-left: 40px;
-} 
-h2 {
-  color: White;
-  margin-left: 40px;
-} 
-</style>
-    </div>
-
-    <button id="btn-sync-fitbit" disabled="true" onclick="syncFitbit()">
-      Sync Fitbit
-    </button>
-
-    <!-- Add a container to hold the response from the call -->
-    <pre id="api-call-result"></pre>
+    
   </body>
   <script src="https://cdn.auth0.com/js/auth0-spa-js/1.0.0/auth0-spa-js.production.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/bundle.js"></script>
 </html>
