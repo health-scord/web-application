@@ -17,15 +17,12 @@ import LoginHero from "../../ui/LoginHero/LoginHero";
 
 const Login: React.FC<LoginProps> = () => {
   return (
-    <Card className="floatingForm">
-      <Text tagName="h1" className="headline">
-        Login
-      </Text>
-
-      <LoginHero />
-
-      <LogInForm />
-    </Card>
+    <div className="centerPageContent">
+      <div className="floatingForm">
+        <LoginHero />
+        <LogInForm />
+      </div>
+    </div>
   );
 };
 

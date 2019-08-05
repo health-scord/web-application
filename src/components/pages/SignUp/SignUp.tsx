@@ -6,13 +6,13 @@ import SignUpForm from "../../data/SignUpForm/SignUpForm";
 
 const SignUp: React.FC<SignUpProps> = () => {
   return (
-    <Card className="floatingForm">
+    <div className="floatingForm">
       <Text tagName="h1" className="headline">
         Sign Up
       </Text>
 
       <SignUpForm />
-    </Card>
+    </div>
   );
 };
 

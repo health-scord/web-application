@@ -19,7 +19,7 @@ const ConfirmEmail: React.FC<ConfirmEmailProps> = () => {
 
   if (true) {
     return (
-      <Card className="floatingForm">
+      <div className="floatingForm">
         {error ? (
           <Callout title="Attention" intent="danger">
             There was an error confirming your email.
@@ -30,15 +30,15 @@ const ConfirmEmail: React.FC<ConfirmEmailProps> = () => {
         <Text tagName="h1" className="headline">
           Confirming Email...
         </Text>
-      </Card>
+      </div>
     );
   } else {
     return (
-      <Card className="floatingForm">
+      <div className="floatingForm">
         <Text tagName="h1" className="headline">
           Waiting...
         </Text>
-      </Card>
+      </div>
     );
   }
 };

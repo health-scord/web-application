@@ -172,3 +172,10 @@ main {
     grid-row-gap: 14px;
   }
 }
+
+.centerPageContent {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

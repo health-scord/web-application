@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { LoginHeroProps } from "./LoginHero.d";
+import { Text } from "@blueprintjs/core";
 
 const LoginHero: React.FC<LoginHeroProps> = ({
   ref = null,
@@ -8,14 +9,14 @@ const LoginHero: React.FC<LoginHeroProps> = ({
   onClick = e => console.info("Click"),
 }) => {
   const clickHandler = e => onClick(e);
-  return <>
-      <section className="loginHero">
-        <div className="loginHeroContain">
-          <h1>scord</h1>
-          <p>Put your fitness data to work for you</p>
-        </div>
-      </section>
-  </>;
+  return (
+    <section className="loginHero">
+      <div className="loginHeroContain">
+        <Text tagName="h1">scord</Text>
+        <Text tagName="p">Put your fitness data to work for you</Text>
+      </div>
+    </section>
+  );
 };
 
 export default LoginHero;

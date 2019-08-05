@@ -24,8 +24,8 @@ const AuthNav: React.FC<AuthNavProps> = ({ children }) => {
         style={{
           paddingLeft: 25,
           paddingRight: 25,
-          paddingTop: 25,
-          background: "#3E4B58",
+          paddingTop: 0,
+          background: "linear-gradient(135deg, #492eae, #b25ccd)",
           height: "100vh",
           overflowY: "scroll",
           overflowX: "hidden",

@@ -41,6 +41,10 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
       .max(100, "Too Long!")
       .email("Invalid email")
       .required("Required"),
+    username: Yup.string()
+      .min(4, "Too Short!")
+      .max(100, "Too Long!")
+      .required("Required"),
     password: Yup.string()
       .min(4, "Too Short!")
       .max(100, "Too Long!")
@@ -81,10 +85,9 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
 
         <Formik
           initialValues={{
+            username: "",
             email: "",
             password: "",
-            confirmPassword: "",
-            agreeTerms: false,
           }}
           validationSchema={SignUpSchema}
           onSubmit={(
@@ -98,13 +101,13 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
               mixpanel.track
             );
 
-            mixpanel.track("Sign up form submission attempt", {
-              env: process.env.NODE_ENV,
-              time: new Date(),
-              data: {
-                values,
-              },
-            });
+            // mixpanel.track("Sign up form submission attempt", {
+            //   env: process.env.NODE_ENV,
+            //   time: new Date(),
+            //   data: {
+            //     values,
+            //   },
+            // });
 
             authClient.signup(values, (err, res) => {
               console.info("returned", err, res);
@@ -133,13 +136,19 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
               <Form>
                 <>
                   <TextField
-                    label="Email"
+                    label=""
                     fieldName="email"
                     fieldPlaceholder="Enter your email address"
                     fieldType="email"
                   />
                   <TextField
-                    label="Password"
+                    label=""
+                    fieldName="username"
+                    fieldPlaceholder="User Name"
+                    fieldType="username"
+                  />
+                  <TextField
+                    label=""
                     fieldName="password"
                     fieldPlaceholder="Enter your password"
                     fieldType="password"

@@ -52,18 +52,19 @@ a {
   &:focus,
   &:visited,
   & {
-    font-size: 0.8rem;
-    font-weight: 300;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: 1.08px;
-    color: $turquoise-blue;
-    text-decoration: underline;
+    font-size: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+    font-stretch: inherit;
+    line-height: inherit;
+    color: inherit;
+    // text-decoration: underline;
+    border-bottom: 2px white solid;
+    width: max-content;
 
     .bp3-icon {
       svg {
-        fill: $turquoise-blue;
+        fill: white;
         width: 12px;
         height: 12px;
         position: relative;
@@ -72,4 +73,10 @@ a {
       }
     }
   }
+}
+
+a.note, p.note {
+  font-size: 15px;
+  color: white;
+  letter-spacing: 0.33px;
 }

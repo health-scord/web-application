@@ -1,1 +1,21 @@
-/** Styles **/
+.loginHero {
+    margin: 0 0 100px 0;
+
+    .loginHeroContain {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+
+        h1 {
+            color: white;
+            font-size: 72px;
+            text-align: center;
+        }
+        p {
+            color: white;
+            font-size: 15px;
+            text-align: center;
+        }
+    }
+}

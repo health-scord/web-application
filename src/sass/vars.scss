@@ -28,6 +28,8 @@ $blue: #5bc1ed;
 $lightBlue: #8bdeff;
 $darkBlue: #4eabd3;
 
+$interactBlue: #1585ff;
+
 // TODO: compare with brand colors
 $dark-slate-blue: #243465;
 $light-slate-blue: rgba(#243465, 0.5);
@@ -63,7 +65,5 @@ $darkShadow: 0 15px 40px 3px rgba(0, 0, 0, 0.4);
 $bigShadow: 0 25px 50px 5px rgba(0, 0, 0, 0.35);
 
 /* Fonts */
-// $hFont: futura-pt, sans-serif;
-// $bFont: futura-pt, sans-serif;
-$hFont: nunito-sans, sans-serif;
-$bFont: nunito-sans, sans-serif;
+$hFont: 'Roboto', sans-serif;
+$bFont: 'Roboto', sans-serif;

@@ -37,10 +37,9 @@ const LogInForm: React.FC<LogInFormProps> = ({
   const [emailNotConfirmed, setEmailNotConfirmed] = React.useState(false);
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string()
+    username: Yup.string()
       .min(4, "Too Short!")
       .max(100, "Too Long!")
-      .email("Invalid email")
       .required("Required"),
     password: Yup.string()
       .min(4, "Too Short!")
@@ -75,7 +74,7 @@ const LogInForm: React.FC<LogInFormProps> = ({
     )}
 
     <Formik
-      initialValues={{ email: "", password: "" }}
+      initialValues={{ username: "", password: "" }}
       validationSchema={LoginSchema}
       onSubmit={(
         values: LogInFormValues,
@@ -116,15 +115,16 @@ const LogInForm: React.FC<LogInFormProps> = ({
               fieldPlaceholder="Password"
               fieldType="password"
             />
-            <Link href="/forgot-password">Forgot your password?</Link>
+            <Link className="note forgotPassword" href="/forgot-password">Forgot your password?</Link>
             <Button
               type="submit"
+              className="button loginButton"
               disabled={formikBag.isSubmitting}
               loading={formikBag.isSubmitting}
             >
               Login
             </Button>
-            <Text tagName="p">Don't have an account? <Link href="/sign-up">Sign Up</Link></Text>
+            <Text className="note" tagName="p">Don't have an account? <Link href="/sign-up">Sign Up</Link></Text>
           </Form>
         );
       }}

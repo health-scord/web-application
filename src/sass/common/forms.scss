@@ -10,6 +10,7 @@ button:focus {
 .bp3-form-group {
   .bp3-label {
     font-size: 1.1rem;
+    color: white;
 
     span {
       font-size: 0.9rem;
@@ -20,9 +21,9 @@ button:focus {
     input[type="email"],
     input[type="password"],
     input[type="number"] {
-      font-size: 1rem;
-      height: 40px;
-      padding: 5px 10px;
+      font-size: 14px;
+      height: 32px;
+      padding: 5px 12px;
     }
   }
 }
@@ -42,22 +43,22 @@ textarea.bp3-input.bp3-small {
   width: 100%;
 }
 
-.formButton {
-  border-radius: 50px;
-  background: $blue;
-  width: 80%;
-  margin: 0 auto;
-  border: none;
-  display: flex;
+// .formButton {
+//   border-radius: 50px;
+//   background: $blue;
+//   width: 80%;
+//   margin: 0 auto;
+//   border: none;
+//   display: flex;
 
-  span {
-    color: white;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    font-weight: 600;
-    margin: 7px 0;
-  }
-}
+//   span {
+//     color: white;
+//     font-size: 1.1rem;
+//     text-transform: uppercase;
+//     font-weight: 600;
+//     margin: 7px 0;
+//   }
+// }
 
 .floatingForm {
   width: 500px;
@@ -72,13 +73,22 @@ textarea.bp3-input.bp3-small {
   h6 {
     &.headline {
       margin: 0;
-      color: $dark-gray1;
+      color: white;
     }
   }
 
   button,
   button.bp3-button:not([class*="bp3-intent-"]) {
-    @extend .formButton;
+    // @extend .formButton;
+    @extend .button;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
   }
 
   &.noMargin {
@@ -105,24 +115,24 @@ textarea.bp3-input.bp3-small {
     }
   }
 
-  &.darkForm {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p {
-      margin: 0;
-      color: $dark-gray1 !important;
-    }
-    label {
-      color: $dark-gray1 !important;
-    }
-    .bp3-tab {
-      color: $dark-gray1 !important;
-    }
-  }
+  // &.darkForm {
+  //   h1,
+  //   h2,
+  //   h3,
+  //   h4,
+  //   h5,
+  //   h6,
+  //   p {
+  //     margin: 0;
+  //     color: $dark-gray1 !important;
+  //   }
+  //   label {
+  //     color: $dark-gray1 !important;
+  //   }
+  //   .bp3-tab {
+  //     color: $dark-gray1 !important;
+  //   }
+  // }
 
   @include tabletDown {
     width: 100%;

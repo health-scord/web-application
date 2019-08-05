@@ -31,11 +31,11 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = () => {
   });
 
   return (
-    <Card className="floatingForm">
+    <div className="floatingForm">
       <Text tagName="h1" className="headline">
         Forgot Password
       </Text>
-      <Text tagName="p">
+      <Text tagName="p" className="note">
         Enter your email below to recieve an email containing instructions to
         reset your password.
       </Text>
@@ -89,7 +89,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = () => {
           return (
             <Form>
               <TextField
-                label="Email"
+                label=""
                 fieldName="email"
                 fieldPlaceholder="Enter your email address"
                 fieldType="email"
@@ -101,7 +101,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = () => {
           );
         }}
       />
-    </Card>
+    </div>
   );
 };
 

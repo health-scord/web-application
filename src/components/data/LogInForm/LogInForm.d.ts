@@ -5,8 +5,8 @@ export interface LogInFormProps {
 }
 
 export interface LogInFormValues {
-  email: string;
+  username: string;
   password: string;
-  confirmPassword: string;
-  agreeTerms: boolean;
+  // confirmPassword: string;
+  // agreeTerms: boolean;
 }

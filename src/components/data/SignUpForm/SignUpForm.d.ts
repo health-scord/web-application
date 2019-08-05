@@ -5,8 +5,9 @@ export interface SignUpFormProps {
 }
 
 export interface SignUpFormValues {
+  username: string;
   email: string;
   password: string;
-  confirmPassword: string;
-  agreeTerms: boolean;
+  // confirmPassword: string;
+  // agreeTerms: boolean;
 }

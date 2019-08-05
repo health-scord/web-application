@@ -8815,6 +8815,12 @@ main {
     grid-column-gap: 14px;
     grid-row-gap: 14px; }
 
+.centerPageContent {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+
 .bp3-input:focus, .bp3-input.bp3-active {
   box-shadow: 0 0 5px 2px #df494a; }
 
@@ -8822,7 +8828,8 @@ button:focus {
   outline: rgba(223, 73, 74, 0.6) auto 2px; }
 
 .bp3-form-group .bp3-label {
-  font-size: 1.1rem; }
+  font-size: 1.1rem;
+  color: white; }
   .bp3-form-group .bp3-label span {
     font-size: 0.9rem; }
 
@@ -8830,9 +8837,9 @@ button:focus {
 .bp3-form-group .bp3-form-content input[type="email"],
 .bp3-form-group .bp3-form-content input[type="password"],
 .bp3-form-group .bp3-form-content input[type="number"] {
-  font-size: 1rem;
-  height: 40px;
-  padding: 5px 10px; }
+  font-size: 14px;
+  height: 32px;
+  padding: 5px 12px; }
 
 .bp3-html-select .bp3-icon,
 .bp3-select .bp3-icon {
@@ -8843,21 +8850,6 @@ button:focus {
 
 textarea.bp3-input, textarea.bp3-input.bp3-large, textarea.bp3-input.bp3-small {
   width: 100%; }
-
-.formButton, .floatingForm button,
-.floatingForm button.bp3-button:not([class*="bp3-intent-"]) {
-  border-radius: 50px;
-  background: #5bc1ed;
-  width: 80%;
-  margin: 0 auto;
-  border: none;
-  display: flex; }
-  .formButton span, .floatingForm button span, .floatingForm button.bp3-button:not([class*="bp3-intent-"]) span {
-    color: white;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    font-weight: 600;
-    margin: 7px 0; }
 
 .floatingForm {
   width: 500px;
@@ -8870,7 +8862,15 @@ textarea.bp3-input, textarea.bp3-input.bp3-large, textarea.bp3-input.bp3-small {
   .floatingForm h5.headline,
   .floatingForm h6.headline {
     margin: 0;
-    color: #182026; }
+    color: white; }
+  .floatingForm button,
+  .floatingForm button.bp3-button:not([class*="bp3-intent-"]) {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center; }
+  .floatingForm form {
+    display: flex;
+    flex-direction: column; }
   .floatingForm.noMargin {
     margin: 0;
     width: 100%; }
@@ -8887,19 +8887,6 @@ textarea.bp3-input, textarea.bp3-input.bp3-large, textarea.bp3-input.bp3-small {
     color: white !important; }
   .floatingForm.whiteForm .bp3-tab {
     color: white !important; }
-  .floatingForm.darkForm h1,
-  .floatingForm.darkForm h2,
-  .floatingForm.darkForm h3,
-  .floatingForm.darkForm h4,
-  .floatingForm.darkForm h5,
-  .floatingForm.darkForm h6,
-  .floatingForm.darkForm p {
-    margin: 0;
-    color: #182026 !important; }
-  .floatingForm.darkForm label {
-    color: #182026 !important; }
-  .floatingForm.darkForm .bp3-tab {
-    color: #182026 !important; }
   @media only screen and (max-width: 767px) {
     .floatingForm {
       width: 100%;
@@ -9077,7 +9064,7 @@ textarea.bp3-input, textarea.bp3-input.bp3-large, textarea.bp3-input.bp3-small {
   content: "\e900"; }
 
 * {
-  font-family: nunito-sans, sans-serif;
+  font-family: "Roboto", sans-serif;
   word-wrap: break-word; }
 
 h1,
@@ -9116,21 +9103,26 @@ ol {
       margin-bottom: 0px; }
 
 a:hover, a:active, a:focus, a:visited, a {
-  font-size: 0.8rem;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 1.08px;
-  color: #05c0da;
-  text-decoration: underline; }
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  font-stretch: inherit;
+  line-height: inherit;
+  color: inherit;
+  border-bottom: 2px white solid;
+  width: max-content; }
   a:hover .bp3-icon svg, a:active .bp3-icon svg, a:focus .bp3-icon svg, a:visited .bp3-icon svg, a .bp3-icon svg {
-    fill: #05c0da;
+    fill: white;
     width: 12px;
     height: 12px;
     position: relative;
     top: -2px;
     margin-right: 3px; }
+
+a.note, p.note {
+  font-size: 15px;
+  color: white;
+  letter-spacing: 0.33px; }
 
 .bp3-overlay.bp3-overlay-scroll-container {
   z-index: 200; }
@@ -9253,33 +9245,37 @@ a:hover, a:active, a:focus, a:visited, a {
   .thirdsCard:nth-of-type(3n) {
     margin-right: 0; }
 
-.button, .textButton,
+.button, .floatingForm button,
+.floatingForm button.bp3-button:not([class*="bp3-intent-"]), .textButton,
 .textButton.bp3-button:not([class*="bp3-intent-"]), .actionButton,
 .actionButton.bp3-button:not([class*="bp3-intent-"]),
 .button.bp3-button:not([class*="bp3-intent-"]),
+.floatingForm button.bp3-button:not([class*="bp3-intent-"]),
 .bp3-button.textButton:not([class*="bp3-intent-"]),
 .bp3-button.actionButton:not([class*="bp3-intent-"]) {
   background-image: none;
   box-shadow: none;
-  border-radius: 3px;
-  background: #05c0da;
-  width: max-content; }
-  .button .bp3-icon, .textButton .bp3-icon, .textButton.bp3-button:not([class*="bp3-intent-"]) .bp3-icon, .actionButton .bp3-icon, .actionButton.bp3-button:not([class*="bp3-intent-"]) .bp3-icon,
+  border-radius: 4px;
+  background: #1585ff;
+  width: max-content;
+  padding: 5px 0;
+  min-width: 200px; }
+  .button .bp3-icon, .floatingForm button .bp3-icon, .floatingForm button.bp3-button:not([class*="bp3-intent-"]) .bp3-icon, .textButton .bp3-icon, .textButton.bp3-button:not([class*="bp3-intent-"]) .bp3-icon, .actionButton .bp3-icon, .actionButton.bp3-button:not([class*="bp3-intent-"]) .bp3-icon,
   .button.bp3-button:not([class*="bp3-intent-"]) .bp3-icon,
+  .floatingForm button.bp3-button:not([class*="bp3-intent-"]) .bp3-icon,
   .bp3-button.textButton:not([class*="bp3-intent-"]) .bp3-icon,
   .bp3-button.actionButton:not([class*="bp3-intent-"]) .bp3-icon {
     margin-right: 4px; }
-  .button span, .textButton span, .textButton.bp3-button:not([class*="bp3-intent-"]) span, .actionButton span, .actionButton.bp3-button:not([class*="bp3-intent-"]) span,
+  .button span, .floatingForm button span, .floatingForm button.bp3-button:not([class*="bp3-intent-"]) span, .textButton span, .textButton.bp3-button:not([class*="bp3-intent-"]) span, .actionButton span, .actionButton.bp3-button:not([class*="bp3-intent-"]) span,
   .button.bp3-button:not([class*="bp3-intent-"]) span,
+  .floatingForm button.bp3-button:not([class*="bp3-intent-"]) span,
   .bp3-button.textButton:not([class*="bp3-intent-"]) span,
   .bp3-button.actionButton:not([class*="bp3-intent-"]) span {
-    text-transform: uppercase;
-    font-size: 0.8rem;
+    font-size: 14px;
     font-weight: 300;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
-    letter-spacing: 1.06px;
     color: #ffffff;
     margin: 0; }
 
@@ -9298,55 +9294,6 @@ a:hover, a:active, a:focus, a:visited, a {
   .actionButton .bp3-button-text,
   .actionButton.bp3-button:not([class*="bp3-intent-"]) .bp3-button-text {
     margin: 0; }
-
-.allReviewsButton {
-  width: 300px; }
-  .allReviewsButton span {
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    font-weight: 600;
-    color: white; }
-
-.createButton,
-.createButton.bp3-button:not([class*="bp3-intent-"]) {
-  padding: 12px 40px;
-  margin: 55px auto; }
-
-.trackButton,
-.trackButton.bp3-button:not([class*="bp3-intent-"]) {
-  background: transparent;
-  display: block;
-  width: 100%;
-  border: none;
-  box-shadow: none;
-  border: 2px white solid;
-  border-radius: 50px;
-  margin-top: 10px;
-  opacity: 0.7;
-  transition: all 0.1s; }
-  .trackButton:hover,
-  .trackButton.bp3-button:not([class*="bp3-intent-"]):hover {
-    opacity: 1;
-    transition: all 0.1s; }
-  .trackButton .bp3-button-text > span,
-  .trackButton.bp3-button:not([class*="bp3-intent-"]) .bp3-button-text > span {
-    display: block;
-    color: white;
-    text-align: center;
-    font-size: 1rem;
-    margin: 2px 0;
-    text-transform: uppercase;
-    font-weight: 600; }
-    .trackButton .bp3-button-text > span .bp3-icon,
-    .trackButton.bp3-button:not([class*="bp3-intent-"]) .bp3-button-text > span .bp3-icon {
-      position: relative;
-      color: white;
-      margin: 0px 8px 0 0;
-      top: -2px;
-      width: 14px; }
-      .trackButton .bp3-button-text > span .bp3-icon svg,
-      .trackButton.bp3-button:not([class*="bp3-intent-"]) .bp3-button-text > span .bp3-icon svg {
-        position: relative; }
 
 .headerActionButton,
 .headerActionButton.bp3-button.bp3-minimal {
@@ -9387,72 +9334,6 @@ a:hover, a:active, a:focus, a:visited, a {
 .buttonTag,
 .buttonTag.bp3-tag {
   margin: 0; }
-
-.joinButton,
-.joinButton.bp3-button:not([class*="bp3-intent-"]) {
-  border-radius: 3px;
-  border: solid 1px #05c0da;
-  min-width: 90px;
-  box-shadow: none;
-  outline: none; }
-  .joinButton span,
-  .joinButton.bp3-button:not([class*="bp3-intent-"]) span {
-    font-size: 0.8rem;
-    font-weight: 300;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: 1.06px;
-    color: #05c0da;
-    text-transform: uppercase;
-    margin: 0; }
-
-.joinButtonBig,
-.joinButtonBig.bp3-button:not([class*="bp3-intent-"]) {
-  border-radius: 3px;
-  background: #05c0da;
-  min-width: 140px;
-  box-shadow: none;
-  outline: none;
-  height: 40px; }
-  .joinButtonBig span,
-  .joinButtonBig.bp3-button:not([class*="bp3-intent-"]) span {
-    font-size: 0.8rem;
-    font-weight: 300;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: 1.06px;
-    color: #ffffff;
-    text-transform: uppercase; }
-
-.filterButton,
-.filterButton.bp3-button:not([class*="bp3-intent-"]) {
-  border-radius: 3px;
-  background: transparent;
-  border: solid 1px #fcfcfd;
-  min-width: 125px;
-  box-shadow: none;
-  outline: none;
-  height: 40px; }
-  .filterButton span,
-  .filterButton.bp3-button:not([class*="bp3-intent-"]) span {
-    font-size: 0.8rem;
-    font-weight: 300;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: 1.06px;
-    color: #ffffff;
-    text-transform: uppercase; }
-
-.darkMode .headerActionButton .bp3-icon svg,
-.darkMode .headerActionButton.bp3-button.bp3-minimal .bp3-icon svg {
-  fill: white; }
-
-.lightMode .headerActionButton .bp3-icon svg,
-.lightMode .headerActionButton.bp3-button.bp3-minimal .bp3-icon svg {
-  fill: rgba(36, 52, 101, 0.5); }
 
 h1 {
   font-size: 48px; }
@@ -9538,6 +9419,15 @@ h1 {
       display: none; }
 
 /** Styles **/
+.forgotPassword {
+  display: block;
+  margin-bottom: 30px; }
+
+.loginButton {
+  display: block;
+  margin-bottom: 30px;
+  width: 260px; }
+
 .headerWrapper {
   background: rgba(36, 52, 101, 0.15);
   width: 100%;
@@ -9710,4 +9600,20 @@ h1 {
 .logo {
   display: block;
   max-width: 100%; }
+
+.loginHero {
+  margin: 0 0 100px 0; }
+  .loginHero .loginHeroContain {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center; }
+    .loginHero .loginHeroContain h1 {
+      color: white;
+      font-size: 72px;
+      text-align: center; }
+    .loginHero .loginHeroContain p {
+      color: white;
+      font-size: 15px;
+      text-align: center; }
 
