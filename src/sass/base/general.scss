@@ -1,0 +1,79 @@
+body, html {
+	// chcek safari
+	overflow-x: hidden;
+	width: 100%;
+	max-width: 100vw;
+
+	-webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility; // geometricPrecision
+
+	min-height: 100%; /* make sure it is at least as tall as the viewport */
+  position: relative;
+}
+
+*:focus {
+  outline: none;
+}
+
+::selection {
+	background: $green;
+	color: white;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+a {
+	display: block;
+	width: fit-content;
+	text-decoration-skip-ink: auto;
+	text-decoration-skip: ink;
+}
+
+strong {
+	font-weight: bold;
+}
+
+p {
+	display: block;
+	margin: 0;
+	padding: 0;
+	font-family: $bFont;
+
+	a {
+		display: inline-block;
+		margin: 0;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+	em {
+		font-weight: inherit;
+    font-size: inherit;
+		font-style: italic;
+	}
+}
+
+ol, ul {
+	margin: 0;
+	padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	display: block;
+	margin: 0;
+	padding: 0;
+	font-size: 32px;
+	font-family: $hFont;
+	line-height: 42px;
+}
+
+a, strong, em, p, ol li, ul li, span {
+	font-family: $bFont;
+	font-size: 18px;
+	line-height: 28px;
+}

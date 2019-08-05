@@ -1,0 +1,132 @@
+.bp3-input:focus,
+.bp3-input.bp3-active {
+  box-shadow: 0 0 5px 2px $red;
+}
+
+button:focus {
+  outline: rgba($red, 0.6) auto 2px;
+}
+
+.bp3-form-group {
+  .bp3-label {
+    font-size: 1.1rem;
+
+    span {
+      font-size: 0.9rem;
+    }
+  }
+  .bp3-form-content {
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"] {
+      font-size: 1rem;
+      height: 40px;
+      padding: 5px 10px;
+    }
+  }
+}
+
+.bp3-html-select .bp3-icon,
+.bp3-select .bp3-icon {
+  margin: 0;
+}
+
+.bp3-file-upload-input {
+  margin: 0;
+}
+
+textarea.bp3-input,
+textarea.bp3-input.bp3-large,
+textarea.bp3-input.bp3-small {
+  width: 100%;
+}
+
+.formButton {
+  border-radius: 50px;
+  background: $blue;
+  width: 80%;
+  margin: 0 auto;
+  border: none;
+  display: flex;
+
+  span {
+    color: white;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 7px 0;
+  }
+}
+
+.floatingForm {
+  width: 500px;
+  margin: 50px auto;
+  padding: 50px 35px;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    &.headline {
+      margin: 0;
+      color: $dark-gray1;
+    }
+  }
+
+  button,
+  button.bp3-button:not([class*="bp3-intent-"]) {
+    @extend .formButton;
+  }
+
+  &.noMargin {
+    margin: 0;
+    width: 100%;
+  }
+
+  &.whiteForm {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p {
+      margin: 0;
+      color: white !important;
+    }
+    label {
+      color: white !important;
+    }
+    .bp3-tab {
+      color: white !important;
+    }
+  }
+
+  &.darkForm {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p {
+      margin: 0;
+      color: $dark-gray1 !important;
+    }
+    label {
+      color: $dark-gray1 !important;
+    }
+    .bp3-tab {
+      color: $dark-gray1 !important;
+    }
+  }
+
+  @include tabletDown {
+    width: 100%;
+    padding: 30px $mobile;
+    margin: 35px auto;
+  }
+}

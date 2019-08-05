@@ -1,0 +1,83 @@
+.hidden {
+  display: none;
+}
+
+.prependChildren {
+  margin-top: 25px;
+}
+
+.mobileHide {
+  // width: 100%;
+
+  @include tabletDown {
+    display: none;
+  }
+}
+
+.mobileShow {
+  display: none;
+
+  @include tabletDown {
+    display: block;
+  }
+}
+
+.w100 {
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.overflowScroll {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.horizontalScroll {
+  height: 345px;
+  width: 100%;
+  position: relative;
+  margin-bottom: -75px;
+
+  .scrollContain {
+    width: 345px; // height
+    height: calc(100vw - #{$sidebarWidth}); // width here
+    overflow-y: auto;
+    overflow-x: hidden;
+    transform: rotate(-90deg) translateY(-380px);
+    transform-origin: right top;
+    padding-left: 100px;
+    position: absolute;
+  }
+
+  .artistCard {
+    width: max-content;
+    transform: rotate(90deg);
+    transform-origin: right top;
+    margin-bottom: 50px;
+  }
+
+  // &:after {
+  //   content: " ";
+  //   display: block;
+  //   height: 345px;
+  //   width: 100%;
+  //   position: relative;
+  // }
+}
+
+.bp3-popover-wrapper {
+  margin: 0;
+  height: 100%;
+
+  .bp3-popover-target {
+    margin: 0;
+  }
+}
+
+.lightGreyBack {
+  background: $lightGrey;
+}

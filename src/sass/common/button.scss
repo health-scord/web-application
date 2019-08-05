@@ -1,0 +1,238 @@
+.button,
+.button.bp3-button:not([class*="bp3-intent-"]) {
+  background-image: none;
+  box-shadow: none;
+  border-radius: 3px;
+  background: $turquoise-blue;
+  width: max-content;
+
+  .bp3-icon {
+    margin-right: 4px;
+
+    svg {
+    }
+  }
+  span {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 1.06px;
+    color: #ffffff;
+    margin: 0;
+  }
+}
+
+.textButton,
+.textButton.bp3-button:not([class*="bp3-intent-"]) {
+  @extend .button;
+  background: transparent;
+
+  span {
+    color: $light-slate-blue;
+  }
+}
+
+.actionButton,
+.actionButton.bp3-button:not([class*="bp3-intent-"]) {
+  @extend .button;
+  background: $red;
+  height: 40px;
+  border-radius: 50px;
+
+  .bp3-button-text {
+    margin: 0;
+  }
+}
+
+.allReviewsButton {
+  width: 300px;
+
+  span {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: white;
+  }
+}
+
+.createButton,
+.createButton.bp3-button:not([class*="bp3-intent-"]) {
+  padding: 12px 40px;
+  margin: 55px auto;
+}
+
+.trackButton,
+.trackButton.bp3-button:not([class*="bp3-intent-"]) {
+  background: transparent;
+  display: block;
+  width: 100%;
+  border: none;
+  box-shadow: none;
+
+  border: 2px white solid;
+  border-radius: 50px;
+  margin-top: 10px;
+  opacity: 0.7;
+  transition: all $short;
+
+  &:hover {
+    opacity: 1;
+    transition: all $short;
+  }
+
+  .bp3-button-text > span {
+    display: block;
+    color: white;
+    text-align: center;
+    font-size: 1rem;
+    margin: 2px 0;
+
+    text-transform: uppercase;
+    font-weight: 600;
+
+    .bp3-icon {
+      position: relative;
+      color: white;
+      margin: 0px 8px 0 0;
+      top: -2px;
+      width: 14px;
+
+      svg {
+        position: relative;
+      }
+    }
+  }
+}
+
+.headerActionButton,
+.headerActionButton.bp3-button.bp3-minimal {
+  width: 50px;
+  position: relative;
+
+  &:hover {
+    background: $lightGrey;
+  }
+
+  .bp3-icon {
+    margin: 0;
+
+    svg {
+      height: 20px;
+      width: 20px;
+    }
+  }
+  .bp3-button-text {
+    position: absolute;
+    top: 15px;
+    right: 2px;
+    margin: 0;
+
+    .buttonTag,
+    .buttonTag.bp3-tag {
+      display: block;
+      text-align: center;
+      min-width: 20px;
+      height: 20px;
+      padding-left: 0;
+      padding-right: 0;
+
+      > span {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
+
+.buttonTag,
+.buttonTag.bp3-tag {
+  margin: 0;
+}
+
+.joinButton,
+.joinButton.bp3-button:not([class*="bp3-intent-"]) {
+  border-radius: 3px;
+  border: solid 1px $turquoise-blue;
+  min-width: 90px;
+  box-shadow: none;
+  outline: none;
+
+  span {
+    font-size: 0.8rem;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 1.06px;
+    color: $turquoise-blue;
+    text-transform: uppercase;
+    margin: 0;
+  }
+}
+
+.joinButtonBig,
+.joinButtonBig.bp3-button:not([class*="bp3-intent-"]) {
+  border-radius: 3px;
+  background: $turquoise-blue;
+  min-width: 140px;
+  box-shadow: none;
+  outline: none;
+  height: 40px;
+
+  span {
+    font-size: 0.8rem;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 1.06px;
+    color: #ffffff;
+    text-transform: uppercase;
+  }
+}
+
+.filterButton,
+.filterButton.bp3-button:not([class*="bp3-intent-"]) {
+  border-radius: 3px;
+  background: transparent;
+  border: solid 1px #fcfcfd;
+  min-width: 125px;
+  box-shadow: none;
+  outline: none;
+  height: 40px;
+
+  span {
+    font-size: 0.8rem;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 1.06px;
+    color: #ffffff;
+    text-transform: uppercase;
+  }
+}
+
+.darkMode {
+  .headerActionButton,
+  .headerActionButton.bp3-button.bp3-minimal {
+    .bp3-icon {
+      svg {
+        fill: white;
+      }
+    }
+  }
+}
+
+.lightMode {
+  .headerActionButton,
+  .headerActionButton.bp3-button.bp3-minimal {
+    .bp3-icon {
+      svg {
+        fill: $light-slate-blue;
+      }
+    }
+  }
+}
