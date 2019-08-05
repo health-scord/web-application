@@ -1,0 +1,34 @@
+.menuItem,
+.menuItem.bp3-menu-item {
+  padding: 11px 30px;
+  margin: 0;
+  line-height: 30px;
+  position: relative;
+
+  &.bp3-active {
+    background: #eeeeee;
+
+    > .bp3-fill {
+      color: $turquoise-blue;
+    }
+  }
+  > .bp3-fill {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 1.41px;
+    color: $dark-slate-blue;
+    line-height: 2rem;
+
+    .bp3-icon {
+      margin: 0 15px 0 0;
+      position: relative;
+      top: -4px;
+    }
+  }
+  .bp3-menu-item-label {
+  }
+}

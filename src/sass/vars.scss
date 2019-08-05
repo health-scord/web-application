@@ -1,0 +1,69 @@
+/* Breakpoints */
+$phone: 480px;
+$mini: 620px;
+$tablet: 768px;
+$middle: 960px;
+$desktop: 1140px;
+
+/* Social */
+$facebook: #306199;
+$twitter: #26c4f1;
+$google: #e93f2e;
+$pinterest: #b81621;
+$linkedin: #0077b5;
+$youtube: #e21d17;
+$instagram: #405de6;
+$amazon: #ff9900;
+
+/* Colors */
+$gray-gradient1: linear-gradient(45deg, $dark-gray1 35%, $dark-gray3);
+$gray-gradient2: linear-gradient(45deg, $dark-gray2 35%, $dark-gray4);
+$gray-gradient3: linear-gradient(45deg, $dark-gray3 35%, $dark-gray5);
+
+/** Brand **/
+$red: #df494a;
+$lightRed: #e86162;
+$darkRed: #ce3b3c;
+$blue: #5bc1ed;
+$lightBlue: #8bdeff;
+$darkBlue: #4eabd3;
+
+// TODO: compare with brand colors
+$dark-slate-blue: #243465;
+$light-slate-blue: rgba(#243465, 0.5);
+$pale-grey: #f8f8fa;
+$turquoise-blue: #05c0da;
+$irise: #5868c0;
+
+$lightGrey: #f7f7f7;
+
+/* Transitions */
+$long: 0.3s;
+$short: 0.1s;
+
+/** Widths / Heights **/
+$headerHeight: 80px;
+$sidebarWidth: 240px;
+
+/* Paddings */
+$large: 100px;
+$medium: 70px;
+$small: 20px;
+$mobile: 20px;
+
+/* Radius */
+$radius1: 5px;
+$radius2: 15px;
+$radius3: 25px;
+
+/* Shadows */
+$lightShadow: 0 15px 40px 3px rgba(0, 0, 0, 0.15);
+$shadow: 0 15px 40px 3px rgba(0, 0, 0, 0.3);
+$darkShadow: 0 15px 40px 3px rgba(0, 0, 0, 0.4);
+$bigShadow: 0 25px 50px 5px rgba(0, 0, 0, 0.35);
+
+/* Fonts */
+// $hFont: futura-pt, sans-serif;
+// $bFont: futura-pt, sans-serif;
+$hFont: nunito-sans, sans-serif;
+$bFont: nunito-sans, sans-serif;

@@ -1,0 +1,160 @@
+@mixin phone {
+  @media only screen and (max-width: $phone) {
+    @content;
+  }
+}
+
+@mixin miniDown {
+  @media only screen and (max-width: $mini - 1) {
+    @content;
+  }
+}
+
+@mixin tabletDown {
+  @media only screen and (max-width: $tablet - 1) {
+    @content;
+  }
+}
+
+@mixin middleDown {
+  @media only screen and (max-width: $middle - 1) {
+    @content;
+  }
+}
+
+@mixin desktopDown {
+  @media only screen and (max-width: $desktop - 1) {
+    @content;
+  }
+}
+
+@mixin maxDown($max) {
+  @media only screen and (max-width: $max - 1) {
+    @content;
+  }
+}
+
+@mixin minUp($min) {
+  @media only screen and (min-width: $min + 1) {
+    @content;
+  }
+}
+
+@mixin respondCustom($selector, $val, $responsive: true) {
+  @media screen and ($selector: $val) {
+    @content;
+  }
+}
+
+@mixin respondMinMax($min, $max) {
+  @media only screen and (min-width: $min) and (max-width: $max) {
+    @content;
+  }
+}
+
+@mixin mainProperties(
+  $display,
+  $width,
+  $height,
+  $position,
+  $top,
+  $right,
+  $bottom,
+  $left,
+  $zIndex
+) {
+  display: $display;
+  width: $width;
+  height: $height;
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  z-index: $zIndex;
+}
+
+@mixin dimensions($display, $position, $width, $height) {
+  display: $display;
+  width: $width;
+  height: $height;
+  position: $position;
+}
+
+@mixin hiddenText {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-indent: 200%;
+}
+
+@mixin ellipsisOverflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin placeholderProperties($color, $weight) {
+  &::-webkit-input-placeholder {
+    color: $color;
+    font-weight: $weight;
+  }
+  &:-moz-placeholder {
+    color: $color;
+    font-weight: $weight;
+  }
+  &::-moz-placeholder {
+    color: $color;
+    font-weight: $weight;
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+    font-weight: $weight;
+  }
+}
+
+@mixin borderArrow($color: #000, $size: 10px, $direction: "left") {
+  width: 0;
+  height: 0;
+
+  @if $direction == "top" {
+    border-right: $size solid transparent;
+    border-left: $size solid transparent;
+    border-bottom: $size solid $color;
+  } @else if $direction == "bottom" {
+    border-right: $size solid transparent;
+    border-left: $size solid transparent;
+    border-top: $size solid $color;
+  } @else if $direction == "left" {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-left: $size solid $color;
+  } @else if $direction == "right" {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-right: $size solid $color;
+  } @else if $direction == "topleft" {
+    border-top: 0 solid $color;
+    border-bottom: $size solid transparent;
+    border-left: $size solid $color;
+  } @else if $direction == "topright" {
+    border-top: 0 solid $color;
+    border-bottom: $size solid transparent;
+    border-right: $size solid $color;
+  } @else if $direction == "bottomleft" {
+    border-top: $size solid transparent;
+    border-bottom: 0 solid $color;
+    border-left: $size solid $color;
+  } @else if $direction == "bottomright" {
+    border-top: $size solid transparent;
+    border-bottom: 0 solid $color;
+    border-right: $size solid $color;
+  }
+}
+
+@mixin position($top, $right: $top, $bottom: $top, $left: $right) {
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
