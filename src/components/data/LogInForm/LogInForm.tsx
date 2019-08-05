@@ -31,7 +31,7 @@ const LogInForm: React.FC<LogInFormProps> = ({
 }) => {
   const authClient = new AuthClient();
 
-  const [{ mixpanel }, dispatch] = useAppContext();
+  const [{ userData }, dispatch] = useAppContext();
   const [userDoesNotExist, setUserDoesNotExist] = React.useState(false);
   const [notValidType, setNotValidType] = React.useState(false);
   const [emailNotConfirmed, setEmailNotConfirmed] = React.useState(false);
@@ -48,90 +48,89 @@ const LogInForm: React.FC<LogInFormProps> = ({
       .required("Required"),
   });
 
-  
-    return (
-      <>
-        {notValidType ? (
-        <Callout title="Attention" intent="danger">
-          Your user is not a valid type. Please contact support.
-        </Callout>
-      ) : (
-        <></>
-      )}
+  return (
+    <>
+      {notValidType ? (
+      <Callout title="Attention" intent="danger">
+        Your user is not a valid type. Please contact support.
+      </Callout>
+    ) : (
+      <></>
+    )}
 
-      {emailNotConfirmed ? (
-        <Callout title="Attention" intent="danger">
-          Your email has yet to be confirmed. Please check your email!
-        </Callout>
-      ) : (
-        <></>
-      )}
+    {emailNotConfirmed ? (
+      <Callout title="Attention" intent="danger">
+        Your email has yet to be confirmed. Please check your email!
+      </Callout>
+    ) : (
+      <></>
+    )}
 
-      {userDoesNotExist ? (
-        <Callout title="Attention" intent="warning">
-          Please try another email and password combination.
-        </Callout>
-      ) : (
-        <></>
-      )}
+    {userDoesNotExist ? (
+      <Callout title="Attention" intent="warning">
+        Please try another email and password combination.
+      </Callout>
+    ) : (
+      <></>
+    )}
 
-      <Formik
-        initialValues={{ email: "", password: "" }}
-        validationSchema={LoginSchema}
-        onSubmit={(
-          values: LogInFormValues,
-          actions: FormikActions<LogInFormValues>
-        ) => {
-          console.log("values", { values, actions });
+    <Formik
+      initialValues={{ email: "", password: "" }}
+      validationSchema={LoginSchema}
+      onSubmit={(
+        values: LogInFormValues,
+        actions: FormikActions<LogInFormValues>
+      ) => {
+        console.log("values", { values, actions });
 
-          mixpanel.track("Log in form submission attempt", {
-            env: process.env.NODE_ENV,
-            time: new Date(),
-            data: {
-              values,
-            },
-          });
+        // mixpanel.track("Log in form submission attempt", {
+        //   env: process.env.NODE_ENV,
+        //   time: new Date(),
+        //   data: {
+        //     values,
+        //   },
+        // });
 
-          authClient.login(values, (err, res) => {
-            if (err) {
-              
-            }
-            if (res.body.success) {
-              // window.location.replace("/");
-            }
-            actions.resetForm();
-          });
-        }}
-        render={(formikBag: FormikProps<LogInFormValues>) => {
-          return (
-            <Form>
-              <TextField
-                label="Email"
-                fieldName="email"
-                fieldPlaceholder="Enter your email address"
-                fieldType="email"
-              />
-              <TextField
-                label="Password"
-                fieldName="password"
-                fieldPlaceholder="Enter your password"
-                fieldType="password"
-              />
-              <Button
-                type="submit"
-                disabled={formikBag.isSubmitting}
-                loading={formikBag.isSubmitting}
-              >
-                Login
-              </Button>
-              <Link href="/forgot-password">Forgot Password?</Link>
-            </Form>
-          );
-        }}
-      />
-      </>
-    );
-  
+        authClient.login(values, (err, res) => {
+          if (err) {
+            
+          }
+          if (res.body.success) {
+            // window.location.replace("/");
+          }
+          actions.resetForm();
+        });
+      }}
+      render={(formikBag: FormikProps<LogInFormValues>) => {
+        return (
+          <Form>
+            <TextField
+              label=""
+              fieldName="username"
+              fieldPlaceholder="User Name"
+              fieldType="text"
+            />
+            <TextField
+              label=""
+              fieldName="password"
+              fieldPlaceholder="Password"
+              fieldType="password"
+            />
+            <Link href="/forgot-password">Forgot your password?</Link>
+            <Button
+              type="submit"
+              disabled={formikBag.isSubmitting}
+              loading={formikBag.isSubmitting}
+            >
+              Login
+            </Button>
+            <Text tagName="p">Don't have an account? <Link href="/sign-up">Sign Up</Link></Text>
+          </Form>
+        );
+      }}
+    />
+    </>
+  );
 };
 
 export default LogInForm;
