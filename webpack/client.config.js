@@ -3,24 +3,15 @@ const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ProgressBarPlugin = require("progress-bar-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const loaders = require("./loaders");
-var HappyPack = require("happypack");
 var ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-const IconFontPlugin = require("icon-font-loader").Plugin;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
-
-const os = require("os");
-const DEV_PORT = config.get("devServer.port");
-
-const PROXY_HOST = config.get("server.apiHost");
 
 ////////////////////////////////////////////////////////////////////////////////
 // per-environment plugins
 const environmentPlugins = (() => {
-  if (config.get("minify")) {
+  if (process.env.NODE_ENV === "production") {
     return [
       new CompressionPlugin({
         algorithm: "gzip",
@@ -43,10 +34,10 @@ const environmentPlugins = (() => {
 })();
 
 module.exports = {
-  mode: config.get("minify") ? "production" : "development",
+  mode: process.env.NODE_ENV,
   entry: {
     app: [
-      "./entry/client.tsx",
+      "./src/client.tsx",
     ],
   },
 
@@ -120,9 +111,9 @@ module.exports = {
       useTypescriptIncrementalApi: true,
     }),
 
-    new webpack.ProvidePlugin({
-      WaveSurfer: "wavesurfer.js",
-    }),
+    // new webpack.ProvidePlugin({
+    //   WaveSurfer: "wavesurfer.js",
+    // }),
 
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
@@ -141,11 +132,11 @@ module.exports = {
         process.env.NODE_ENV === "development" ? "[name].css" : "[name].css",
     }),
 
-    new CopyPlugin([
-      { from: "./entry/img/", to: "./img/" },
-      { from: "./entry/favicon.ico", to: "./favicon.ico" },
-      { from: "./entry/", to: "./public/" },
-    ]),
+    // new CopyPlugin([
+    //   { from: "./entry/img/", to: "./img/" },
+    //   { from: "./entry/favicon.ico", to: "./favicon.ico" },
+    //   { from: "./entry/", to: "./public/" },
+    // ]),
 
     // new IconFontPlugin(),
 
@@ -172,7 +163,6 @@ module.exports = {
     modules: [path.resolve(__dirname, "../modules"), "node_modules"],
     alias: {
       "@material-ui/core": "@material-ui/core/es",
-      wavesurfer: require.resolve("wavesurfer.js"),
     },
   },
 
@@ -201,17 +191,13 @@ module.exports = {
   devServer: {
     publicPath: "/",
     // contentBase: "/public",
-    port: DEV_PORT,
+    port: 2020,
     hot: false,
     historyApiFallback: true,
     stats: "errors-only",
-    disableHostCheck: config.get("devServer.disableHostCheck"),
+    // disableHostCheck: config.get("devServer.disableHostCheck"),
     proxy: {
-      "/graphql/*": `http://${PROXY_HOST}`,
-      "/graphiql/*": `http://${PROXY_HOST}`,
-      "/auth/*": `http://${PROXY_HOST}`,
-      "/arena/*": `http://${PROXY_HOST}`,
-      "/api/*": `http://${PROXY_HOST}`,
+      "/api/*": process.env.SERVER_URL,
     },
   },
 };
