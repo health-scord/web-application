@@ -1,1 +1,41 @@
-/** Styles **/
+.footerTabs {
+    background: $interactBlue;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
+    .footerTabsContain {
+        display: flex;
+        flex-direction: row;
+
+        .footerTab {
+            width: calc(100% / 3);
+
+            a {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                width: max-content;
+                margin: 0 auto;
+                border-bottom: 4px transparent solid;
+                height: $footerHeight;
+                text-decoration: none;
+
+                svg {
+                    margin: 0 5px 0 0;
+                }
+                span {
+                    font-size: 14px;
+                    color: white;
+                }
+            }
+
+            &.active {
+                a {
+                    border-color: white;
+                }
+            }
+        }
+    }
+}
