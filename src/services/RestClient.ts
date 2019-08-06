@@ -3,25 +3,13 @@ import fetch from "cross-fetch";
 import superagent from "superagent";
 
 // get endpoint in proper format
-function formatUrl(path, version = "1.0") {
+function formatUrl(path) {
   let pathBase = "";
 
   pathBase = process.env.SERVER_URL;
 
   const adjustedPath = path[0] !== "/" ? "/" + path : path;
-
-  const formattedUrl = pathBase + "/v" + version + adjustedPath;
-
-  console.info(
-    "path",
-    path,
-    "pathBase",
-    pathBase,
-    "version",
-    version,
-    "adjustedPath",
-    adjustedPath
-  );
+  const formattedUrl = pathBase + adjustedPath;
 
   return formattedUrl;
 }
@@ -29,9 +17,9 @@ function formatUrl(path, version = "1.0") {
 export default class RestClient {
   constructor() {}
 
-  makeRequest(endpoint, values, callback) {
+  makeRequest(endpoint, values, callback, method = "POST") {
     try {
-      this.execSuper(endpoint, values, "POST").end((err, res) => {
+      this.execSuper(endpoint, values, method).end((err, res) => {
         if (err) {
           console.error(err);
 

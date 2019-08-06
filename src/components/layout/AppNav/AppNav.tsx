@@ -24,6 +24,7 @@ import Header from "../../ui/Header/Header";
 import Logo from "../../ui/Logo/Logo";
 import MenuItem from "../../ui/MenuItem/MenuItem";
 import App from "../App/App";
+import FooterTabs from "../../ui/FooterTabs/FooterTabs";
 
 const AppNav: React.FC<AppNavProps> = ({ children }) => {
   const strings = new Strings();
@@ -72,19 +73,11 @@ const AppNav: React.FC<AppNavProps> = ({ children }) => {
       <main
         className={`appContainer`}
       >
-        <Header
-          leftElements={
-            <></>
-          }
-          rightElements={
-            <></>
-          }
-        />
-
         <section className="mainContent">
           <div className="contentBody">{children}</div>
         </section>
       </main>
+      <FooterTabs />
     </App>
   );
 };

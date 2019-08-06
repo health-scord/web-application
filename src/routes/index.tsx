@@ -8,6 +8,9 @@ import ForgotPassword from "../components/pages/ForgotPassword/ForgotPassword";
 import Login from "../components/pages/Login/Login";
 import SignUp from "../components/pages/SignUp/SignUp";
 import Strings from "../services/Strings";
+import Scores from "../components/pages/Scores/Scores";
+import Offers from "../components/pages/Offers/Offers";
+import Account from "../components/pages/Account/Account";
 
 const strings = new Strings();
 const changeCase = require("change-case");
@@ -98,6 +101,52 @@ const routes = mount({
         <AuthNav>
           <ConfirmEmail />
         </AuthNav>
+      ),
+    };
+  }),
+  // logged in
+  "/scores": route(req => {
+    return {
+      title: "Scores / Scord",
+      head: (
+        <>
+          <link rel="canonical" href="https://localhost/scores" />
+        </>
+      ),
+      view: (
+        <AppNav>
+          <Scores />
+        </AppNav>
+      ),
+    };
+  }),
+  "/offers": route(req => {
+    return {
+      title: "Offers / Scord",
+      head: (
+        <>
+          <link rel="canonical" href="https://localhost/offers" />
+        </>
+      ),
+      view: (
+        <AppNav>
+          <Offers />
+        </AppNav>
+      ),
+    };
+  }),
+  "/account": route(req => {
+    return {
+      title: "Account / Scord",
+      head: (
+        <>
+          <link rel="canonical" href="https://localhost/account" />
+        </>
+      ),
+      view: (
+        <AppNav>
+          <Account />
+        </AppNav>
       ),
     };
   }),
