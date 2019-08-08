@@ -8667,6 +8667,9 @@ Styleguide tree
 .lightGreyBack {
   background: #f7f7f7; }
 
+.bp3-callout {
+  color: white; }
+
 body,
 html {
   overflow-x: hidden;

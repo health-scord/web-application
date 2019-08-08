@@ -17,9 +17,9 @@ function formatUrl(path) {
 export default class RestClient {
   constructor() {}
 
-  makeRequest(endpoint, values, callback, method = "POST") {
+  makeRequest(endpoint, values, callback, method = "POST", headers = {}, format = true) {
     try {
-      this.execSuper(endpoint, values, method).end((err, res) => {
+      this.execSuper(endpoint, values, method, headers, format).end((err, res) => {
         if (err) {
           console.error(err);
 
@@ -36,13 +36,15 @@ export default class RestClient {
     }
   }
 
-  execSuper(endpoint, params, method = "GET") {
+  execSuper(endpoint, params, method = "GET", headers = {}, format = true) {
     if (method === "POST") {
       return superagent
-        .post(formatUrl(endpoint))
+        .post(format ? formatUrl(endpoint) : endpoint)
+        .type('form')
         .send(params)
-        .withCredentials()
-        .set("accept", "json");
+        // .withCredentials()
+        // .set("accept", "json")
+        // .set(headers);
     }
   }
 

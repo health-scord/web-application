@@ -1,11 +1,26 @@
 import Cookies from "universal-cookie";
 import client from "./ApolloClient";
 import RestClient from "./RestClient";
+import createAuth0Client from "@auth0/auth0-spa-js";
+import config from "../../client/auth_config.json";
+import * as $ from "jquery";
+
 
 export default class AuthClient {
+  public auth0;
   public restClient = new RestClient();
 
-  constructor() {}
+  constructor() {
+    this.init();
+  }
+
+  async init() {
+    this.auth0 = await createAuth0Client({
+      domain: config.domain,
+      client_id: config.clientId,
+      redirect_uri: window.location.origin
+    });
+  }
 
   async getUserData(dispatch) {
     // const cookies = new Cookies();
@@ -18,8 +33,19 @@ export default class AuthClient {
   }
 
   // TODO: use route constants
-  signup(values, callback) {
-    this.restClient.makeRequest("/accounts", values, callback, "POST");
+  async signup(values, callback) {
+    this.restClient.makeRequest(
+      "https://" + config.domain + "/dbconnections/signup", 
+      {
+        "client_id": config.clientId,
+        "connection": "Username-Password-Authentication",
+        ...values
+      }, 
+      callback, 
+      "POST", 
+      { "content-type": "application/x-www-form-urlencoded" },
+      false
+    );
   }
 
   // resetPassword(values, callback) {

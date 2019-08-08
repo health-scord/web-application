@@ -33,6 +33,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
 
   const [{ mixpanel }, dispatch] = useAppContext();
   const [userExists, setUserExists] = React.useState(false);
+  const [invalidPassword, setInvalidPassword] = React.useState(false);
   const [successfulSubmission, setSuccessfulSubmission] = React.useState(false);
 
   const SignUpSchema = Yup.object().shape({
@@ -67,8 +68,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
           Thank you
         </Text>
         <Text tagName="p">
-          Welcome to Reeviewr! In order to continue, please check your email to
-          confirm your email address.
+          Welcome to Scord! --- TBD coonfirm email before using or use right away
         </Text>
       </Card>
     );
@@ -78,6 +78,20 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
         {userExists ? (
           <Callout title="Attention" intent="danger">
             A user with this email address already exists. Try signing in.
+          </Callout>
+        ) : (
+          <></>
+        )}
+
+        {invalidPassword ? (
+          <Callout title="Attention" intent="danger">
+            The password must be at least 8 characters and contain at least 3 of the following 4 types of characters:
+            <ol>
+              <li>lower case letters (a-z)</li>
+              <li>upper case letters (A-Z)</li>
+              <li>numbers (i.e. 0-9)</li>
+              <li>special characters (e.g. !@#$%^&*)</li>
+            </ol>
           </Callout>
         ) : (
           <></>
@@ -96,9 +110,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
           ) => {
             console.log(
               "values",
-              { values, actions },
-              mixpanel,
-              mixpanel.track
+              { values, actions }
             );
 
             // mixpanel.track("Sign up form submission attempt", {
@@ -114,13 +126,20 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
 
               if (err) {
                 console.error(err);
-                // if (res.body.errorMessage === ERROR_CODE.C008) {
-                //   setUserExists(true);
-                // } else {
-                //   setUserExists(false);
-                // }
+                if (res.badRequest) {
+                  if (res.body.code === "user_exists") {
+                    setUserExists(true);
+                  } else {
+                    setUserExists(false);
+                  }
+                  if (res.body.code === "invalid_password") {
+                    setInvalidPassword(true);
+                  } else {
+                    setInvalidPassword(false);
+                  }
+                }
               }
-              if (res.body.success) {
+              if (res.body._id) {
                 // redirect to Home
                 console.info(
                   "thank you - go confirm your email and complete your profile"
