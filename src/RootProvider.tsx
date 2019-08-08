@@ -14,6 +14,8 @@ import ErrorFallback from "./components/pages/status/ErrorFallback/ErrorFallback
 import { AppContextAPI } from "./context/AppContextAPI";
 import client from "./services/ApolloClient";
 import { ErrorHandler } from "./services/ErrorHandler";
+import { Auth0Provider } from "./Auth0";
+import config from "../client/auth_config.json";
 
 const styles = require("./sass/style.scss");
 
@@ -26,6 +28,16 @@ const styles = require("./sass/style.scss");
 interface AppProviderProps {}
 
 interface RootProviderProps {}
+
+const onRedirectCallback = appState => {
+  window.history.replaceState(
+    {},
+    document.title,
+    appState && appState.targetUrl
+      ? appState.targetUrl
+      : window.location.pathname
+  );
+};
 
 export const AppProvider: React.FC<AppProviderProps> = props => {
   return (
@@ -48,6 +60,14 @@ const RootProvider: React.FC<RootProviderProps> = props => {
         )}
           {/** TODO: Good spot for Layout if desire no rerender, consider best placement for context */}
           <CookiesProvider>
+            <Auth0Provider
+              domain={config.domain}
+              client_id={config.clientId}
+              redirect_uri={window.location.origin}
+              onRedirectCallback={onRedirectCallback}
+            >
+
+            </Auth0Provider>
             <Router routes={routes}>
               <AppProvider />
             </Router>

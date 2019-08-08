@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/healthkarma/web-application#readme",
   "dependencies": {
-    "@auth0/auth0-spa-js": "^1.0.1",
+    "@auth0/auth0-spa-js": "^1.1.1",
     "@blueprintjs/core": "^3.18.0",
     "@blueprintjs/icons": "^3.10.0",
     "@types/jest": "^24.0.16",
