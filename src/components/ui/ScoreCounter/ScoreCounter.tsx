@@ -8,7 +8,19 @@ const ScoreCounter: React.FC<ScoreCounterProps> = ({
   onClick = e => console.info("Click"),
 }) => {
   const clickHandler = e => onClick(e);
-  return <></>;
+  return (
+    <>
+      <section className="scoreCounter">
+        <div className="scoreCounterContain">
+          <span className="label">Your Health Score</span>
+          <span className="scoreCount">No data</span>
+          <div className="progressBar">
+            <div className="fill" style={{ width: "80%" }}></div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 };
 
 export default ScoreCounter;
