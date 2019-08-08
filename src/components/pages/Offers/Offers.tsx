@@ -26,9 +26,14 @@ const Offers: React.FC<OffersProps> = () => {
   ]
   return (
     <>
-      {offers.map((offer, i) => {
-        return <Offer offer={offer} />
-      })}
+      <section className="offers">
+        <h1 className="headline">My Offers:</h1>
+        <div className="offersContain">
+          {offers.map((offer, i) => {
+            return <Offer offer={offer} />
+          })}
+        </div>
+      </section>
     </>
   );
 };

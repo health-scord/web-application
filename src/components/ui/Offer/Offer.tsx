@@ -17,10 +17,10 @@ const Offer: React.FC<OfferProps> = ({
           <img src={offer.image} alt="" title="" />
           <div className="info">
             <span>{offer.type}</span>
-            <p>{offer.benefiit}</p>
+            <p>{offer.benefit}</p>
           </div>
           <div className="interact">
-            <Button onClick={() => window.location.href = offer.applyUrl}>Apply Now</Button>
+            <Button className="button" onClick={() => window.location.href = offer.applyUrl}>Apply Now</Button>
           </div>
         </div>
       </section>

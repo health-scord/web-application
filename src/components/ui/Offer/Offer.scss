@@ -1,1 +1,36 @@
-/** Styles **/
+.offer {
+    border-bottom: 1px grey solid;
+
+    &:first-of-type {
+        border-top: 1px grey solid;
+    }
+
+    .offerContain {
+        padding: 30px 0;
+
+        img {
+            height: 60px;
+            width: 50%;
+            display: block;
+            background: #E5E5E5;
+        }
+        span {
+            color: #4A4A4A;
+            font-family: $bFont;
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 20px;
+        }
+        p {
+            color: #1890FF;
+            font-family: $bFont;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 20px;
+        }
+        .interact {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}

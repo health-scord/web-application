@@ -9059,10 +9059,14 @@ span {
   color: white; }
 
 .headline {
-  font-size: 3rem; }
-  @media only screen and (max-width: 767px) {
-    .headline {
-      font-size: 2rem; } }
+  display: block;
+  color: #4A4A4A;
+  font-family: Helvetica;
+  font-size: 30px;
+  font-weight: bold;
+  letter-spacing: 0.66px;
+  line-height: 36px;
+  text-align: center; }
 
 .darkHeadline {
   color: #182026 !important; }
@@ -9236,10 +9240,10 @@ a.note, p.note {
   background-image: none;
   box-shadow: none;
   border-radius: 4px;
-  background: #1585ff;
+  background-color: #7ED321;
   width: max-content;
-  padding: 5px 0;
-  min-width: 200px; }
+  padding: 8px 30px;
+  min-width: 150px; }
   .button .bp3-icon, .floatingForm button .bp3-icon, .floatingForm button.bp3-button:not([class*="bp3-intent-"]) .bp3-icon, .textButton .bp3-icon, .textButton.bp3-button:not([class*="bp3-intent-"]) .bp3-icon, .actionButton .bp3-icon, .actionButton.bp3-button:not([class*="bp3-intent-"]) .bp3-icon,
   .button.bp3-button:not([class*="bp3-intent-"]) .bp3-icon,
   .floatingForm button.bp3-button:not([class*="bp3-intent-"]) .bp3-icon,
@@ -9251,13 +9255,10 @@ a.note, p.note {
   .floatingForm button.bp3-button:not([class*="bp3-intent-"]) span,
   .bp3-button.textButton:not([class*="bp3-intent-"]) span,
   .bp3-button.actionButton:not([class*="bp3-intent-"]) span {
-    font-size: 14px;
-    font-weight: 300;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    color: #ffffff;
-    margin: 0; }
+    color: #FFFFFF;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    line-height: 24px; }
 
 .textButton,
 .textButton.bp3-button:not([class*="bp3-intent-"]) {
@@ -9328,11 +9329,15 @@ h1 {
     height: auto; }
   @media only screen and (max-width: 767px) {
     .mainContent {
-      padding: 80px 20px 20px 20px; } }
+      padding: 0 20px; } }
 
 /** Styles **/
 /** Styles **/
-/** Styles **/
+.offers {
+  margin-top: 25px; }
+  .offers .headline {
+    margin-bottom: 20px; }
+
 .forgotPassword {
   display: block;
   margin-bottom: 30px; }
@@ -9546,5 +9551,30 @@ h1 {
     background-color: #9B9B9B;
     height: 13px; }
 
-/** Styles **/
+.offer {
+  border-bottom: 1px grey solid; }
+  .offer:first-of-type {
+    border-top: 1px grey solid; }
+  .offer .offerContain {
+    padding: 30px 0; }
+    .offer .offerContain img {
+      height: 60px;
+      width: 50%;
+      display: block;
+      background: #E5E5E5; }
+    .offer .offerContain span {
+      color: #4A4A4A;
+      font-family: "Roboto", sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 20px; }
+    .offer .offerContain p {
+      color: #1890FF;
+      font-family: "Roboto", sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px; }
+    .offer .offerContain .interact {
+      display: flex;
+      justify-content: flex-end; }
 
