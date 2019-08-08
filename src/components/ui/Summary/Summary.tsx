@@ -13,9 +13,9 @@ const Summary: React.FC<SummaryProps> = ({
     <>
       <section className="summary">
         <div className="summaryContain">
-          <span className="title">Summary</span>
+          <h1 className="title">Summary</h1>
           <Callout title="" intent="none">
-            Nothing here yet! Please <a href="#!">Sync</a> your fitbit account.
+            Nothing here yet!<br />Please <a href="#!">Sync</a> your fitbit account.
           </Callout>
         </div>
       </section>

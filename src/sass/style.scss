@@ -31,6 +31,8 @@
 @import "../components/layout/AuthNav/AuthNav";
 
 @import "../components/pages/status/NotFound/NotFound";
+@import "../components/pages/Scores/Scores";
+@import "../components/pages/Offers/Offers";
 
 @import "../components/data/LoginForm/LoginForm";
 
@@ -44,3 +46,7 @@
 @import "../components/ui/Logo/Logo";
 @import "../components/ui/LoginHero/LoginHero";
 @import "../components/ui/FooterTabs/FooterTabs";
+@import "../components/ui/Summary/Summary";
+@import "../components/ui/Stats/Stats";
+@import "../components/ui/ScoreCounter/ScoreCounter";
+@import "../components/ui/Offer/Offer";

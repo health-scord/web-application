@@ -1,1 +1,30 @@
-/** Styles **/
+.summary {
+    .summaryContain {
+        .title {
+            color: #4A4A4A;
+            font-family: $hFont;
+            font-size: 30px;
+            font-weight: bold;
+            letter-spacing: 0.66px;
+            line-height: 36px;
+            text-align: center;
+            margin: 22px 0;
+            display: block;
+        }
+        .bp3-callout {
+            padding: 25px;
+            text-align: center;
+            color: #4A4A4A;
+            font-family: $bFont;
+            font-size: 15px;
+            letter-spacing: 0.33px;
+            line-height: 18px;
+            text-align: center;
+
+            a {
+                color: blue;
+                border: none;
+            }
+        }
+    }
+}

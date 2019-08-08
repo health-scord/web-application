@@ -12,7 +12,7 @@ const ScoreCounter: React.FC<ScoreCounterProps> = ({
     <>
       <section className="scoreCounter">
         <div className="scoreCounterContain">
-          <span className="label">Your Health Score</span>
+          <span className="label">Your Health Score:</span>
           <span className="scoreCount">No data</span>
           <div className="progressBar">
             <div className="fill" style={{ width: "80%" }}></div>
