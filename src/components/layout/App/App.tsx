@@ -16,10 +16,9 @@ const App: React.FC<AppProps> = ({ children }) => {
   const navigation = useNavigation();
 
   // consider creating auth0 hooks package
-  const [cookies, setCookie, removeCookie] = useCookies([
-    "reeviewrPrivateHash",
-    "reeviewrDarkMode",
-  ]);
+  const [cookies, setCookie, removeCookie] = useCookies(["scordAccessToken"]);
+
+  console.info("cookies", cookies);
 
   // Global Loading
   // Will users who are logged in be shown a loading symbol on SSR (with JS disabled)?
@@ -37,22 +36,32 @@ const App: React.FC<AppProps> = ({ children }) => {
 
   // Global Redirects
   if (
-    false
+    cookies['scordAccessToken']
   ) {
     if (
       route.url.pathname === "/"
     ) {
       setTimeout(() => {
-        navigation.navigate("/list");
+        navigation.navigate("/scores");
       }, 500)
     }
   } else {
     if (
       route.url.pathname === "/"
     ) {
-      setTimeout(() => {
-        navigation.navigate("/login");
-      }, 500)
+      console.info("redirect", route);
+      const hasToken = route.url.hash.split("access_token");
+      if (typeof hasToken[1] !== "undefined") {
+        let token = hasToken[1].split("&")[0];
+        token = token.substr(1, token.length - 1)
+        console.info("token", token);
+        setCookie("scordAccessToken", token);
+        window.location.href = window.location.origin;
+      } else {
+        setTimeout(() => {
+          navigation.navigate("/login");
+        }, 500)
+      }
     }
   }
 
