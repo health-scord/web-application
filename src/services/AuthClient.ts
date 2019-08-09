@@ -1,10 +1,9 @@
-import Cookies from "universal-cookie";
+import Cookies from "js-cookie";
 import client from "./ApolloClient";
 import RestClient from "./RestClient";
 import createAuth0Client from "@auth0/auth0-spa-js";
 import config from "../../client/auth_config.json";
 import * as $ from "jquery";
-
 
 export default class AuthClient {
   public auth0;
@@ -115,12 +114,10 @@ export default class AuthClient {
       { "content-type": "application/x-www-form-urlencoded" },
       false
     ).then(res => {
-      console.info("login res", res);
-
-      // token = res.body.access_token
-
-      // let token = await this.auth0.getTokenSilently();
-      // let userProfile = JSON.stringify(await this.auth0.getUser());
+      Cookies.set("scordAccessToken", res['body']['access_token']);
+      setTimeout(() => {
+        window.location.replace("/");
+      }, 500);
     })
   }
 
