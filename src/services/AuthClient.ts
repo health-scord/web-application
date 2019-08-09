@@ -83,8 +83,30 @@ export default class AuthClient {
   //   this.restClient.makeRequest("/user/forgot-password", values, callback);
   // }
 
-  login(values, callback) {
-    this.restClient.makeRequest("/user/authenticate", values, callback);
+  async login(values, callback) {
+    // this.restClient.makeRequest("/user/authenticate", values, callback);
+    
+    this.restClient.makeRequest(
+      "https://" + config.domain + "/oauth/token", 
+      {
+        grant_type: "password",
+        client_id: config.clientId,
+        // client_secret
+        // audience
+        // scope
+        // realm
+        ...values
+      }, 
+      callback,
+      "POST", 
+      { "content-type": "application/x-www-form-urlencoded" },
+      false
+    ).then(res => {
+      console.info("login res", res);
+
+      // let token = await this.auth0.getTokenSilently();
+      // let userProfile = JSON.stringify(await this.auth0.getUser());
+    })
   }
 
   // confirmEmail(values, callback) {

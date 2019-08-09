@@ -15,6 +15,7 @@ const App: React.FC<AppProps> = ({ children }) => {
   const route = useCurrentRoute();
   const navigation = useNavigation();
 
+  // consider creating auth0 hooks package
   const [cookies, setCookie, removeCookie] = useCookies([
     "reeviewrPrivateHash",
     "reeviewrDarkMode",
