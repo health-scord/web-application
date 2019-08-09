@@ -129,6 +129,13 @@ const LogInForm: React.FC<LogInFormProps> = ({
         );
       }}
     />
+
+      <Button className="button loginButton" onClick={() => authClient.socialLogin("google-oauth2", () => console.info("finished"))}>
+        Login with Google
+      </Button>
+      <Button className="button loginButton" onClick={() => authClient.socialLogin("facebook", () => console.info("finished"))}>
+        Login with Facebook
+      </Button>
     </>
   );
 };

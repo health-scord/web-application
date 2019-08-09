@@ -17,10 +17,72 @@ function formatUrl(path) {
 export default class RestClient {
   constructor() {}
 
+  execSuper(endpoint, params, method = "GET", headers = {}, format = true) {
+    if (method === "POST") {
+      return superagent
+        .post(format ? formatUrl(endpoint) : endpoint)
+        .type('form')
+        .send(params)
+        // .withCredentials()
+        // .set("accept", "json")
+        // .set(headers);
+    } else if (method === "GET") {
+      // return superagent
+      //   .post(format ? formatUrl(endpoint) : endpoint)
+      //   .send(params)
+      //   .withCredentials()
+      //   .set("accept", "json");
+      return this.exec(endpoint, params, method, format);
+    }
+  }
+
+  paramsToString(params) {
+    let sendParams = "?";
+      for (const key in params) {
+        if (params.hasOwnProperty(key)) {
+          sendParams += key + "=" + params[key] + "&";
+        }
+      }
+    return sendParams;
+  }
+
+  // exec currently unused
+  exec(endpoint, params, method = "GET", format) {
+    const newHeaders = new Headers();
+    newHeaders.append("Content-Type", "application/json");
+
+    let sendParams = "";
+    let fetchParams;
+    if (method === "GET") {
+      sendParams = this.paramsToString(params);
+      fetchParams = { method };
+    } else if (method === "POST") {
+      fetchParams = {
+        method,
+        body: JSON.stringify(params),
+        headers: newHeaders,
+      };
+    }
+
+    const fullUrl = format ? formatUrl(endpoint) + sendParams : endpoint + sendParams;
+
+    console.info("FETCH ", method, fullUrl, fetchParams);
+
+    return fetch(fullUrl, fetchParams).then(data => {
+      if (!data.ok || data.status === 414) {
+        console.error("Fetch error", data.status);
+      }
+
+      const jsonData = data.json();
+      return jsonData;
+    });
+  }
+
   makeRequest(endpoint, values, callback, method = "POST", headers = {}, format = true) {
     return new Promise((resolve, reject) => {
       try {
-        this.execSuper(endpoint, values, method, headers, format).end((err, res) => {
+        console.info("exec", this.execSuper, "superagent", superagent)
+        this.execSuper(endpoint, values, method, headers, format).then((err, res) => {
           if (err) {
             console.error(err);
   
@@ -37,55 +99,6 @@ export default class RestClient {
         console.error("ERROR 2001: ", err);
         reject(err);
       }
-    });
-  }
-
-  execSuper(endpoint, params, method = "GET", headers = {}, format = true) {
-    if (method === "POST") {
-      return superagent
-        .post(format ? formatUrl(endpoint) : endpoint)
-        .type('form')
-        .send(params)
-        // .withCredentials()
-        // .set("accept", "json")
-        // .set(headers);
-    }
-  }
-
-  // exec currently unused
-  exec(endpoint, params, method = "GET") {
-    const newHeaders = new Headers();
-    newHeaders.append("Content-Type", "application/json");
-
-    let sendParams = "";
-    let fetchParams;
-    if (method === "GET") {
-      sendParams += "?";
-      for (const key in params) {
-        if (params.hasOwnProperty(key)) {
-          sendParams += key + "=" + params[key] + "&";
-        }
-      }
-      fetchParams = { method };
-    } else if (method === "POST") {
-      fetchParams = {
-        method,
-        body: JSON.stringify(params),
-        headers: newHeaders,
-      };
-    }
-
-    const fullUrl = formatUrl(endpoint) + sendParams;
-
-    console.info("FETCH ", method, fullUrl, fetchParams);
-
-    return fetch(fullUrl, fetchParams).then(data => {
-      if (!data.ok || data.status === 414) {
-        console.error("Fetch error", data.status);
-      }
-
-      const jsonData = data.json();
-      return jsonData;
     });
   }
 }

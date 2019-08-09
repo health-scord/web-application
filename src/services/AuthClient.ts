@@ -104,9 +104,22 @@ export default class AuthClient {
     ).then(res => {
       console.info("login res", res);
 
+      // token = res.body.access_token
+
       // let token = await this.auth0.getTokenSilently();
       // let userProfile = JSON.stringify(await this.auth0.getUser());
     })
+  }
+
+  socialLogin(connection, callback) {
+    const queryString = this.restClient.paramsToString({
+      response_type: "token",
+      client_id: config.clientId,
+      redirect_uri: "https://localhost",
+      connection
+    });
+    const fullUrl = "https://" + config.domain + "/authorize" + queryString;
+    window.location.href = fullUrl;
   }
 
   // confirmEmail(values, callback) {
