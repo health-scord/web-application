@@ -18,22 +18,26 @@ export default class RestClient {
   constructor() {}
 
   makeRequest(endpoint, values, callback, method = "POST", headers = {}, format = true) {
-    try {
-      this.execSuper(endpoint, values, method, headers, format).end((err, res) => {
-        if (err) {
-          console.error(err);
-
-          if (typeof res !== "undefined") {
-            if (res.body !== null) {
-              console.error(res.body.errorMessage);
+    return new Promise((resolve, reject) => {
+      try {
+        this.execSuper(endpoint, values, method, headers, format).end((err, res) => {
+          if (err) {
+            console.error(err);
+  
+            if (typeof res !== "undefined") {
+              if (res.body !== null) {
+                console.error(res.body.errorMessage);
+              }
             }
           }
-        }
-        callback(err, res);
-      });
-    } catch (err) {
-      console.error("ERROR 2001: ", err);
-    }
+          callback(err, res);
+          resolve(res);
+        });
+      } catch (err) {
+        console.error("ERROR 2001: ", err);
+        reject(err);
+      }
+    });
   }
 
   execSuper(endpoint, params, method = "GET", headers = {}, format = true) {

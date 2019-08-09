@@ -41,11 +41,28 @@ export default class AuthClient {
         "connection": "Username-Password-Authentication",
         ...values
       }, 
-      callback, 
+      () => console.info("Step 1 finished"), 
       "POST", 
       { "content-type": "application/x-www-form-urlencoded" },
       false
-    );
+    ).then((res) => {
+      console.info("res", res, values)
+      if (typeof res['body']['_id'] !== "undefined") {
+        this.restClient.makeRequest(
+          "/accounts", 
+          {
+            "id": res['body']['_id'],
+            ...values
+          }, 
+          () => callback, 
+          "POST", 
+          { "content-type": "application/json" },
+          false
+        )
+      } else {
+        console.error(res);
+      }
+    });
   }
 
   // resetPassword(values, callback) {
