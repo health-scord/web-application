@@ -82,7 +82,7 @@ export default class RestClient {
     return new Promise((resolve, reject) => {
       try {
         console.info("exec", this.execSuper, "superagent", superagent)
-        this.execSuper(endpoint, values, method, headers, format).then((err, res) => {
+        this.execSuper(endpoint, values, method, headers, format).then((res, err) => {
           if (err) {
             console.error(err);
   

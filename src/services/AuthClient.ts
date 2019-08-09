@@ -79,9 +79,22 @@ export default class AuthClient {
   //   );
   // }
 
-  // forgotPassword(values, callback) {
-  //   this.restClient.makeRequest("/user/forgot-password", values, callback);
-  // }
+  forgotPassword(values, callback) {
+    this.restClient.makeRequest(
+      "https://" + config.domain + "/dbconnections/change_password", 
+      {
+        email: values.email,
+        client_id: config.clientId,
+        connection: values.connection
+      }, 
+      callback, 
+      "POST", 
+      { "content-type": "application/x-www-form-urlencoded" },
+      false
+    ).then(data => {
+      console.info("data", data);
+    })
+  }
 
   async login(values, callback) {
     // this.restClient.makeRequest("/user/authenticate", values, callback);
