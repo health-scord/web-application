@@ -34,6 +34,7 @@ export default class AuthClient {
 
   // TODO: use route constants
   async signup(values, callback) {
+    // auth0 user create
     this.restClient.makeRequest(
       "https://" + config.domain + "/dbconnections/signup", 
       {
@@ -47,6 +48,7 @@ export default class AuthClient {
       false
     ).then((res) => {
       console.info("res", res, values)
+      // data-service user create
       if (typeof res['body']['_id'] !== "undefined") {
         this.restClient.makeRequest(
           "/accounts", 
@@ -54,7 +56,7 @@ export default class AuthClient {
             "id": res['body']['_id'],
             ...values
           }, 
-          () => callback, 
+          callback, // finish
           "POST", 
           { "content-type": "application/json" },
           false

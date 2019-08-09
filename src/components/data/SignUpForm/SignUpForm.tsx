@@ -50,10 +50,18 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
       .min(4, "Too Short!")
       .max(100, "Too Long!")
       .required("Required"),
+    firstName: Yup.string()
+      .min(4, "Too Short!")
+      .max(100, "Too Long!")
+      .required("Required"),
+    lastName: Yup.string()
+      .min(4, "Too Short!")
+      .max(100, "Too Long!")
+      .required("Required"),
     // confirmPassword: Yup.string()
     //   .required("Required")
     //   .oneOf([Yup.ref("password"), null], "Passwords must match"),
-    // agreeTerms: Yup.boolean().oneOf([true], "Must Accept Terms"),
+    agreeTerms: Yup.boolean().oneOf([true], "Must Accept Terms"),
   });
 
   const openInNewTab = url => {
@@ -101,7 +109,10 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
           initialValues={{
             username: "",
             email: "",
+            firstName: "",
+            lastName: "",
             password: "",
+            agreeTerms: false,
           }}
           validationSchema={SignUpSchema}
           onSubmit={(
@@ -139,7 +150,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
                   }
                 }
               }
-              if (res.body._id) {
+              if (res.body.id) {
                 // redirect to Home
                 console.info(
                   "thank you - go confirm your email and complete your profile"
@@ -168,6 +179,18 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
                   />
                   <TextField
                     label=""
+                    fieldName="firstName"
+                    fieldPlaceholder="First Name"
+                    fieldType="firstName"
+                  />
+                  <TextField
+                    label=""
+                    fieldName="lastName"
+                    fieldPlaceholder="Last Name"
+                    fieldType="lastName"
+                  />
+                  <TextField
+                    label=""
                     fieldName="password"
                     fieldPlaceholder="Enter your password"
                     fieldType="password"
@@ -177,7 +200,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
                     fieldName="confirmPassword"
                     fieldPlaceholder="Confirm your password"
                     fieldType="password"
-                  />
+                  /> */ }
                   <CheckboxField
                     label={
                       <>
@@ -185,9 +208,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
                         <Link
                           href="#!"
                           onClick={() =>
-                            openInNewTab(
-                              "https://grandrapids.reeviewr.com/pages/terms"
-                            )
+                            window.location.href = "https://localhost/terms"
                           }
                         >
                           Terms
@@ -195,7 +216,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
                       </>
                     }
                     fieldName="agreeTerms"
-                  /> */}
+                  />
                   <Button
                     type="submit"
                     disabled={formikBag.isSubmitting}

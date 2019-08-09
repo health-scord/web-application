@@ -8,6 +8,7 @@ export interface SignUpFormValues {
   username: string;
   email: string;
   password: string;
-  // confirmPassword: string;
-  // agreeTerms: boolean;
+  firstName: string;
+  lastName: string;
+  agreeTerms: boolean;
 }
