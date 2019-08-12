@@ -22,13 +22,22 @@ export default class AuthClient {
   }
 
   async getUserData(dispatch) {
-    // const cookies = new Cookies();
-    // const hash = cookies.get("");
+    const token = Cookies.get("scordAccessToken");
+    const auth0Id = Cookies.get("scordAuth0Id");
 
-    // dispatch({
-    //   type: "setUserData",
-    //   userData,
-    // });
+    this.restClient.makeRequest(
+      process.env.SERVER_URL + "/accounts/" + auth0Id, 
+      {}, 
+      () => console.info("getUserData finished"),
+      "GET", 
+      { "content-type": "application/json" },
+      false
+    ).then(res => {
+      dispatch({
+        type: "setUserData",
+        userData: res,
+      });
+    })
   }
 
   // TODO: use route constants
@@ -66,18 +75,6 @@ export default class AuthClient {
     });
   }
 
-  // resetPassword(values, callback) {
-  //   this.restClient.makeRequest("/user/reset-password", values, callback);
-  // }
-
-  // resendEmailConfirmation(values, callback) {
-  //   this.restClient.makeRequest(
-  //     "/user/resend-email-confirmation",
-  //     values,
-  //     callback
-  //   );
-  // }
-
   forgotPassword(values, callback) {
     this.restClient.makeRequest(
       "https://" + config.domain + "/dbconnections/change_password", 
@@ -96,8 +93,8 @@ export default class AuthClient {
   }
 
   async login(values, callback) {
-    // this.restClient.makeRequest("/user/authenticate", values, callback);
-    
+    // the local User _id is not used, we use the associated auth0 id
+    // auth0 token request
     this.restClient.makeRequest(
       "https://" + config.domain + "/oauth/token", 
       {
@@ -114,10 +111,28 @@ export default class AuthClient {
       { "content-type": "application/x-www-form-urlencoded" },
       false
     ).then(res => {
-      Cookies.set("scordAccessToken", res['body']['access_token']);
-      setTimeout(() => {
-        window.location.replace("/");
-      }, 500);
+      const token = res['body']['access_token'];
+
+      // auth0 id request
+      this.restClient.makeRequest(
+        "https://" + config.domain + "/userinfo", 
+        {
+          access_token: token
+        }, 
+        callback,
+        "POST", 
+        { "content-type": "application/x-www-form-urlencoded" },
+        false
+      ).then(res2 => {
+        const auth0Id = res2['body']['sub'].split("auth0|")[1];
+
+        Cookies.set("scordAccessToken", token);
+        Cookies.set("scordAuth0Id", auth0Id);
+      
+        setTimeout(() => {
+          window.location.replace("/");
+        }, 500);
+      })
     })
   }
 
@@ -132,11 +147,9 @@ export default class AuthClient {
     window.location.href = fullUrl;
   }
 
-  // confirmEmail(values, callback) {
-  //   this.restClient.makeRequest("/user/confirm-email", values, callback);
-  // }
-
-  // logout() {
-  //   // remove cookie and load home
-  // }
+  logout() {
+    Cookies.remove("scordAccessToken");
+    Cookies.remove("scordAuth0Id");
+    window.location.href = window.location.origin;
+  }
 }

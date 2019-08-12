@@ -1,13 +1,17 @@
 import * as React from "react";
 
 import { ScoreCounterProps } from "./ScoreCounter.d";
+import { useAppContext } from "../../../context";
 
 const ScoreCounter: React.FC<ScoreCounterProps> = ({
   ref = null,
   className = "",
   onClick = e => console.info("Click"),
 }) => {
-  const clickHandler = e => onClick(e);
+  const [{ userData }, dispatch] = useAppContext();
+
+  console.info("scorecounter", userData)
+
   return (
     <>
       <section className="scoreCounter">
