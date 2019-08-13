@@ -17,49 +17,44 @@ function formatUrl(path) {
 export default class RestClient {
   constructor() {}
 
-  makeRequest(endpoint, values, callback, method = "POST") {
-    try {
-      this.execSuper(endpoint, values, method).end((err, res) => {
-        if (err) {
-          console.error(err);
-
-          if (typeof res !== "undefined") {
-            if (res.body !== null) {
-              console.error(res.body.errorMessage);
-            }
-          }
-        }
-        callback(err, res);
-      });
-    } catch (err) {
-      console.error("ERROR 2001: ", err);
+  execSuper(endpoint, params, method = "GET", headers = {}, format = true) {
+    if (method === "POST") {
+      return superagent
+        .post(format ? formatUrl(endpoint) : endpoint)
+        .type('form')
+        .send(params)
+        // .withCredentials()
+        // .set("accept", "json")
+        // .set(headers);
+    } else if (method === "GET") {
+      // return superagent
+      //   .post(format ? formatUrl(endpoint) : endpoint)
+      //   .send(params)
+      //   .withCredentials()
+      //   .set("accept", "json");
+      return this.exec(endpoint, params, method, format);
     }
   }
 
-  execSuper(endpoint, params, method = "GET") {
-    if (method === "POST") {
-      return superagent
-        .post(formatUrl(endpoint))
-        .send(params)
-        .withCredentials()
-        .set("accept", "json");
-    }
+  paramsToString(params) {
+    let sendParams = "?";
+      for (const key in params) {
+        if (params.hasOwnProperty(key)) {
+          sendParams += key + "=" + params[key] + "&";
+        }
+      }
+    return sendParams;
   }
 
   // exec currently unused
-  exec(endpoint, params, method = "GET") {
+  exec(endpoint, params, method = "GET", format) {
     const newHeaders = new Headers();
     newHeaders.append("Content-Type", "application/json");
 
     let sendParams = "";
     let fetchParams;
     if (method === "GET") {
-      sendParams += "?";
-      for (const key in params) {
-        if (params.hasOwnProperty(key)) {
-          sendParams += key + "=" + params[key] + "&";
-        }
-      }
+      sendParams = this.paramsToString(params);
       fetchParams = { method };
     } else if (method === "POST") {
       fetchParams = {
@@ -69,7 +64,7 @@ export default class RestClient {
       };
     }
 
-    const fullUrl = formatUrl(endpoint) + sendParams;
+    const fullUrl = format ? formatUrl(endpoint) + sendParams : endpoint + sendParams;
 
     console.info("FETCH ", method, fullUrl, fetchParams);
 
@@ -80,6 +75,30 @@ export default class RestClient {
 
       const jsonData = data.json();
       return jsonData;
+    });
+  }
+
+  makeRequest(endpoint, values, callback, method = "POST", headers = {}, format = true) {
+    return new Promise((resolve, reject) => {
+      try {
+        console.info("exec", this.execSuper, "superagent", superagent)
+        this.execSuper(endpoint, values, method, headers, format).then((res, err) => {
+          if (err) {
+            console.error(err);
+  
+            if (typeof res !== "undefined") {
+              if (res.body !== null) {
+                console.error(res.body.errorMessage);
+              }
+            }
+          }
+          callback(err, res);
+          resolve(res);
+        });
+      } catch (err) {
+        console.error("ERROR 2001: ", err);
+        reject(err);
+      }
     });
   }
 }

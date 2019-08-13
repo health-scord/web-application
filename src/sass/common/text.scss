@@ -16,11 +16,14 @@ span {
 }
 
 .headline {
-  font-size: 3rem;
-
-  @include tabletDown {
-    font-size: 2rem;
-  }
+  display: block;
+  color: #4A4A4A;
+  font-family: Helvetica;
+  font-size: 30px;
+  font-weight: bold;
+  letter-spacing: 0.66px;
+  line-height: 36px;
+  text-align: center;
 }
 
 .darkHeadline {

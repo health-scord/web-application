@@ -64,8 +64,9 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = () => {
           actions: FormikActions<ForgotPasswordValues>
         ) => {
           console.log("values", { values, actions });
-          authClient.forgotPassword(values, (err, res) => {
+          authClient.forgotPassword({ connection: "Username-Password-Authentication", ...values}, (err, res) => {
             if (err) {
+              console.error("err", err)
               // console.info("here 1");
               // if (res.body.errorMessage === ERROR_CODE.C001) {
               //   // console.info("hero");
@@ -76,7 +77,8 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = () => {
               // if (res.body.errorMessage === ERROR_CODE.C002) {
               // }
             }
-            if (res.body.success) {
+            console.info("res", res);
+            if (res.text) {
               setEmailSent(true);
             } else {
               setEmailSent(false);

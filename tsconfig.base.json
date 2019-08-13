@@ -23,7 +23,8 @@
     "sourceMap": true,
     "strict": true,
     "noImplicitAny": false,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "resolveJsonModule": true
   },
   "exclude": ["./dist", "./es", "./data-seed"],
   "include": ["./node_modules/@types/jest"]

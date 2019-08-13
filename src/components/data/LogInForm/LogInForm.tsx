@@ -92,11 +92,12 @@ const LogInForm: React.FC<LogInFormProps> = ({
 
         authClient.login(values, (err, res) => {
           if (err) {
-            
+            console.error("err", err);
           }
-          if (res.body.success) {
-            // window.location.replace("/");
-          }
+          // if (res['body']['access_token']) {
+          //   console.info('success');
+          //   // window.location.replace("/");
+          // }
           actions.resetForm();
         });
       }}
@@ -129,6 +130,13 @@ const LogInForm: React.FC<LogInFormProps> = ({
         );
       }}
     />
+
+      <Button className="button loginButton" onClick={() => authClient.socialLogin("google-oauth2", () => console.info("finished"))}>
+        Login with Google
+      </Button>
+      <Button className="button loginButton" onClick={() => authClient.socialLogin("facebook", () => console.info("finished"))}>
+        Login with Facebook
+      </Button>
     </>
   );
 };

@@ -10,6 +10,6 @@
   }
 
   @include tabletDown {
-    padding: (60px + $mobile) $mobile $mobile $mobile;
+    padding: 0 $mobile;
   }
 }

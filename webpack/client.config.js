@@ -8,6 +8,10 @@ const loaders = require("./loaders");
 var ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+require("dotenv").config({
+  silent: false,
+});
+
 ////////////////////////////////////////////////////////////////////////////////
 // per-environment plugins
 const environmentPlugins = (() => {
@@ -140,9 +144,9 @@ module.exports = {
 
     // new IconFontPlugin(),
 
-    ...(process.env.ANALYZE
-      ? [new (require("webpack-bundle-analyzer")).BundleAnalyzerPlugin()]
-      : []),
+    // ...(process.env.ANALYZE
+    //   ? [new (require("webpack-bundle-analyzer")).BundleAnalyzerPlugin()]
+    //   : []),
   ].concat(environmentPlugins),
 
   // node: {
@@ -152,10 +156,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "../client/public/"),
     publicPath: "/",
-    filename:
-      process.env.NODE_ENV === "development"
-        ? "client.[chunkhash].js"
-        : "client.js",
+    filename: "client.js",
   },
 
   resolve: {
