@@ -12,6 +12,7 @@ COPY . /usr/src/app/
 
 
 RUN npm install
+RUN npm rebuild node-sass
 RUN npm run build
 # If you are building your code for production
 # RUN npm install --only=production
