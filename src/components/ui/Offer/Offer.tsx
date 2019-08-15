@@ -14,13 +14,13 @@ const Offer: React.FC<OfferProps> = ({
     <>
       <section className="offer">
         <div className="offerContain">
-          <img src={offer.image} alt="" title="" />
+          <img src={offer.image} alt={offer.title} title={offer.title} />
           <div className="info">
-            <span>{offer.type}</span>
-            <p>{offer.benefit}</p>
+            <span>{offer.title}</span>
+            <p>{offer.description}</p>
           </div>
           <div className="interact">
-            <Button className="button" onClick={() => window.location.href = offer.applyUrl}>Apply Now</Button>
+            <Button className="button" onClick={() => window.location.href = offer.link}>Apply Now</Button>
           </div>
         </div>
       </section>
