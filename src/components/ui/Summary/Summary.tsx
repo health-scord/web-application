@@ -22,10 +22,14 @@ const Summary: React.FC<SummaryProps> = ({
       <section className="summary">
         <div className="summaryContain">
           <h1 className="title">Summary</h1>
-          <Callout title="" intent="none">
-            Nothing here yet!<br />
-            Please <a href="#!" onClick={syncFitbit}>Sync</a> your fitbit account.
-          </Callout>
+          {userData.devices.length > 0 ? 
+            <Callout title="" intent="none">
+              Your account is all set up!
+            </Callout> : 
+            <Callout title="" intent="none">
+              Nothing here yet!<br />
+              Please <a href="#!" onClick={syncFitbit}>Sync</a> your fitbit account.
+            </Callout>}
         </div>
       </section>
     </>
