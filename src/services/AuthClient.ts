@@ -75,6 +75,18 @@ export default class AuthClient {
     });
   }
 
+  async updateAccount(id, values, callback) {
+    // data-service user update
+    this.restClient.makeRequest(
+      "/accounts/" + id, 
+      values, 
+      callback, // finish
+      "PATCH", 
+      { "content-type": "application/json" },
+      false
+    )
+  }
+
   forgotPassword(values, callback) {
     this.restClient.makeRequest(
       "https://" + config.domain + "/dbconnections/change_password", 
@@ -92,7 +104,7 @@ export default class AuthClient {
     })
   }
 
-  async login(values, callback) {
+  async login(values, callback, onError) {
     // the local User _id is not used, we use the associated auth0 id
     // auth0 token request
     this.restClient.makeRequest(
@@ -109,7 +121,8 @@ export default class AuthClient {
       callback,
       "POST", 
       { "content-type": "application/x-www-form-urlencoded" },
-      false
+      false,
+      onError
     ).then(res => {
       const token = res['body']['access_token'];
 
@@ -122,7 +135,8 @@ export default class AuthClient {
         callback,
         "POST", 
         { "content-type": "application/x-www-form-urlencoded" },
-        false
+        false,
+        onError
       ).then(res2 => {
         const auth0Id = res2['body']['sub'].split("auth0|")[1];
 

@@ -2,6 +2,7 @@ const FitbitApiClient = require("fitbit-node");
 const express = require("express");
 const rp = require("request-promise");
 const https = require("https");
+const http = require("http");
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const path = require("path");
@@ -182,12 +183,18 @@ app.get("/*", (_, res) => {
   res.sendFile(join(__dirname, "index.html"));
 });
 
-https
+// https
+//   .createServer(
+//     {
+//       key: fs.readFileSync(__dirname + "/certs/server.key", "utf8"),
+//       cert: fs.readFileSync(__dirname + "/certs/server.cert", "utf8")
+//     },
+//     app
+//   )
+//   .listen(443);
+
+http
   .createServer(
-    {
-      key: fs.readFileSync(__dirname + "/certs/server.key", "utf8"),
-      cert: fs.readFileSync(__dirname + "/certs/server.cert", "utf8")
-    },
     app
   )
-  .listen(443);
+  .listen(3030);

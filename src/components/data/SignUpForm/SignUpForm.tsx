@@ -28,10 +28,11 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
   ref = null,
   className = "",
   onClick = e => console.info("Click"),
+  initialValues = null
 }) => {
   const authClient = new AuthClient();
 
-  const [{ mixpanel }, dispatch] = useAppContext();
+  const [{ userData, mixpanel }, dispatch] = useAppContext();
   const [userExists, setUserExists] = React.useState(false);
   const [invalidPassword, setInvalidPassword] = React.useState(false);
   const [successfulSubmission, setSuccessfulSubmission] = React.useState(false);
@@ -106,14 +107,14 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
         )}
 
         <Formik
-          initialValues={{
+          initialValues={initialValues === null ? {
             username: "",
             email: "",
             firstName: "",
             lastName: "",
             password: "",
             agreeTerms: false,
-          }}
+          } : initialValues}
           validationSchema={SignUpSchema}
           onSubmit={(
             values: SignUpFormValues,
@@ -132,7 +133,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
             //   },
             // });
 
-            authClient.signup(values, (err, res) => {
+            const callback = (err, res) => {
               console.info("returned", err, res);
 
               if (err) {
@@ -158,19 +159,25 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
                 setSuccessfulSubmission(true);
               }
               actions.resetForm();
-            });
+            }
+
+            if (initialValues === null) {
+              authClient.signup(values, callback);
+            } else {
+              authClient.updateAccount(userData.id, values, callback);
+            }
           }}
           render={(formikBag: FormikProps<SignUpFormValues>) => {
             // console.info("formikbag", formikBag);
             return (
               <Form>
                 <>
-                  <TextField
+                {initialValues === null ? <TextField
                     label=""
                     fieldName="email"
                     fieldPlaceholder="Enter your email address"
                     fieldType="email"
-                  />
+                  /> : <></>}
                   <TextField
                     label=""
                     fieldName="username"
@@ -189,41 +196,38 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
                     fieldPlaceholder="Last Name"
                     fieldType="lastName"
                   />
-                  <TextField
-                    label=""
-                    fieldName="password"
-                    fieldPlaceholder="Enter your password"
-                    fieldType="password"
-                  />
-                  {/* <TextField
-                    label="Confirm Password"
-                    fieldName="confirmPassword"
-                    fieldPlaceholder="Confirm your password"
-                    fieldType="password"
-                  /> */ }
-                  <CheckboxField
-                    label={
-                      <>
-                        Agree to{" "}
-                        <Link
-                          href="#!"
-                          onClick={() =>
-                            window.location.href = "https://localhost/terms"
-                          }
-                        >
-                          Terms
-                        </Link>
-                      </>
-                    }
-                    fieldName="agreeTerms"
-                  />
+                  {initialValues === null ? 
+                    <>
+                      <TextField
+                        label=""
+                        fieldName="password"
+                        fieldPlaceholder="Enter your password"
+                        fieldType="password"
+                      />
+                      <CheckboxField
+                        label={
+                          <>
+                            Agree to{" "}
+                            <Link
+                              href="#!"
+                              onClick={() =>
+                                window.location.href = "https://localhost/terms"
+                              }
+                            >
+                              Terms
+                            </Link>
+                          </>
+                        }
+                        fieldName="agreeTerms"
+                      />
+                    </> : <></>} 
                   <Button
                     type="submit"
                     disabled={formikBag.isSubmitting}
                     loading={formikBag.isSubmitting}
                     // onClick={() => formikBag.submitForm()}
                   >
-                    Sign Up
+                    {initialValues === null ? "Sign Up" : "Save"}
                   </Button>
                 </>
               </Form>

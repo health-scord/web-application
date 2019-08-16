@@ -22,7 +22,7 @@ const Summary: React.FC<SummaryProps> = ({
       <section className="summary">
         <div className="summaryContain">
           <h1 className="title">Summary</h1>
-          {userData.devices.length > 0 ? 
+          {typeof userData.devices !== "undefined" && userData.devices.length > 0 ? 
             <Callout title="" intent="none">
               Your account is all set up!
             </Callout> : 

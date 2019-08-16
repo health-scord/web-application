@@ -33,8 +33,8 @@ const LogInForm: React.FC<LogInFormProps> = ({
 
   const [{ userData }, dispatch] = useAppContext();
   const [userDoesNotExist, setUserDoesNotExist] = React.useState(false);
-  const [notValidType, setNotValidType] = React.useState(false);
-  const [emailNotConfirmed, setEmailNotConfirmed] = React.useState(false);
+  const [tooManyLoginAttempts, setTooManyLoginAttempts] = React.useState(false);
+  const [generalError, setGeneralError] = React.useState(false);
 
   const LoginSchema = Yup.object().shape({
     username: Yup.string()
@@ -49,25 +49,25 @@ const LogInForm: React.FC<LogInFormProps> = ({
 
   return (
     <>
-      {notValidType ? (
-      <Callout title="Attention" intent="danger">
-        Your user is not a valid type. Please contact support.
-      </Callout>
-    ) : (
-      <></>
-    )}
-
-    {emailNotConfirmed ? (
-      <Callout title="Attention" intent="danger">
-        Your email has yet to be confirmed. Please check your email!
-      </Callout>
-    ) : (
-      <></>
-    )}
-
     {userDoesNotExist ? (
       <Callout title="Attention" intent="warning">
         Please try another email and password combination.
+      </Callout>
+    ) : (
+      <></>
+    )}
+
+    {tooManyLoginAttempts ? (
+      <Callout title="Attention" intent="warning">
+        Your account has been blocked after multiple consecutive login attempts.
+      </Callout>
+    ) : (
+      <></>
+    )}
+
+    {generalError ? (
+      <Callout title="Attention" intent="warning">
+        There was an error logging in.
       </Callout>
     ) : (
       <></>
@@ -90,16 +90,42 @@ const LogInForm: React.FC<LogInFormProps> = ({
         //   },
         // });
 
-        authClient.login(values, (err, res) => {
-          if (err) {
-            console.error("err", err);
+        authClient.login(
+          values, 
+          (err, res) => {
+            if (err) {
+              console.error("err", err);
+            }
+            // if (res['body']['access_token']) {
+            //   console.info('success');
+            //   // window.location.replace("/");
+            // }
+            actions.resetForm();
+          },
+          (err) => {
+            console.error("ERROR LOGIN:", err, err.message, err.response);
+
+            if (err.response) {
+              setTooManyLoginAttempts(false);
+              setUserDoesNotExist(false);
+              setGeneralError(false);
+
+              switch (err.response.body.error) {
+                case "too_many_attempts":
+                  setTooManyLoginAttempts(true);
+                  break;
+
+                case "invalid_grant":
+                  setUserDoesNotExist(true);
+                  break;
+            
+                default:
+                  setGeneralError(true);
+                  break;
+              }
+            }
           }
-          // if (res['body']['access_token']) {
-          //   console.info('success');
-          //   // window.location.replace("/");
-          // }
-          actions.resetForm();
-        });
+        );
       }}
       render={(formikBag: FormikProps<LogInFormValues>) => {
         return (

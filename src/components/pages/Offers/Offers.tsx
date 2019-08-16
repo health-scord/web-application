@@ -12,9 +12,9 @@ const Offers: React.FC<OffersProps> = () => {
       <section className="offers">
         <h1 className="headline">My Offers:</h1>
         <div className="offersContain">
-          {userData.offers.map((offer, i) => {
+          {typeof userData.offers !== "undefined" && userData.offers.length > 0 ? userData.offers.map((offer, i) => {
             return <Offer key={i} offer={offer} />
-          })}
+          }) : <></>}
         </div>
       </section>
     </>

@@ -1,7 +1,7 @@
 const defaults = {
   SERVER_URI: "localhost",
-  DATA_SERVICE_URI: `localhost`,
-  DATA_SERVICE_PORT: `8080`
+  DATA_SERVICE_URI: `68.183.100.145`,
+  DATA_SERVICE_PORT: `9000`
 };
 
 let config = {

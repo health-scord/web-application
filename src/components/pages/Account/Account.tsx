@@ -5,6 +5,7 @@ import { Button } from "@blueprintjs/core";
 import { useCookies } from "react-cookie";
 import AuthClient from "../../../services/AuthClient";
 import { useAppContext } from "../../../context";
+import SignUpForm from "../../data/SignUpForm/SignUpForm";
 
 const Account: React.FC<AccountProps> = () => {
   const authClient = new AuthClient();
@@ -13,7 +14,7 @@ const Account: React.FC<AccountProps> = () => {
 
   return (
     <>
-      {userData.firstName}
+      <SignUpForm initialValues={userData} />
       <Button onClick={() => {
         authClient.logout();
       }}>Log Out</Button>

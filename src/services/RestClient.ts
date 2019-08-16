@@ -17,22 +17,34 @@ function formatUrl(path) {
 export default class RestClient {
   constructor() {}
 
-  execSuper(endpoint, params, method = "GET", headers = {}, format = true) {
-    if (method === "POST") {
-      return superagent
-        .post(format ? formatUrl(endpoint) : endpoint)
-        .type('form')
-        .send(params)
-        // .withCredentials()
-        // .set("accept", "json")
-        // .set(headers);
-    } else if (method === "GET") {
-      // return superagent
-      //   .post(format ? formatUrl(endpoint) : endpoint)
-      //   .send(params)
-      //   .withCredentials()
-      //   .set("accept", "json");
-      return this.exec(endpoint, params, method, format);
+  execSuper(
+    endpoint = "", 
+    params = {}, 
+    method = "GET", 
+    headers = {}, 
+    format = true, 
+    onError = (err) => console.error("exec error", err)
+  ) {
+    try {
+      if (method === "POST") {
+        return superagent
+          .post(format ? formatUrl(endpoint) : endpoint)
+          .type('form')
+          .send(params)
+          .on('error', onError)
+          // .withCredentials()
+          // .set("accept", "json")
+          // .set(headers);
+      } else if (method === "GET") {
+        // return superagent
+        //   .post(format ? formatUrl(endpoint) : endpoint)
+        //   .send(params)
+        //   .withCredentials()
+        //   .set("accept", "json");
+        return this.exec(endpoint, params, method, format);
+      }
+    } catch(err) {
+      console.error("err 5", err)
     }
   }
 
@@ -78,19 +90,29 @@ export default class RestClient {
     });
   }
 
-  makeRequest(endpoint, values, callback, method = "POST", headers = {}, format = true) {
+  makeRequest(
+    endpoint, 
+    values, 
+    callback, 
+    method = "POST", 
+    headers = {}, 
+    format = true, 
+    onError = (err) => console.error("exec/makeRequest error", err)
+  ) {
     return new Promise((resolve, reject) => {
       try {
         console.info("exec", this.execSuper, "superagent", superagent)
-        this.execSuper(endpoint, values, method, headers, format).then((res, err) => {
+        this.execSuper(endpoint, values, method, headers, format, onError).then((res, err) => {
           if (err) {
-            console.error(err);
+            console.error("err 3", err, res);
   
             if (typeof res !== "undefined") {
               if (res.body !== null) {
-                console.error(res.body.errorMessage);
+                console.error("error body", res.body.errorMessage);
               }
             }
+
+            reject(err);
           }
           callback(err, res);
           resolve(res);
