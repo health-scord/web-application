@@ -1,4 +1,6 @@
-FROM node:11
+FROM node:10
+
+RUN npm install webpack -g
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -6,18 +8,16 @@ WORKDIR /usr/src/app
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
-COPY package*.json ./
+COPY . /usr/src/app/
 
-RUN echo ls -a
 
 RUN npm install
+RUN npm rebuild node-sass
+RUN npm run build
 # If you are building your code for production
 # RUN npm install --only=production
 
-# Bundle app source
-COPY . .
+# # Bundle app source
+# COPY . .
 
-RUN echo pwd
-
-EXPOSE 8080
 CMD [ "npm", "start"]
