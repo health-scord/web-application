@@ -13,7 +13,7 @@ const client = new FitbitApiClient({
   apiVersion: "1.2" // 1.2 is the default
 });
 
-const serverIP = "localhost";
+const serverIP = "68.183.100.145";
 
 let callbackUrl = `https://${serverIP}/authorizeCallback`;
 const apiUrl = `${serverIP}:9000`;
