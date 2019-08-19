@@ -183,18 +183,18 @@ app.get("/*", (_, res) => {
   res.sendFile(join(__dirname, "index.html"));
 });
 
-// https
-//   .createServer(
-//     {
-//       key: fs.readFileSync(__dirname + "/certs/server.key", "utf8"),
-//       cert: fs.readFileSync(__dirname + "/certs/server.cert", "utf8")
-//     },
-//     app
-//   )
-//   .listen(443);
-
-http
+https
   .createServer(
+    {
+      key: fs.readFileSync(__dirname + "/certs/server.key", "utf8"),
+      cert: fs.readFileSync(__dirname + "/certs/server.cert", "utf8")
+    },
     app
   )
-  .listen(3030);
+  .listen(443);
+
+// http
+//   .createServer(
+//     app
+//   )
+//   .listen(3030);
