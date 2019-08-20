@@ -32,6 +32,8 @@ const dataServiceEndpoint = `http://${config.dataServiceUri}:${
   config.dataServicePort
 }`;
 
+// const dataServiceEndpoint = `https://localhost`;
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

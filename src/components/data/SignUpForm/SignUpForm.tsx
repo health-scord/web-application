@@ -121,7 +121,8 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
           ) => {
             console.log(
               "values",
-              { values, actions }
+              { values, actions },
+              userData
             );
 
             // mixpanel.track("Sign up form submission attempt", {

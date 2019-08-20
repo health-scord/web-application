@@ -27,6 +27,7 @@ export default class RestClient {
   ) {
     try {
       if (method === "POST") {
+        console.info('run superagent', format, endpoint, params, onError);
         return superagent
           .post(format ? formatUrl(endpoint) : endpoint)
           .type('form')
@@ -35,7 +36,18 @@ export default class RestClient {
           // .withCredentials()
           // .set("accept", "json")
           // .set(headers);
+      } else if (method === "PATCH") {
+        console.info('run patch', format, endpoint, params, onError);
+        return superagent
+          .patch(format ? formatUrl(endpoint) : endpoint)
+          .type('form')
+          .send(params)
+          .on('error', onError)
+          // .withCredentials()
+          // .set("accept", "json")
+          // .set(headers);
       } else if (method === "GET") {
+        console.info("run fetch", endpoint, params, method, format)
         // return superagent
         //   .post(format ? formatUrl(endpoint) : endpoint)
         //   .send(params)
