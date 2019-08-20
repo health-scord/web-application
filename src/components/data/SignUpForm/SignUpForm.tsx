@@ -161,8 +161,12 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
               actions.resetForm();
             }
 
+            const onError = (err) => {
+              console.info("err here", err, JSON.stringify(err), err.message, err.code, err.body);
+            }
+
             if (initialValues === null) {
-              authClient.signup(values, callback);
+              authClient.signup(values, callback, onError);
             } else {
               authClient.updateAccount(userData.id, values, callback);
             }
@@ -181,19 +185,19 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
                   <TextField
                     label=""
                     fieldName="username"
-                    fieldPlaceholder="User Name"
+                    fieldPlaceholder="Enter your user name"
                     fieldType="username"
                   />
                   <TextField
                     label=""
                     fieldName="firstName"
-                    fieldPlaceholder="First Name"
+                    fieldPlaceholder="Enter your first name"
                     fieldType="firstName"
                   />
                   <TextField
                     label=""
                     fieldName="lastName"
-                    fieldPlaceholder="Last Name"
+                    fieldPlaceholder="Enter your last name"
                     fieldType="lastName"
                   />
                   {initialValues === null ? 
