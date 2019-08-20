@@ -162,7 +162,22 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
             }
 
             const onError = (err) => {
-              console.info("err here", err, JSON.stringify(err), err.message, err.code, err.body);
+              console.info("err here", err, JSON.stringify(err), err.response.body.code);
+
+              const { code } = err.response.body;
+
+              if (code === "user_exists") {
+                setUserExists(true);
+              } else {
+                setUserExists(false);
+              }
+              if (code === "invalid_password") {
+                setInvalidPassword(true);
+              } else {
+                setInvalidPassword(false);
+              }
+
+              actions.setSubmitting(false);
             }
 
             if (initialValues === null) {

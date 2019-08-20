@@ -106,6 +106,8 @@ const LogInForm: React.FC<LogInFormProps> = ({
           (err) => {
             console.error("ERROR LOGIN:", err, err.message, err.response);
 
+            actions.setSubmitting(false);
+
             if (err.response) {
               setTooManyLoginAttempts(false);
               setUserDoesNotExist(false);
