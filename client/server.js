@@ -89,6 +89,26 @@ app.post("/accounts/", async (req, res) => {
   }
 });
 
+app.patch("/accounts/", async (req, res) => {
+  try {
+    let options = {
+      uri: `${dataServiceEndpoint}/accounts/`,
+      method: "PATCH",
+      body: {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        id: req.body.id
+      },
+      json: true
+    };
+
+    let results = await rp(options);
+    return res.send(results);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 // fitbit auth stuff
 let globalScopeId;
 let callbackUrl = `https://${config.serverUri}/authorizeCallback`;
