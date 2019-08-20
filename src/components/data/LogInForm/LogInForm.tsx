@@ -75,7 +75,7 @@ const LogInForm: React.FC<LogInFormProps> = ({
     )}
 
     <Formik
-      initialValues={{ email: "", password: "" }}
+      initialValues={{ username: "", password: "" }}
       validationSchema={LoginSchema}
       onSubmit={(
         values: LogInFormValues,
@@ -135,8 +135,8 @@ const LogInForm: React.FC<LogInFormProps> = ({
           <Form>
             <TextField
               label=""
-              fieldName="email"
-              fieldPlaceholder="Email"
+              fieldName="username"
+              fieldPlaceholder="Username"
               fieldType="text"
             />
             <TextField
