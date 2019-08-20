@@ -70,16 +70,19 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
   };
 
   if (successfulSubmission) {
-    return (
-      <Card className="floatingForm darkForm">
-        <Text tagName="h1" className="headline">
-          Thank you
-        </Text>
-        <Text tagName="p">
-          Welcome to Scord! --- TBD coonfirm email before using or use right away
-        </Text>
-      </Card>
-    );
+    if (initialValues === null) {
+      return (
+        <Card className="floatingForm darkForm">
+          <Text tagName="h1" className="headline">
+            Thank you
+          </Text>
+          <Text tagName="p">
+            Welcome to Scord! --- TBD coonfirm email before using or use right away
+          </Text>
+        </Card>
+      );
+    }
+    window.location.href = "/account";
   } else {
     return (
       <>
