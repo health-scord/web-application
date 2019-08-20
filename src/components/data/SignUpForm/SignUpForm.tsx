@@ -33,8 +33,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
   const authClient = new AuthClient();
 
   const [{ userData, mixpanel }, dispatch] = useAppContext();
-  const [userExists, setUserExists] = React.useState(false);
-  const [invalidPassword, setInvalidPassword] = React.useState(false);
+  const [formError, setFormError] = React.useState([null, null]);
   const [successfulSubmission, setSuccessfulSubmission] = React.useState(false);
 
   const SignUpSchema = Yup.object().shape({
@@ -84,15 +83,15 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
   } else {
     return (
       <>
-        {userExists ? (
+        {formError[0] !== null ? (
           <Callout title="Attention" intent="danger">
-            A user with this email address already exists. Try signing in.
+            {formError[1]}
           </Callout>
         ) : (
           <></>
         )}
 
-        {invalidPassword ? (
+        {/* {invalidPassword ? (
           <Callout title="Attention" intent="danger">
             The password must be at least 8 characters and contain at least 3 of the following 4 types of characters:
             <ol>
@@ -104,7 +103,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
           </Callout>
         ) : (
           <></>
-        )}
+        )} */}
 
         <Formik
           initialValues={initialValues === null ? {
@@ -136,19 +135,12 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
             const callback = (err, res) => {
               console.info("returned", err, res);
 
+              setFormError([null, null]);
+
               if (err) {
                 console.error(err);
                 if (res.badRequest) {
-                  if (res.body.code === "user_exists") {
-                    setUserExists(true);
-                  } else {
-                    setUserExists(false);
-                  }
-                  if (res.body.code === "invalid_password") {
-                    setInvalidPassword(true);
-                  } else {
-                    setInvalidPassword(false);
-                  }
+                  setFormError([res.body.code, res.body.message]);
                 }
               }
               if (res.body.id) {
@@ -164,18 +156,9 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
             const onError = (err) => {
               console.info("err here", err, JSON.stringify(err), err.response.body.code);
 
-              const { code } = err.response.body;
+              const { code, message } = err.response.body;
 
-              if (code === "user_exists") {
-                setUserExists(true);
-              } else {
-                setUserExists(false);
-              }
-              if (code === "invalid_password") {
-                setInvalidPassword(true);
-              } else {
-                setInvalidPassword(false);
-              }
+              setFormError([code, message]);
 
               actions.setSubmitting(false);
             }
