@@ -10,14 +10,18 @@ const ScoreCounter: React.FC<ScoreCounterProps> = ({
 }) => {
   const [{ userData }, dispatch] = useAppContext();
 
-  console.info("scorecounter", userData)
+  console.info("scorecounter", userData);
+
+  const { calculated } = userData.healthScore;
 
   return (
     <>
       <section className="scoreCounter">
         <div className="scoreCounterContain">
           <span className="label">Your Health Score:</span>
-          <span className="scoreCount">No data</span>
+          {typeof calculated !== "undefined" ? 
+            <span className="scoreCount" style={{ color: "#92cf48" }}>{calculated}</span> 
+            : <span className="scoreCount">No data</span>}
           <div className="progressBar">
             <div className="fill" style={{ width: "80%" }}></div>
           </div>
