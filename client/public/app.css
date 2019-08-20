@@ -9279,6 +9279,11 @@ a.note, p.note {
   .actionButton.bp3-button:not([class*="bp3-intent-"]) .bp3-button-text {
     margin: 0; }
 
+.logoutButton,
+.logoutButton.bp3-button:not([class*="bp3-intent-"]) {
+  margin: 25px auto 0 auto;
+  display: block; }
+
 .headerActionButton,
 .headerActionButton.bp3-button.bp3-minimal {
   width: 50px;

@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { AccountProps } from "./Account.d";
-import { Button } from "@blueprintjs/core";
+import { Button, Text } from "@blueprintjs/core";
 import { useCookies } from "react-cookie";
 import AuthClient from "../../../services/AuthClient";
 import { useAppContext } from "../../../context";
@@ -13,12 +13,15 @@ const Account: React.FC<AccountProps> = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["scordAccessToken", "scordAuth0Id"]);
 
   return (
-    <>
+    <section className="floatingForm">
+      <Text tagName="h1" className="headline darkHeadline">
+        Edit Profile
+      </Text>
       <SignUpForm initialValues={userData} />
-      <Button onClick={() => {
+      <Button className="logoutButton" intent="primary" onClick={() => {
         authClient.logout();
       }}>Log Out</Button>
-    </>
+    </section>
   );
 };
 

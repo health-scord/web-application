@@ -191,18 +191,21 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
             return (
               <Form>
                 <>
-                {initialValues === null ? <TextField
-                    label=""
-                    fieldName="email"
-                    fieldPlaceholder="Enter your email address"
-                    fieldType="email"
-                  /> : <></>}
-                  <TextField
-                    label=""
-                    fieldName="username"
-                    fieldPlaceholder="Enter your user name"
-                    fieldType="username"
-                  />
+                {initialValues === null ? <>
+                    <TextField
+                      label=""
+                      fieldName="email"
+                      fieldPlaceholder="Enter your email address"
+                      fieldType="email"
+                    /> 
+                    <TextField
+                      label=""
+                      fieldName="username"
+                      fieldPlaceholder="Enter your user name"
+                      fieldType="username"
+                    />
+                  </>: <></>}
+                  
                   <TextField
                     label=""
                     fieldName="firstName"
@@ -215,6 +218,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
                     fieldPlaceholder="Enter your last name"
                     fieldType="lastName"
                   />
+                  
                   {initialValues === null ? 
                     <>
                       <TextField
