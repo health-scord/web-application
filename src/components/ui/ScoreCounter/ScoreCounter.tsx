@@ -20,7 +20,7 @@ const ScoreCounter: React.FC<ScoreCounterProps> = ({
         <div className="scoreCounterContain">
           <span className="label">Your Health Score:</span>
           {typeof calculated !== "undefined" ? 
-            <span className="scoreCount" style={{ color: "#92cf48" }}>{calculated}</span> 
+            <span className="scoreCount" style={{ color: "#92cf48", opacity: 1 }}>{calculated}</span> 
             : <span className="scoreCount">No data</span>}
           <div className="progressBar">
             <div className="fill" style={{ width: "80%" }}></div>
