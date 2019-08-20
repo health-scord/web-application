@@ -71,4 +71,10 @@ const App: React.FC<AppProps> = ({ children }) => {
   return <>{children}</>;
 };
 
-export default hot(module)(App);
+const ExportedApp = process.env.NODE_ENV === 'development'
+  ? hot(module)(App) // error is thrown by `hot`
+  : App;
+
+export default ExportedApp;
+
+// export default hot(module)(App);

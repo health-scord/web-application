@@ -46,7 +46,7 @@ module.exports = {
   },
 
   devServer: {
-    hot: false,
+    hot: process.env.NODE_ENV === "development" ? true : false,
   },
 
   performance: {

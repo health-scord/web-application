@@ -10,9 +10,7 @@ const ScoreCounter: React.FC<ScoreCounterProps> = ({
 }) => {
   const [{ userData }, dispatch] = useAppContext();
 
-  console.info("scorecounter", userData);
-
-  const { calculated } = userData.healthScore;
+  const calculated = typeof userData.healthScore !== "undefined" ? userData.healthScore.calculated : undefined;
 
   return (
     <>
