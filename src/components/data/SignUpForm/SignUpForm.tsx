@@ -160,9 +160,9 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
             const onError = (err) => {
               console.info("err here", err, JSON.stringify(err), err.response.body.code);
 
-              const { code, message } = err.response.body;
+              const { code, description } = err.response.body;
 
-              setFormError([code, message]);
+              setFormError([code, description]);
 
               actions.setSubmitting(false);
             }
