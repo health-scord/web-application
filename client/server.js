@@ -89,10 +89,10 @@ app.post("/accounts/", async (req, res) => {
   }
 });
 
-app.patch("/accounts/", async (req, res) => {
+app.patch("/accounts/:id", async (req, res) => {
   try {
     let options = {
-      uri: `${dataServiceEndpoint}/accounts/`,
+      uri: `${dataServiceEndpoint}/accounts/${req.params.id}`,
       method: "PATCH",
       body: {
         firstName: req.body.firstName,
