@@ -40,7 +40,7 @@ const LogInForm: React.FC<LogInFormProps> = ({
     username: Yup.string()
       .min(4, "Too Short!")
       .max(100, "Too Long!")
-      .email(),
+      .required("Required"),
     password: Yup.string()
       .min(4, "Too Short!")
       .max(100, "Too Long!")
