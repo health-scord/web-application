@@ -37,10 +37,9 @@ const LogInForm: React.FC<LogInFormProps> = ({
   const [generalError, setGeneralError] = React.useState(false);
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string()
+    username: Yup.string()
       .min(4, "Too Short!")
       .max(100, "Too Long!")
-      .required("Required")
       .email(),
     password: Yup.string()
       .min(4, "Too Short!")
