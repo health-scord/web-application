@@ -38,19 +38,19 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
   const [successfulSubmission, setSuccessfulSubmission] = React.useState(false);
 
   const SignUpSchema = Yup.object().shape({
-    email: Yup.string()
+    email: initialValues === null ? Yup.string()
       .min(4, "Too Short!")
       .max(100, "Too Long!")
       .email("Invalid email")
-      .required("Required"),
-    username: Yup.string()
+      .required("Required") : null,
+    username: initialValues === null ? Yup.string()
       .min(4, "Too Short!")
       .max(100, "Too Long!")
-      .required("Required"),
-    password: Yup.string()
+      .required("Required") : null,
+    password: initialValues === null ? Yup.string()
       .min(4, "Too Short!")
       .max(100, "Too Long!")
-      .required("Required"),
+      .required("Required") : null,
     firstName: Yup.string()
       .min(4, "Too Short!")
       .max(100, "Too Long!")
@@ -62,7 +62,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
     // confirmPassword: Yup.string()
     //   .required("Required")
     //   .oneOf([Yup.ref("password"), null], "Passwords must match"),
-    agreeTerms: Yup.boolean().oneOf([true], "Must Accept Terms"),
+    agreeTerms: initialValues === null ? Yup.boolean().oneOf([true], "Must Accept Terms") : null,
   });
 
   const openInNewTab = url => {
