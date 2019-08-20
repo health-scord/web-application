@@ -166,7 +166,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
             if (initialValues === null) {
               authClient.signup(values, callback, onError);
             } else {
-              authClient.updateAccount(userData.id, values, callback);
+              authClient.updateAccount(userData.id, values, callback, onError);
             }
           }}
           render={(formikBag: FormikProps<SignUpFormValues>) => {

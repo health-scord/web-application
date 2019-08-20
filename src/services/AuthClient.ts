@@ -77,7 +77,7 @@ export default class AuthClient {
     });
   }
 
-  async updateAccount(id, values, callback) {
+  async updateAccount(id, values, callback, onError) {
     // data-service user update
     this.restClient.makeRequest(
       "/accounts/" + id, 
@@ -85,7 +85,8 @@ export default class AuthClient {
       callback, // finish
       "PATCH", 
       { "content-type": "application/json" },
-      false
+      false,
+      onError
     )
   }
 

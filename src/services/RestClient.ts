@@ -1,6 +1,6 @@
 // const methods = ['get', 'post', 'put', 'patch', 'del'];
 import fetch from "cross-fetch";
-import superagent from "superagent";
+const superagent = require('superagent');
 
 // get endpoint in proper format
 function formatUrl(path) {
