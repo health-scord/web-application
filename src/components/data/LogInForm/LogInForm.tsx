@@ -132,8 +132,8 @@ const LogInForm: React.FC<LogInFormProps> = ({
           <Form>
             <TextField
               label=""
-              fieldName="username"
-              fieldPlaceholder="User Name"
+              fieldName="email"
+              fieldPlaceholder="Email"
               fieldType="text"
             />
             <TextField
