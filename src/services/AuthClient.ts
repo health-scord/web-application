@@ -156,7 +156,7 @@ export default class AuthClient {
     const queryString = this.restClient.paramsToString({
       response_type: "token",
       client_id: config.clientId,
-      redirect_uri: "https://localhost",
+      redirect_uri: process.env.SERVER_URL,
       connection
     });
     const fullUrl = "https://" + config.domain + "/authorize" + queryString;

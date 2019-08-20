@@ -21,7 +21,7 @@ const routes = mount({
       title: "Redirect / Scord",
       head: (
         <>
-          <link rel="canonical" href="https://localhost" />
+          <link rel="canonical" href={`${process.env.SERVER_URL}`} />
         </>
       ),
       view: (
@@ -34,7 +34,7 @@ const routes = mount({
       title: "Login / Scord",
       head: (
         <>
-          <link rel="canonical" href="https://localhost/login" />
+          <link rel="canonical" href={`${process.env.SERVER_URL}/login`} />
         </>
       ),
       view: (
@@ -49,7 +49,7 @@ const routes = mount({
       title: "Sign Up / Scord",
       head: (
         <>
-          <link rel="canonical" href="https://localhost/sign-up" />
+          <link rel="canonical" href={`${process.env.SERVER_URL}/sign-up`} />
         </>
       ),
       view: (
@@ -64,7 +64,7 @@ const routes = mount({
       title: "Forgot Password / Scord",
       head: (
         <>
-          <link rel="canonical" href="https://localhost/forgot-password" />
+          <link rel="canonical" href={`${process.env.SERVER_URL}/forgot-password`} />
         </>
       ),
       view: (
@@ -94,7 +94,7 @@ const routes = mount({
       title: "Confirm Email / Scord",
       head: (
         <>
-          <link rel="canonical" href="https://localhost/confirm-email" />
+          <link rel="canonical" href={`${process.env.SERVER_URL}/confirm-email`} />
         </>
       ),
       view: (
@@ -110,7 +110,7 @@ const routes = mount({
       title: "Scores / Scord",
       head: (
         <>
-          <link rel="canonical" href="https://localhost/scores" />
+          <link rel="canonical" href={`${process.env.SERVER_URL}/scores`} />
         </>
       ),
       view: (
@@ -125,7 +125,7 @@ const routes = mount({
       title: "Offers / Scord",
       head: (
         <>
-          <link rel="canonical" href="https://localhost/offers" />
+          <link rel="canonical" href={`${process.env.SERVER_URL}/offers`} />
         </>
       ),
       view: (
@@ -140,7 +140,7 @@ const routes = mount({
       title: "Account / Scord",
       head: (
         <>
-          <link rel="canonical" href="https://localhost/account" />
+          <link rel="canonical" href={`${process.env.SERVER_URL}/account`} />
         </>
       ),
       view: (

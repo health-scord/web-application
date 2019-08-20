@@ -230,7 +230,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
                             <Link
                               href="#!"
                               onClick={() =>
-                                window.location.href = "https://localhost/terms"
+                                window.location.href = `${process.env.SERVER_URL}/terms`
                               }
                             >
                               Terms
