@@ -107,6 +107,8 @@ const LogInForm: React.FC<LogInFormProps> = ({
 
             actions.setSubmitting(false);
 
+            // TODO: dynamic errors like sign up
+            // https://auth0.com/docs/libraries/error-messages
             if (err.response) {
               setTooManyLoginAttempts(false);
               setUserDoesNotExist(false);
