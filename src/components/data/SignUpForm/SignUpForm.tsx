@@ -77,7 +77,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
             Thank you
           </Text>
           <Text tagName="p">
-            Welcome to Scord! --- TBD coonfirm email before using or use right away
+            Welcome to Scord!
           </Text>
         </Card>
       );
