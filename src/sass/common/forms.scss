@@ -80,7 +80,7 @@ textarea.bp3-input.bp3-small {
   button,
   button.bp3-button:not([class*="bp3-intent-"]) {
     // @extend .formButton;
-    @extend .button;
+    // @extend .button;
     margin-left: auto;
     margin-right: auto;
     text-align: center;

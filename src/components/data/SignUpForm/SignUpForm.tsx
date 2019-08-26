@@ -235,6 +235,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
                     type="submit"
                     disabled={formikBag.isSubmitting}
                     loading={formikBag.isSubmitting}
+                    className="button loginButton"
                     // onClick={() => formikBag.submitForm()}
                   >
                     {initialValues === null ? "Sign Up" : "Save"}
@@ -244,6 +245,15 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
             );
           }}
         />
+
+      <Button className="button loginButton" onClick={() => authClient.socialLogin("google-oauth2", () => console.info("finished"))}>
+        Signup with Google
+      </Button>
+      <Button className="button loginButton" onClick={() => authClient.socialLogin("facebook", () => console.info("finished"))}>
+        Signup with Facebook
+      </Button>
+
+      <Text className="note" tagName="p">Already have an account? <Link href="/login">Log In</Link></Text>
       </>
     );
   }

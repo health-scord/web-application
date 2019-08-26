@@ -155,7 +155,7 @@ const LogInForm: React.FC<LogInFormProps> = ({
             >
               Login
             </Button>
-            <Text className="note" tagName="p">Don't have an account? <Link href="/sign-up">Sign Up</Link></Text>
+            
           </Form>
         );
       }}
@@ -167,6 +167,8 @@ const LogInForm: React.FC<LogInFormProps> = ({
       <Button className="button loginButton" onClick={() => authClient.socialLogin("facebook", () => console.info("finished"))}>
         Login with Facebook
       </Button>
+
+      <Text className="note" tagName="p">Don't have an account? <Link href="/sign-up">Sign Up</Link></Text>
     </>
   );
 };

@@ -9232,12 +9232,10 @@ a.note, p.note {
   .thirdsCard:nth-of-type(3n) {
     margin-right: 0; }
 
-.button, .floatingForm button,
-.floatingForm button.bp3-button:not([class*="bp3-intent-"]), .textButton,
+.button, .textButton,
 .textButton.bp3-button:not([class*="bp3-intent-"]), .actionButton,
 .actionButton.bp3-button:not([class*="bp3-intent-"]),
 .button.bp3-button:not([class*="bp3-intent-"]),
-.floatingForm button.bp3-button:not([class*="bp3-intent-"]),
 .bp3-button.textButton:not([class*="bp3-intent-"]),
 .bp3-button.actionButton:not([class*="bp3-intent-"]) {
   background-image: none;
@@ -9247,15 +9245,13 @@ a.note, p.note {
   width: max-content;
   padding: 8px 30px;
   min-width: 150px; }
-  .button .bp3-icon, .floatingForm button .bp3-icon, .floatingForm button.bp3-button:not([class*="bp3-intent-"]) .bp3-icon, .textButton .bp3-icon, .textButton.bp3-button:not([class*="bp3-intent-"]) .bp3-icon, .actionButton .bp3-icon, .actionButton.bp3-button:not([class*="bp3-intent-"]) .bp3-icon,
+  .button .bp3-icon, .textButton .bp3-icon, .textButton.bp3-button:not([class*="bp3-intent-"]) .bp3-icon, .actionButton .bp3-icon, .actionButton.bp3-button:not([class*="bp3-intent-"]) .bp3-icon,
   .button.bp3-button:not([class*="bp3-intent-"]) .bp3-icon,
-  .floatingForm button.bp3-button:not([class*="bp3-intent-"]) .bp3-icon,
   .bp3-button.textButton:not([class*="bp3-intent-"]) .bp3-icon,
   .bp3-button.actionButton:not([class*="bp3-intent-"]) .bp3-icon {
     margin-right: 4px; }
-  .button span, .floatingForm button span, .floatingForm button.bp3-button:not([class*="bp3-intent-"]) span, .textButton span, .textButton.bp3-button:not([class*="bp3-intent-"]) span, .actionButton span, .actionButton.bp3-button:not([class*="bp3-intent-"]) span,
+  .button span, .textButton span, .textButton.bp3-button:not([class*="bp3-intent-"]) span, .actionButton span, .actionButton.bp3-button:not([class*="bp3-intent-"]) span,
   .button.bp3-button:not([class*="bp3-intent-"]) span,
-  .floatingForm button.bp3-button:not([class*="bp3-intent-"]) span,
   .bp3-button.textButton:not([class*="bp3-intent-"]) span,
   .bp3-button.actionButton:not([class*="bp3-intent-"]) span {
     color: #FFFFFF;
@@ -9265,10 +9261,14 @@ a.note, p.note {
 
 .textButton,
 .textButton.bp3-button:not([class*="bp3-intent-"]) {
-  background: transparent; }
+  background: transparent;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: fit-content;
+  min-width: auto; }
   .textButton span,
   .textButton.bp3-button:not([class*="bp3-intent-"]) span {
-    color: rgba(36, 52, 101, 0.5); }
+    color: white; }
 
 .actionButton,
 .actionButton.bp3-button:not([class*="bp3-intent-"]) {
@@ -9352,7 +9352,7 @@ h1 {
 
 .loginButton {
   display: block;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   width: 260px; }
 
 .menuItem,

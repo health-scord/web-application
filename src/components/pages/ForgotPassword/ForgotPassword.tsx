@@ -15,6 +15,7 @@ import * as Yup from "yup";
 
 import TextField from "../../ui/TextField/TextField";
 import AuthClient from "../../../services/AuthClient";
+import BackButton from "../../ui/BackButton/BackButton";
 
 const ForgotPassword: React.FC<ForgotPasswordProps> = () => {
   const authClient = new AuthClient();
@@ -32,6 +33,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = () => {
 
   return (
     <div className="floatingForm">
+      <BackButton />
       <Text tagName="h1" className="headline">
         Forgot Password
       </Text>
@@ -96,7 +98,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = () => {
                 fieldPlaceholder="Enter your email address"
                 fieldType="email"
               />
-              <Button type="submit" disabled={formikBag.isSubmitting}>
+              <Button className="button loginButton" type="submit" disabled={formikBag.isSubmitting}>
                 Submit
               </Button>
             </Form>
