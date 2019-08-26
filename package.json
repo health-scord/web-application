@@ -9,7 +9,8 @@
     "gen:ui": "bash/gen_ui_component.sh",
     "gen:page": "bash/gen_page_component.sh",
     "gen:data": "bash/gen_data_component.sh",
-    "gen:layout": "bash/gen_layout_component.sh"
+    "gen:layout": "bash/gen_layout_component.sh",
+    "start-local": "DATA_SERVICE_URI=localhost DATA_SERVICE_PORT=8080 npm start"
   },
   "repository": {
     "type": "git",
