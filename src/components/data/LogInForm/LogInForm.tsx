@@ -37,7 +37,7 @@ const LogInForm: React.FC<LogInFormProps> = ({
   const [generalError, setGeneralError] = React.useState(false);
 
   const LoginSchema = Yup.object().shape({
-    username: Yup.string()
+    email: Yup.string()
       .min(4, "Too Short!")
       .max(100, "Too Long!")
       .required("Required"),
@@ -74,7 +74,7 @@ const LogInForm: React.FC<LogInFormProps> = ({
     )}
 
     <Formik
-      initialValues={{ username: "", password: "" }}
+      initialValues={{ email: "", password: "" }}
       validationSchema={LoginSchema}
       onSubmit={(
         values: LogInFormValues,
@@ -91,7 +91,10 @@ const LogInForm: React.FC<LogInFormProps> = ({
         // });
 
         authClient.login(
-          values, 
+          { 
+            username: values.email,
+            password: values.password 
+          }, 
           (err, res) => {
             if (err) {
               console.error("err", err);
@@ -136,9 +139,9 @@ const LogInForm: React.FC<LogInFormProps> = ({
           <Form>
             <TextField
               label=""
-              fieldName="username"
-              fieldPlaceholder="Username"
-              fieldType="text"
+              fieldName="email"
+              fieldPlaceholder="Email"
+              fieldType="email"
             />
             <TextField
               label=""
