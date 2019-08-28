@@ -54,11 +54,56 @@ const App: React.FC<AppProps> = ({ children }) => {
     ) {
       // when token is retrieved after successful login via auth0
       const hasToken = route.url.hash.split("access_token");
+      const hasClient = route.url.hash.split("auth0Client");
+      const hasIdToken = route.url.hash.split("id_token");
       if (typeof hasToken[1] !== "undefined") {
         let token = hasToken[1].split("&")[0];
         token = token.substr(1, token.length - 1);
-        setCookie("scordAccessToken", token);
-        window.location.href = window.location.origin + "/scores";
+        
+        console.info("token", token);
+        // 
+        // get user id with access token
+        authClient.getAuth0UserInfo(token).then((user) => {
+          console.info("user", user);
+          const auth0Id = user['sub'].split("google-oauth2|")[1];
+          setCookie("scordAccessToken", token);
+          setCookie("scordAuth0Id", auth0Id);
+          
+          setTimeout(() => {
+            // now check if mongo account exists with id
+            authClient.getUserData(null).then((res) => {
+              console.info("token res", res)
+              if (res['error'].error.title === "Account Not Found") {
+                // send to complete profile if not
+                window.location.href = window.location.origin + "/account";
+              } else {
+                // send to scores is yes
+                window.location.href = window.location.origin + "/scores";
+              }
+            })
+          }, 500)
+        }).catch((err) => {
+          console.error("err", err);
+        })
+      } else if (typeof hasClient[1] !== "undefined") {
+        let client = hasClient[1].split("&")[0];
+        client = client.substr(1, client.length - 1);
+        // setCookie("scordAccessToken", token);
+        console.info("client", client);
+      } else if (typeof hasIdToken[1] !== "undefined") {
+        let token = hasIdToken[1].split("&")[0];
+        token = token.substr(1, token.length - 1);
+        let userInfo = JSON.parse(window.atob(token.split(".")[1]));
+
+        const auth0Id = userInfo.sub.split("google-oauth2|")[1];
+
+        console.info("token 2", userInfo, auth0Id);
+      
+        setCookie("scordAuth0Id", auth0Id);
+
+        // setTimeout(() => {
+        //   window.location.replace("/");
+        // }, 500);
       } else {
         setTimeout(() => {
           navigation.navigate("/login");

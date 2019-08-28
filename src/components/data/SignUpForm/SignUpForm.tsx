@@ -23,6 +23,7 @@ import SelectField from "../../ui/SelectField/SelectField";
 import TextareaField from "../../ui/TextareaField/TextareaField";
 import TextField from "../../ui/TextField/TextField";
 import UploadField from "../../ui/UploadField/UploadField";
+import { useCookies } from "react-cookie";
 
 const SignUpForm: React.FC<SignUpFormProps> = ({
   ref = null,
@@ -35,6 +36,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
   const [{ userData, mixpanel }, dispatch] = useAppContext();
   const [formError, setFormError] = React.useState([null, null]);
   const [successfulSubmission, setSuccessfulSubmission] = React.useState(false);
+  const [cookies, setCookie, removeCookie] = useCookies(["scordAccessToken", "scordAuth0Id"]);
 
   const SignUpSchema = Yup.object().shape({
     email: initialValues === null ? Yup.string()
@@ -167,11 +169,26 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
               actions.setSubmitting(false);
             }
 
-            if (initialValues === null) {
-              authClient.signup(values, callback, onError);
-            } else {
-              authClient.updateAccount(userData.id, values, callback, onError);
-            }
+            authClient.getUserData(null).then((res) => {
+              console.info("token res 2", res)
+              if (res['error'].error.title === "Account Not Found") {
+                // send to complete profile if not
+                if (cookies["scordAuth0Id"]) {
+                  authClient.createLocalAccount(cookies["scordAuth0Id"], values, callback, onError);
+                } else {
+                  authClient.signup(values, callback, onError);
+                }
+              } else {
+                // send to scores is yes
+                authClient.updateAccount(userData.id, values, callback, onError);
+              }
+            })
+
+            // if (initialValues === null) {
+            //   authClient.signup(values, callback, onError);
+            // } else {
+            //   authClient.updateAccount(userData.id, values, callback, onError);
+            // }
           }}
           render={(formikBag: FormikProps<SignUpFormValues>) => {
             // console.info("formikbag", formikBag);
@@ -245,15 +262,18 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
             );
           }}
         />
+      
+      {initialValues === null ? 
+      <>
+        <Button className="button loginButton" onClick={() => authClient.socialLogin("google-oauth2", () => console.info("finished"))}>
+          Signup with Google
+        </Button>
+        <Button className="button loginButton" onClick={() => authClient.socialLogin("facebook", () => console.info("finished"))}>
+          Signup with Facebook
+        </Button>
 
-      <Button className="button loginButton" onClick={() => authClient.socialLogin("google-oauth2", () => console.info("finished"))}>
-        Signup with Google
-      </Button>
-      <Button className="button loginButton" onClick={() => authClient.socialLogin("facebook", () => console.info("finished"))}>
-        Signup with Facebook
-      </Button>
-
-      <Text className="note" tagName="p">Already have an account? <Link href="/login">Log In</Link></Text>
+        <Text className="note" tagName="p">Already have an account? <Link href="/login">Log In</Link></Text> 
+      </> : <></>}
       </>
     );
   }
