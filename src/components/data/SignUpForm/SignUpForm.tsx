@@ -171,7 +171,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
 
             authClient.getUserData(null).then((res) => {
               console.info("token res 2", res)
-              if (res['error'].error.title === "Account Not Found") {
+              if (typeof res['error'] !== "undefined" && res['error'].error.title === "Account Not Found") {
                 // send to complete profile if not
                 if (cookies["scordAuth0Id"]) {
                   authClient.createLocalAccount(cookies["scordAuth0Id"], values, callback, onError);
