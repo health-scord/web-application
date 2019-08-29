@@ -75,7 +75,16 @@ const App: React.FC<AppProps> = ({ children }) => {
               console.info("token res", res)
               if (res['error'].error.title === "Account Not Found") {
                 // send to complete profile if not
-                window.location.href = window.location.origin + "/account";
+                authClient.createLocalAccount(
+                  auth0Id, 
+                  {
+                    firstName: user['given_name'], 
+                    lastName: user['family_name'] 
+                  }, 
+                  () => window.location.href = window.location.origin + "/account", 
+                  (err) => console.error("social login new account creation failure", err)
+                );
+                // window.location.href = window.location.origin + "/account";
               } else {
                 // send to scores is yes
                 window.location.href = window.location.origin + "/scores";
